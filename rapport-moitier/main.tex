@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%                                            %%%%%%
+%%%                                                  %%%
+%      Modèle de Rapport.                              %
+%               Par Matthieu Maury                     %
+%                                                      %
+%%%                                                  %%%
+%%%%%%                                            %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt, a4paper]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Package essentiel
+\usepackage[greek,french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[top=2.6cm,bottom=2.6cm,right=2.1cm,left=2.1cm]{geometry}
+\usepackage{float}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Package optionnel
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage[dvips]{pstricks}
+\usepackage{pstricks-add}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{epsfig}
+\usepackage{pst-grad} % For gradients
+\usepackage{pst-plot} % For axes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{mathrsfs}
+\usepackage{framed}
+%\usepackage[framed, thmmarks, amsmath]{ntheorem}
+\usepackage{verbatim}
+\usepackage{moreverb}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{listings}
+%\usepackage{hyperlinks}
+\usepackage{lettrine}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%                                            %%%%%%
+%%         Configuration de la mise en page           %%
+%%%%%                                              %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Profondeur du sommaire
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Configuration des chapitres
+\makeatletter
+\def\@makechapterhead#1{%
+\vspace*{50\p@}%
+{\parindent \z@ \raggedright \normalfont
+\interlinepenalty\@M
+\Huge \bfseries\thechapter.\quad#1\par\nobreak
+\vskip 20\p@
+}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%                                            %%%%%%
+%%                Début du Document                   %%
+%%%%%                                              %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+\lstset{basicstyle=\fontsize{10}{11}, tabsize=3, frame=b, numbers=left, inputencoding=utf8x, extendedchars=\true, language=C}
+
+\newcommand{\celeg}{\textit{C. Elegans}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inclusion de la page de titre
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{} % clear all header fields
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LO,RE]{\textit{Année Universitaire 2010-2011}}
+\fancyfoot[LE,RO]{\textit{Écris avec \LaTeX}}
+
+\input{title}
+
+\thispagestyle{empty}
+
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead{} % clear all header fields
+\fancyhead[RE,LO]{Rapport intermédiaire de stage}
+
+\fancyhead[RO,LE]{\rightmark}
+
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LO,RE]{Matthieu Maury}
+\fancyfoot[LE,RO]{\thepage}
+
+%Redéfinition du style fancy - plain, utilisé pour les pages de nouveau chapitre
+%Le style par défaut est un style plain
+\fancypagestyle{plain}{
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+
+%Définition des headers identiques à une page normale
+\fancyfoot[LO,RE]{Matthieu Maury}
+\fancyfoot[LE,RO]{\thepage}
+}
+
+\tableofcontents
+\thispagestyle{empty} %Si votre sommaire fait 2 pages, supprime la numérotation de la deuxième page.
+
+%\newpage
+
+%\doublespacing
+\onehalfspacing
+
+\input{inria}
+\input{project}
+\input{timeline}
+
+\begin{flushleft}
+   %\chapter*{Bibliographie}
+   \addcontentsline{toc}{chapter}{Bibliographie}
+
+   \nocite{*}
+   \bibliographystyle{plain}
+   \bibliography{bibli}
+\end{flushleft}
+
+%\newpage
+%\setcounter{page}{1}
+%\pagenumbering{Roman}
+%\appendix
+%\include{annexes}
+
+\end{document}
