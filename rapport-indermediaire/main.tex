@@ -8,7 +8,8 @@
 %%%%%%                                            %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[11pt, a4paper]{report}
+\documentclass[11pt,a4paper]{report}
+\special{papersize=210mm,297mm} % safe protection against ghostscript multiple version
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Package essentiel
@@ -16,11 +17,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
-\usepackage[top=2.6cm,bottom=2.6cm,right=2.1cm,left=2.1cm]{geometry}
-\usepackage{float}
+\usepackage{fullpage} % pour des marges plus petites
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Package optionnel
+\usepackage{float}
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{tabularx}
@@ -46,6 +47,10 @@
 \usepackage{listings}
 %\usepackage{hyperlinks}
 \usepackage{lettrine}
+
+% Try to avoid widow and orphan
+\widowpenalty=300
+\clubpenalty=300
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%                                            %%%%%%
@@ -84,8 +89,12 @@
 \lstset{basicstyle=\fontsize{10}{11}, tabsize=3, frame=b, numbers=left, inputencoding=utf8x, extendedchars=\true, language=C}
 
 \newcommand{\celeg}{\textit{C. Elegans}}
+\newcommand{\caeleg}{\textit{Caenorhabditis Elegans}}
 
 \begin{document}
+
+\onehalfspacing % better readability
+%\doublespacing % for cheatting purpose :p
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Inclusion de la page de titre
@@ -125,12 +134,8 @@
 }
 
 \tableofcontents
-\thispagestyle{empty} %Si votre sommaire fait 2 pages, supprime la numérotation de la deuxième page.
 
 %\newpage
-
-%\doublespacing
-\onehalfspacing
 
 \input{inria}
 \input{project}
@@ -139,8 +144,7 @@
 \begin{flushleft}
    %\chapter*{Bibliographie}
    \addcontentsline{toc}{chapter}{Bibliographie}
-
-   \nocite{*}
+   %\nocite{*}
    \bibliographystyle{plain}
    \bibliography{bibli}
 \end{flushleft}
