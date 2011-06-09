@@ -136,13 +136,11 @@
 \input{project}
 \input{timeline}
 
-\begin{flushleft}
-   %\chapter*{Bibliographie}
-   \addcontentsline{toc}{chapter}{Bibliographie}
-   \nocite{Goodman2008,Allard2007}
-   \bibliographystyle{plain}
-   \bibliography{bibli}
-\end{flushleft}
+\clearpage % ensure to jump to the next page
+\addcontentsline{toc}{chapter}{Bibliographie} % Add the title in the TOC
+\nocite{Goodman2008,Allard2007} % cite not cited paper
+\bibliographystyle{plain} % biblio style
+\bibliography{bibli} % generate biblio
 
 %\newpage
 %\setcounter{page}{1}
