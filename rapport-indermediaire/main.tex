@@ -17,36 +17,38 @@
 \usepackage[T1]{fontenc}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
-\usepackage{fullpage} % pour des marges plus petites
+\usepackage[paper=a4paper,margin=1in]{geometry} % pour des marges plus petites
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Package optionnel
-\usepackage{float}
-\usepackage{enumerate}
+%\usepackage{float}
+%\usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{setspace}
-\usepackage[dvips]{pstricks}
-\usepackage{pstricks-add}
-\usepackage{color}
-\usepackage{xcolor}
-\usepackage{epsfig}
-\usepackage{pst-grad} % For gradients
-\usepackage{pst-plot} % For axes
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsxtra}
-\usepackage{mathrsfs}
-\usepackage{framed}
+%\usepackage[dvips]{pstricks}
+%\usepackage{pstricks-add}
+%\usepackage{color}
+%\usepackage{xcolor}
+%\usepackage{epsfig}
+%\usepackage{pst-grad} % For gradients
+%\usepackage{pst-plot} % For axes
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{amsxtra}
+%\usepackage{mathrsfs}
+%\usepackage{framed}
 %\usepackage[framed, thmmarks, amsmath]{ntheorem}
-\usepackage{verbatim}
-\usepackage{moreverb}
+%\usepackage{verbatim}
+%\usepackage{moreverb}
 \usepackage{fancyhdr}
 \usepackage{url}
-\usepackage{listings}
+%\usepackage{listings}
 %\usepackage{hyperlinks}
-\usepackage{lettrine}
+\usepackage{hyperref}
+%\usepackage{lettrine}
+\usepackage{multicol}
 
 % Try to avoid widow and orphan
 \widowpenalty=300
@@ -80,13 +82,6 @@
 %%                Début du Document                   %%
 %%%%%                                              %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{caption}
-\DeclareCaptionFont{white}{\color{white}}
-\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
-\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
-
-\lstset{basicstyle=\fontsize{10}{11}, tabsize=3, frame=b, numbers=left, inputencoding=utf8x, extendedchars=\true, language=C}
 
 \newcommand{\celeg}{\textit{C. Elegans}}
 \newcommand{\caeleg}{\textit{Caenorhabditis Elegans}}
