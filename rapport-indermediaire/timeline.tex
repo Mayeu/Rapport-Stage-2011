@@ -2,7 +2,7 @@
 \label{cha:Avancement}
 
 \caeleg{} (abrégé \celeg{}) est un nématode (ou vers ronds) non parasitaire d'un milimètre de long.
-De part sa simplicité, et des différents études menées, ce vers est un organisme modéle en génétique;
+De part sa simplicité, et des différentes études menées, ce vers est un organisme modéle en génétique;
 il est ainsi possible de controler finement l'expressions de ses gènes en ciblant uniquement une ou
 plusieurs de ses cellules.
 
@@ -14,7 +14,7 @@ De plus, une grande partie de son système nerveux à été cartographié
 \section{L'éxistant} % (fold)
 \label{sec:L'éxistant}
 
-Malgré sa faible complexité le \celeg{} présente des comportements varié. Ainsi il se déplace
+Malgré sa faible complexité le \celeg{} présente des comportements variés. Ainsi il se déplace
 en suivant des gradients d'odeurs \cite{Ferree1999,Gray2005}, posséde differents types et
 motifs de mouvement (nage, rampe, avant, arrière, pirouette), posséde un circuit dédié à la 
 réponse au toucher \cite{Chalfie1985}, et même une forme de mémoire \cite{Rankin2005a}.
@@ -22,9 +22,9 @@ réponse au toucher \cite{Chalfie1985}, et même une forme de mémoire \cite{Ran
 Peu d'étude on étais menée sur la dynamique du circuit neural du \celeg{}, principalement
 car il est actuellement infaissable d'enregistrer la dynamique de comportement des neurones
 chez un vers libre de mouvement.
-Mais il éxiste des études qui permette d'inférer sur le rôle des différents neurones moteurs
+Mais il éxiste des études qui permettent d'inférer sur le rôle des différents neurones moteurs
 lors du déplacement du vers \cite{Yanik2006,Chronis2007,Leifer2011}.
-Des études statistiques sur les différents motifs de déplacement \cite{Gray2005} du vers existe, ainsi que
+Des études statistiques sur les différents motifs de déplacement \cite{Gray2005} du vers, ainsi que
 des études portant sur l'éléctrophysiologie de certaines cellules neurales \cite{Mellem2008a,Lockery2009}.
 
 % section L'éxistant (end)
@@ -34,11 +34,25 @@ des études portant sur l'éléctrophysiologie de certaines cellules neurales \c
 
 Dans le but de créer un modèle simple à manipuler et à faire évoluer, une version en Python du
 modèle de Jordan H. Boyle à été implémentée avant mon arrivée. Cette version délègue la gestion
-des neurones à Brian, la modelisation physique à SOFA et utilise Clone pour les communication
+des neurones à Brian, la modelisation physique à SOFA et utilise Clones pour les communication
 avec SOFA.
 
 \subsection{Modification et correction} % (fold)
 \label{sub:Modification et correction}
+
+En étudiant la thése de Jordan H. Boyle ainsi que le code source de son modèle, de légéres differences
+on fait leurs apparitions; différences qu'il à fallu répercuter dans notre modèle.
+Le modèle actuel se comporte de manière équivalente à celui de Jordan H. Boyle, mais l'implémentation
+est légèrement différente. Principalement du à un problème d'instabilité dans SOFA, nous sommes obligé
+de mettre un coefficient multiplicateur pour augmenter l'ordre de grandeur des valeurs physiques du vers
+modélisé.
+
+Après étude des algorithmes de calcul utilisés, il apparait que SOFA serais possiblement la cause de
+l'instabilité. Le bug à été remonté aux devellopeurs
+\footnote{\url{https://wiki.sofa-framework.org/tdev/ticket/240}} pour en assurer la prise en compte.
+
+Le but étant, bien sur, d'arriver à se passer de ce coefficient pour ètre le plus proche possible
+du modèle dévellopé par Jordan H. Boyle.
 
 % subsection Modification et correction (end)
 
@@ -48,7 +62,7 @@ avec SOFA.
 \label{sec:Locomotion arrière}
 
 Le circuit neuronal de la locomotion arrière est très proche du circuit neuronal de la locomotion
-avant, mais inversé\cite{Boyle2009}. Mais il n'éxistes que peu d'information sur le circuit
+avant, mais inversé\cite{Boyle2009}. Il n'éxistes malheureusement que peu d'information sur le circuit
 permettant de passer de la locomotion avant à arrière, ormis le cablage du réseau.
 
 Actuellement l'implémenttion du vers posséde ce deuxième circuit générant la marche arrière. Mais
@@ -70,7 +84,7 @@ la recherche de nourriture \cite{Gray2005}.
 
 Du fait du manque d'information sur les neurones en jeux et les circuits neuronaux utilisés lors de
 la pirouette, il est difficile de la modeliser directement. Par contre nous prévoyons d'utiliser des
-vidéos de pirouette et de faire coincider le mouvement du vers avec le mouvement de notre modèle, et
+vidéos de pirouette et de faire coincider le mouvement de notre modèle sur le mouvement du vers, et
 ainsi remonter de l'état musculaire, à l'état neuronal et voir quel circuit et neurones serais actif
 lors de la pirouette.
 
