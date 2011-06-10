@@ -99,20 +99,37 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead{} % clear all header fields
 \fancyfoot{} % clear all footer fields
-\fancyfoot[LO,RE]{\textit{Année Universitaire 2010-2011}}
-\fancyfoot[LE,RO]{\textit{Écris avec \LaTeX}}
+% Header gauche pour la page de titre
+\fancyhead[RE,LO]{\includegraphics[width=4cm]{pic/loria.eps}\\
+\textit{LORIA}\\
+\textit{Campus Scientifique}\\
+\textit{BP 239}\\
+\textit{54506 Vandoeuvre-lès-Nancy Cedex}\\
+\textit{Téléphone :} +33 3 83 59 30 00}
+%Header droit pour la page de titre
+\fancyhead[RO,LE]{\includegraphics[width=5cm]{pic/logoesil.eps}\\
+\textit{Université de la Méditerranée}\\
+\textit{Ecole Supérieure d'Ingénieurs de Luminy}\\
+\textit{Département Informatique}\\
+\textit{$3^{eme}$ année}}
+%footer gauche pour la page de titre
+\fancyfoot[LO,RE]{\textit{Matthieu Maury\\\url{mattieu.maury@etumel.univmed.fr}}}
+%footer droit pour la page de titre
+\fancyfoot[LE,RO]{\textit{Année Universitaire 2010-2011}}
 
 \input{title}
 
 \thispagestyle{empty}
 
+% On remets les valeurs de hauteurs par défaut
+\setlength{\headheight}{12pt}
+\setlength{\footskip}{30pt}
+% définition de la ligne de séparation
 \renewcommand{\footrulewidth}{0.5pt}
 \renewcommand{\headrulewidth}{0.5pt}
 \fancyhead{} % clear all header fields
 \fancyhead[RE,LO]{Rapport intermédiaire de stage}
-
 \fancyhead[RO,LE]{\rightmark}
-
 \fancyfoot{} % clear all footer fields
 \fancyfoot[LO,RE]{Matthieu Maury}
 \fancyfoot[LE,RO]{\thepage}
@@ -122,8 +139,7 @@
 \fancypagestyle{plain}{
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-
-%Définition des headers identiques à une page normale
+%Définition des footers identiques à une page normale
 \fancyfoot[LO,RE]{Matthieu Maury}
 \fancyfoot[LE,RO]{\thepage}
 }
