@@ -10,7 +10,6 @@ divers comportements de base, très stéréotypés : locomotion "forward", "back
 (voir vidéo). Un modèle informatique et biophysique a permis de démontrer que les retours somatosensoriels
 sont fortement impliqués dans l’activité locomotrice ondulatoire (thèse de Jordan H. Boyle). Nous avons
 reproduits en partie ces résultats, et nous cherchons à comprendre comment ces comportements sont intégrés.
-
 Le stage consistera à :
 \begin{itemize}
    \item se familiariser avec le modèle.
@@ -23,34 +22,34 @@ Le stage consistera à :
 \section{But du projet} % (fold)
 \label{sec:But du projet}
 
-Le projet se base sur le modèle de locomotion avant décris dans la thèse de Jordan H. Boyle\cite{Boyle2009}.
-Ce modèle simplifie le vers en douze sections comportant le même nombre de muscles et de neurones.
+Le projet se base sur le modèle de locomotion avant, décris dans la thèse de Jordan H. Boyle\cite{Boyle2009}.
+Ce modèle représente le vers de façon simplifiée en douze sections comportant le même nombre de muscles et de neurones.
 Dans sa thése, Jordan H. Boyle démontre qu'il est possible, sans modifier le circuit de neurones, de
 modéliser les comportements de déplacement avant dans l'eau, dans l'agar et dans un environement
-de viscosité intermédiaire. Contrairement à d'autres modèles qui ne prenais en compte que le circuit neuronal
-du vers, il démontre ainsi que le feedback induit par l'environement du vers modelisé à un rôle à jouer sur le
-comportement du circuit neural de la locomotion.
+de viscosité intermédiaire. Contrairement à d'autres modèles qui ne prenaient en compte que le circuit neuronal
+du vers, il démontre ainsi que le feedback induit par l'environement du vers modélisé a un rôle à jouer sur le
+fonctionnement du circuit neural de la locomotion.
 
-Le but du projet est d'étendre ce modèle à d'autre comportement du vers lors de la locomotion.
+Le but du projet est d'étendre ce modèle à d'autre comportement de déplacement du vers tel que la locomotion arrière, la pirouette etc...
 
 % section But du projet (end)
 
 \section{Tâches à réaliser} % (fold)
 \label{sec:Tâches à réaliser}
 
-La première partie du travail consiste à se familiariser avec le modèl dévellopé dans la thèse de Jordan
-H. Boyle \cite{Boyle2009}, ainsi que les études menée sur le \celeg{}. Il faudras ensuite améliorer
+La première partie du travail consiste à se familiariser avec le modèle dévellopé dans la thèse de Jordan
+H. Boyle \cite{Boyle2009}, ainsi qu'avec les études menées sur \celeg{}. Il faudra ensuite travailler sur
 l'implémentation issue de la thése. Cette implémentation utilise la bibliothéque Python Brian
 (\url{http://www.briansimulator.org/}) ainsi que le logiciel de modélisation physique SOFA
 (Simulation Open Framework Architecture, \url{http://www.sofa-framework.org/}). La liaison entre ces
 deux logiciels est réalisée à l'aide de Clones (\textbf{C}losed-\textbf{LO}op \textbf{NE}ural \textbf{S}imulations, 
 \url{http://clones.gforge.inria.fr/}).
 
-Plusieurs autres tâches sont envisageables, parmis celle ci :
+Plusieurs autres tâches sont envisageables, parmis celles ci :
 \begin{itemize}
    \item Réalisation et test de circuit neuronal pour d'autre mouvement ("backward", "omega-turn")
-   \item Implémentation de la chimiotaxie\footnote{Déplacement suivant un gradient d'odeur}
-   \item autre tâches liée\dots
+   \item Implémentation de la chimiotaxie\footnote{Déplacement suivant un gradient d'odeur} Je suis pas convaincu par cette définition, un odeur impliquerai à système équivalent à un nez chez le vers, es que c'est le cas ? perso je pense que "Déplacement suivant un gradient de molécule chimique" est plus juste
+   \item autres tâches liées\dots
 \end{itemize}
 
 % section Tâches à réaliser (end)
