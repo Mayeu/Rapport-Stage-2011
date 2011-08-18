@@ -1,0 +1,67 @@
+\chapter{Avancement} % (fold)
+\label{cha:Avancement}
+
+% section L'existant (end)
+
+\section{Implémentation du modèle} % (fold)
+\label{sub:Implémentation du modèle}
+
+Dans le but de créer un modèle simple à manipuler et à faire évoluer, une version en Python du
+modèle de Jordan H. Boyle a été implémentée avant mon arrivée. Cette version délègue la gestion
+des neurones à Brian, la modelisation physique à SOFA et utilise Clones pour les communications
+avec SOFA.
+
+\subsection{Modifications et corrections} % (fold)
+\label{sub:Modifications et corrections}
+
+En étudiant la thèse de Jordan H. Boyle ainsi que le code source de son modèle, de légéres differences
+ont fait leurs apparitions; différences qu'il a fallu répercuter dans notre modèle.
+Le modèle actuel se comporte de manière équivalente à celui de Jordan H. Boyle, mais l'implémentation
+est légèrement différente. Principalement dû à un problème d'instabilité dans SOFA, nous sommes obligés
+de mettre un coefficient multiplicateur pour augmenter l'ordre de grandeur des valeurs physiques du ver
+modélisé.
+
+Après étude des algorithmes de calcul utilisés, il apparait que SOFA serait possiblement la cause de
+l'instabilité. Le bug a été remonté aux developpeurs
+\footnote{\url{https://wiki.sofa-framework.org/tdev/ticket/240}} pour en assurer la prise en compte.
+
+Le but étant, bien sur, d'arriver à se passer de ce coefficient pour être le plus proche possible
+du modèle développé par Jordan H. Boyle.
+
+% subsection Modification et correction (end)
+
+% section Implémentation du modéle (end)
+
+\section{Locomotion arrière} % (fold)
+\label{sec:Locomotion arrière}
+
+Le circuit neuronal de la locomotion arrière est très proche du circuit neuronal de la locomotion
+avant, mais inversé\cite{Boyle2009}. Il n'existe malheureusement que peu d'informations sur le circuit
+permettant de passer de la locomotion avant à l'arrière, ormis le cablage du réseau.
+
+Actuellement, l'implémentation du ver possède ce deuxième circuit générant la marche arrière. Mais
+le passage de l'un à l'autre n'est pas biologiquement plausible. En s'aidant de données
+éléctrophysiologiques sur certains neurones \cite{Mellem2008a,Lockery2009}, ainsi que de différentes
+données sur le cablage et les interactions entre neurones
+\cite{Chalfie1985,Gray2005,Chen2006,Varshney2011,Leifer2011}, nous developpons un modèle plus
+plausible biologiquement pour le passage d'un circuit à l'autre.
+
+% section Locomotion arrière (end)
+
+\section{Pirouette} % (fold)
+\label{sec:Pirouette}
+
+La pirouette, ou omega-turn car le mouvement du ver se rapproche d'un $\Omega$, permet au ver
+de réaliser un changement de direction soudain. Comparé aux autres motifs de déplacements il y a encore
+moins d'information biologique sur le sujet, ormis sur le but et la fréquence de la pirouette dans
+la recherche de nourriture \cite{Gray2005}.
+
+Du fait du manque d'informations sur les neurones en jeux et les circuits neuronaux utilisés lors de
+la pirouette, il est difficile de la modéliser directement. Par contre nous prévoyons d'utiliser des
+vidéos de pirouette et de faire coïncider le mouvement de notre modèle sur le mouvement du ver, et
+ainsi remonter de l'état musculaire à l'état neuronal, et voir quels circuits et neurones seraient actifs
+lors de la pirouette.
+
+% section Pirouette (end)
+
+% chapter Avancement (end)

@@ -1,3 +1,3 @@
 = Rapport de stage 2011
 
-Dépot contenant mon rappor de stage ingénieur réalisé à l'INRIA sur l'étude du circuit neural lors de la locomotion chez C. Elegans
+Dépot contenant mon rapport de stage ingénieur réalisé à l'INRIA sur l'étude du circuit neural lors de la locomotion chez C. Elegans.
