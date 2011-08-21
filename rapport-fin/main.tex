@@ -28,9 +28,9 @@
 \usepackage{setspace}
 %\usepackage[dvips]{pstricks}
 %\usepackage{pstricks-add}
-%\usepackage{color}
+\usepackage{color}
 %\usepackage{xcolor}
-%\usepackage{epsfig}
+\usepackage{epsfig}
 %\usepackage{pst-grad} % For gradients
 %\usepackage{pst-plot} % For axes
 %\usepackage{amsmath}
@@ -155,7 +155,8 @@
 
 \clearpage % ensure to jump to the next page
 \addcontentsline{toc}{chapter}{Bibliographie} % Add the title in the TOC
-\nocite{Goodman2008,Allard2007} % cite not cited paper
+%\nocite{Goodman2008,Allard2007} % cite not cited paper
+\nocite{*}
 \bibliographystyle{plain} % biblio style
 \bibliography{bibli} % generate biblio
 
