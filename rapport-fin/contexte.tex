@@ -4,13 +4,6 @@
 \section{L'existant} % (fold)
 \label{sec:L'existant}
 
-Malgré sa faible complexité le \celeg{} présente des comportements variés.
-Ainsi il se déplace en suivant des gradients d'odeurs
-\cite{Ferree1999,Gray2005}, il possède differents types et motifs de mouvements
-(nage, rampe, avant, arrière, pirouette), il possède un circuit dédié à la
-réponse au toucher \cite{Chalfie1985}, et même une forme de mémoire
-\cite{Rankin2005a}.
-
 Peu d'études ont été menées sur la dynamique du circuit neural du \celeg{},
 principalement car il est actuellement infaisable d'enregistrer la dynamique de
 comportement des neurones chez un ver libre de ses mouvements.  Mais il existe
@@ -26,28 +19,77 @@ neurales \cite{Mellem2008a,Lockery2009} ont été menées.
 \label{sec:Contexte Biologique}
 
 \caeleg{} (abrégé \celeg{}) est un nématode (ou ver rond) non parasitaire d'un
-millimètre de long. De part sa simplicité, et grâce à différentes études, ce
-ver est un organisme modèle en génétique; il est ainsi possible de contrôler
-finement l'expression de ses gènes en ciblant uniquement une ou plusieurs de
+millimètre de long. De part sa simplicité, ver est un organisme modèle en biologie
+et particulièrement en génétique; il est ainsi possible de contrôler
+finement l'expression de ses gènes en ne ciblant qu'une seule ou plusieurs de
 ses cellules.
-
-Parmis ses autres avantages, figure le fait que son système nerveux est
-constitué de seulement 302 neurones câblés et qu'il est globalement invariable
-entre les différents individus \cite{Boyle2009}.  De plus, une grande partie de
-son système nerveux a été cartographié
-\cite{Durbin1987,Gray2005,Boyle2009,Varshney2011}.
 
 \subsection{Anatomie du \celeg{}} % (fold)
 \label{sub:Anatomie du caeleg}
 
-intro :
-   - on ne présenteras pas tous ici, que le necessaire
-   - presentation du systéme musculaire
+\begin{figure}[ht]
+   \begin{center}
+      \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
+   \end{center}
+   \caption{Anatomy générale du \caeleg{}. A) représentation global du vers, vue selon le flan gauche. B) coupe transversal du vers. Source \cite{Boyle2009}}
+   \label{fig:celegans_anatomy}
+\end{figure}
+
+%intro :
+%   - on ne présenteras pas tous ici, que le necessaire
+%   - presentation du systéme musculaire
+
+Le \celeg{} adulte mesure en générale entre 1 mm et 1,2 mm de long et
+possède un corps tubulaire lisse sans anneaux d'un diamètre maximal
+avoisinant les 80 µm (fig~\ref{fig:celegans_anatomy},
+page~\pageref{fig:celegans_anatomy}).
+
+Un ver adulte et invariablement composé de 959 cellules (en omettant les
+cellules qui deviendrons des spermatozoïdes ou des oeufs), incluant 302
+neurones et 95 muscles.  \cite{Boyle2009} L'invariabilité et le peu de
+cellules composant ce vers en fait donc un organisme idéal pour l'étude
+biologique et les simulations informatiques.\\
+
+
+Comme tous \textit{nématode} n'incluant pas de partie rigide, le \celeg{}
+compte sur la pression interne réalisé par ses fluides et organes pour
+maintenir sa forme et réaliser ses mouvements.  Comme on peut le voir sur la
+figure \ref{fig:celegans_anatomy} B), les muscles sont organisés en quatre
+quadrant le long du corps; et contrairement au espèces possédant un
+squelette où les muscles ne sont attaché qu'à un seul point des os, les
+muscles sont ici entièrement attaché au cuticule. Ceci est important puisque
+c'est cette propriété qui permettra la réalisation d'une torsion régulière
+et sinusoïdale.
+
+Les deux quadrant de muscles sont innervé par la corde neuronal dorsal, et de
+manières similaire, les quadrants ventraux sont innervé par la corde neuronal
+ventral. Chaque pair de quadrants (dorsal et ventral) est controlée par le même
+jeu de neurones, ainsi le vers ne peut réaliser des torsions que dans un plan à
+2 dimensions. A noter que seul la tête du vers (composé des quatres premières
+ligne de muscles) est innervé de manière à pouvoir réaliser des mouvements en 3
+dimensions. Le ver se déplace ainsi sur ses flancs gauche ou droit, en réalisant
+une succession de contraction et décontraction des muscles dorsaux et ventraux
+générant un mouvement sinusoïdale.
 
 % subsection Anatomie du \caeleg{} (end)
 
 \subsection{Comportement du ver} % (fold)
 \label{sub:Comportement du ver}
+
+Nous nous interesserons ici au comportement de déplacement du vers, mais il est
+à noté que malgrès sont faible nombre de neurone le \celeg{} est capable de
+suivre ou éviter des gradient de température et/ou d'odeur
+\cite{Ferree1999,Gray2005}, d'adapter son comportement si on le touche
+(acceleration, fuite) \cite{Chalfie1985} et il possède aussi une forme de
+mémoire \cite{Rankin2005a}.\\
+
+Comme dis précédemment le ver ce déplace en contractant ses muscles dorsaux
+et ventraux pour réaliser un mouvement sinusoïdale, tout en reposant sur
+ses flancs droit ou gauche. L'étude du mouvement se fait généralement 
+dans des boites de petri contenant du gel d'agar celui ci leur permettant de
+reposer sans s'enfoncer dedans. Le ver rampe ainsi à la surface du gel en suivant
+une sinusoïde avec une longueur d'onde aproximative de 2/3 de la longueur du corps
+\cite{Boyle2009}
 
 % subsection Comportement du ver (end)
 
