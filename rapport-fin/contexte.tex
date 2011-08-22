@@ -27,14 +27,18 @@ ses cellules.
 \subsection{Anatomie du \celeg{}} % (fold)
 \label{sub:Anatomie du caeleg}
 
-\begin{figure}[ht]
-   \begin{center}
-      \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
-   \end{center}
-   \caption{Anatomy générale du \caeleg{}. A) représentation global du vers, vue selon le flan gauche. B) coupe transversal du vers. Source \cite{Boyle2009}}
-   \label{fig:celegans_anatomy}
-\end{figure}
-
+%\begin{figure}[ht]
+%   \begin{center}
+%      \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
+%   \end{center}
+%   \caption{Anatomy générale du \caeleg{}. A) représentation global du vers,
+%   vue selon le flan gauche. B) coupe transversal du vers. Source
+%   \cite{Boyle2009}}
+%   \label{fig:celegans_anatomy}
+%\end{figure}
+\begin{center}
+   Ici une image de l'anatomie générale du vers
+\end{center}
 %intro :
 %   - on ne présenteras pas tous ici, que le necessaire
 %   - presentation du systéme musculaire
@@ -83,18 +87,144 @@ suivre ou éviter des gradient de température et/ou d'odeur
 (acceleration, fuite) \cite{Chalfie1985} et il possède aussi une forme de
 mémoire \cite{Rankin2005a}.\\
 
-Comme dis précédemment le ver ce déplace en contractant ses muscles dorsaux
-et ventraux pour réaliser un mouvement sinusoïdale, tout en reposant sur
-ses flancs droit ou gauche. L'étude du mouvement se fait généralement 
-dans des boites de petri contenant du gel d'agar celui ci leur permettant de
-reposer sans s'enfoncer dedans. Le ver rampe ainsi à la surface du gel en suivant
-une sinusoïde avec une longueur d'onde aproximative de 2/3 de la longueur du corps
-\cite{Boyle2009}
+% TODO donner la compo du gél en réf
+Comme dis précédemment le ver ce déplace en contractant ses muscles dorsaux et
+ventraux pour réaliser un mouvement sinusoïdale, tout en reposant sur ses
+flancs droit ou gauche. L'étude du mouvement se fait généralement dans des
+boites de petri contenant du gel d'agar celui ci leur permettant de reposer
+sans s'enfoncer dedans. Le ver rampe ainsi à la surface du gel en suivant une
+sinusoïde avec une longueur d'onde aproximative de 2/3 de la longueur du corps
+à une fréquence de 0,5 Hz en moyenne\cite{Boyle2009}. Ce mouvement lui permet
+sois de se déplacer vers l'avant, sois vers l'arrière. Le \celeg{} à bien sur
+la possibilité de moduler ce mouvement pour adapter sa vitesse.
+
+Il est capable de tourner de manière lente pour suivre ou fuire des gradient
+d'odeur et de température, mais il présente aussi un mouvement nommé
+\textit{pirouette} (ou \textit{Omega-turn}, du à la forme en $\Omega$ qu'il
+prend dans ce cas.) qui lui permet de réaliser en changement de direction
+brusque. Ce mouvement est souvent utiliser pour passer d'un mouvement en marche
+arrière à un mouvement en marche avant, où lorsque le ver recherche sa
+nouriture.\\
+
+\begin{center}
+   Ici une image du mouvement du vers
+\end{center}
+
+% TODO donner la compo du liquide généralement utilisé en réf
+Le vers est également capable de nager dans un environnement liquide. La fréquence
+de son mouvement passe ainsi à 2 Hz. Différentes études on montrée que le ver
+adapte ainsi sont mouvement en fonction des contraintes de son environnement.
+Plus d'information peut être trouvé dans la thêse de J. H. Boyle \cite{Boyle2009}
 
 % subsection Comportement du ver (end)
 
 \subsection{Présentation du circuit neural de locomotion} % (fold)
 \label{sub:Présentation du circuit neural de locomotion}
+
+Le circuit neural du \celeg{} à été étudié en profondeur, de sorte qu'on
+connait non seulement la position de tous ses neurones mais aussi la grande
+majorité de ses connections neurales (comme vu précédent celle si sont
+invariable d'un ver à l'autre).  Ainsi il est possible d'avoir une carte
+précise des liens entre chaque neurone
+\cite{Durbin1987,Chen2006,Boyle2009,Varshney2011}.  Plusieurs de ses donnée
+peuvent étre trouvée à l'adresse
+\url{http://www.wormatlas.org/neuronalwiring.html}, le site \textit{Worm Atlas}
+étant une base de donnée structurel et comportementale du \celeg{}.
+
+Si on connait très bien les liens entre chaque neurone, on ne connais en
+revanche pas le rôle précis de certains neurones. Je vais présenter ici le
+circuit neural utilisé lors de la locomotion avant, ainsi que celui que l'on
+considère comme étant générateur du mouvement arrière.
+
+\subsubsection{Présentation d'ensemble} % (fold)
+\label{ssub:Présentation d'ensemble}
+
+% TODO ajouter une image du circuit neural générale
+\begin{center}
+   ici, une image du circuit neural générale, représentant l'anneau neural et la corde ventral
+\end{center}
+
+On peut rapidement dicerner deux partie principal dans le circuit neural du
+\celeg{}, un ganglion au niveau de la tête du ver, appelé \textit{anneau
+nerveux}, et la \textit{corde ventral}.
+
+Les muscles de la tête (quatre premier quadrant de muscles) ne sont innervé que
+par \textit{l'anneau nerveux}, le reste des muscles en revanche, est innervé
+par \textit{l'anneau nerveux}, et par la \textit{corde ventral}.  Le rôle
+présumé de \textit{l'anneau nerveux} est celui de la gestion des comportement
+de haut niveaux (poursuite/fuite de gradient, réponse au touché), alors que la
+très grande majorité des neurones de la \textit{corde ventral} ne se charge que
+de la contraction et décontraction des muscles; et le rôle unitaire des neurones
+la composant est mieux connue.
+
+% subsubsection Présentation d'ensemble (end)
+
+\subsubsection{Circuit de la corde ventral} % (fold)
+\label{ssub:Circuit de la corde ventral}
+
+Comme dis précédement, chaque paire de muscle présent dans la partie dorsal
+(et de manière équivalente dans la partie ventral), et innervé par le même
+jeu de neurone, ont les considéreras comme combiné dans la suite de ce document.
+
+Il éxiste 6 jeux de neurones différents dans la \textit{corde ventral} pour la
+gestion de la locomotion \cite{Boyle2009}, DA (9), DB (7), DD (6), VA (12), VB
+(11), VD (13), ou le chiffre entre parenthése designe le nombre de neurone de
+chaque type, et V désignant Ventral, et D dorsal.  Les neurones de type A et B
+(DA, DB, VA, VB) sont des neurones excitant, alors que les neurones de type D
+(DD, VD) sont des neurones inhibiteur.\\
+
+
+Il est admis que les neurones de type B sont dédié au déplacement avant du vers,
+et que ce même circuit est répété dans l'autre sens par les neurones de type A
+pour gérer le déplacement arrière \cite{AltunZ.F.andHall2011,Boyle2009,White1986}.
+
+On peut noter que les zones de jonctions neuromusculaire \footnote{Zone de
+contact entre un neurone et un muscle permettant de déclencher un potentiel
+d'action pour controler le muscle} ne se chevauche pas, alors que les axones
+des neurones se prolonge vers l'arrière pour les neurones de type B (et
+inversement vers l'avant pour les types A) et se chevauche entre elle. Cet
+allongement joue le rôle de récépteur de torsion pour le vers, et lui permet
+ainsi de synchroniser le mouvement de ses muscles \cite{Boyle2009}. A noter que
+cette fonction à été proposé par R. L. Russel et L. Byerly, le tout cité par
+White et al. \cite{White1986}, mais n'a jamais été vérifié expérimentalement
+pour l'instant.
+
+
+% TODO mettre une image de "l'aternance de DD/VD"
+\begin{center}
+   Ici, une image de "l'alternance" de VD/DD
+\end{center}
+A contrario des neurones de type A et B qui n'ont pas de lien entre eux, les
+neurones de type D (DD, VD) sont éxcité par les neurones de type A et B, en
+plus d'hiniber les muscles. Les neurones DD sont excité par les neurones VA/B,
+et les neurones VD par les neurones DA/B. Grâce à cela, lorsque des muscles se
+contractes d'un coté, l'autre coté seras relaxé; ceci générant alors une
+sinusoïde. La torsion étant elle controlé par les récépteur de torsion qui
+prévienne lorsqu'il faut alterner les rôles. Ce phénomène seras appelé
+\textit{cross-inhibition} dans la suite.\\
+
+
+En plus de ces neurones moteurs, ont trouve des interneurones qui ont pour
+charge de transmettre l'information entre différent neurones. Je ne
+présenterais pas tous ces interneurones, mais seulement 2 paires, AVB/AVA et
+PVC/AVD, qui sont pertinent dans le contexte de ce stage.  Ces interneurones
+permette la génération de réaction de plus haut niveaux
+\cite{Boyle2009,White1986}.  Ainsi la paire AVB/AVA se charge de la marche
+avant et la marche arrière, ainsi que le passage de l'un à l'autre. AVB gérant
+la marche avant, et AVA la marche arrière. On pense aussi que l'interaction
+entre ces deux interneurones permet la génération d'une \textit{pirouette},
+mais rien n'à encore étais prouvé que ce soit en terme expérimentale, ou de
+simulation.
+
+Les interneurones PVC et AVD quand à eux, sont responsable de la réponse aux
+touché du vers. En plus de cette fonction, il peuvent légèrement compenser le
+rôle de AVA/AVB s'il sont absent ou dysfonctionnant. Le soma du neurone PVC ce
+trouve prés de la queue, alors que AVD se trouve dans la tête du ver.
+
+Les interneurones AVB et PVC sont relié au neurones de type B, et similairement
+AVA et AVD sont relié au neurones de type A.
+
+% subsubsection Circuit de la corde ventral (end)
 
 % subsection Présentation du circuit neural de locomotion (end)
 
@@ -102,6 +232,18 @@ une sinusoïde avec une longueur d'onde aproximative de 2/3 de la longueur du co
 
 \section{Modèle du ver} % (fold)
 \label{sec:Modèle du ver}
+
+Le modêle choisis pour les simulations est celui détaillé dans la thêse de
+Jordan H. Boyle \cite{Boyle2009}. Il à été proposé plusieurs modèle avant
+celui ci, mais beaucoup différencié le mouvement dans l'eau du mouvement
+dans l'agar. Le modèle devellopé par J. H. Boyle démontre lui qu'il est
+possible de simuler les deux comportement avec un seul modèle, uniquement
+en ce servant des retours réalisé par l'environement. Il modélise ainsi à la
+fois le circuit neural de la corde ventral du ver (ce modèle permet simplement
+de faire avancer le vers), le corps du ver (force, élasticité) et les forces
+en jeux dans l'environement du ver.
+
+Je vais détaillé ici le modèle final tel qu'il est décrit dans la thêse de J. H. Boyle.
 
 % section Modèle du vers (end)
 
