@@ -27,21 +27,15 @@ ses cellules.
 \subsection{Anatomie du \celeg{}} % (fold)
 \label{sub:Anatomie du caeleg}
 
-%\begin{figure}[ht]
-%   \begin{center}
-%      \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
-%   \end{center}
-%   \caption{Anatomie générale de \caeleg{}. A) représentation globale du ver,
-%   vue selon le flan gauche. B) coupe transversale du ver. Source
-%   \cite{Boyle2009}}
-%   \label{fig:celegans_anatomy}
-%\end{figure}
-\begin{center}
-   Aanatomie générale du vers
-\end{center}
-%intro :
-%   - on ne présenteras pas tous ici, que le necessaire
-%   - presentation du système musculaire
+\begin{figure}[ht]
+   \begin{center}
+      \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
+   \end{center}
+   \caption{Anatomie générale de \caeleg{}. A) représentation globale du ver,
+   vue selon le flan gauche. B) coupe transversale du ver. Source
+   \cite{Boyle2009}}
+   \label{fig:celegans_anatomy}
+\end{figure}
 
 Un ver \celeg{} adulte mesure en général entre 1 mm et 1,2 mm de long et
 possède un corps tubulaire lisse sans anneaux d'un diamètre maximal
@@ -56,23 +50,24 @@ biologique et les simulations informatiques.\\
 
 
 Comme tout \textit{nématode} ne possédant pas de partie rigide, \celeg{}
-maintient sa forme et peut réaliser des mouvements grâce à ses fluides 
-et organes qui imposent une pression interne suffisante. Comme on peut le voir sur la
-figure \ref{fig:celegans_anatomy} B), les muscles sont organisés en quatre
-quadrants le long du corps. Contrairement aux espèces possédant un
-squelette où les muscles ne sont attachés qu'à un seul point des os, les
-muscles sont ici entièrement attachés à la cuticule. Cette propriété permettra la réalisation d'une torsion régulière
-et sinusoïdale.
+maintient sa forme et peut réaliser des mouvements grâce à ses fluides et
+organes qui imposent une pression interne suffisante. Comme on peut le voir sur
+la figure \ref{fig:celegans_anatomy} B), les muscles sont organisés en quatre
+quadrants le long du corps. Contrairement aux espèces possédant un squelette où
+les muscles ne sont attachés qu'à un seul point des os, les muscles sont ici
+entièrement attachés à la cuticule. Cette propriété permettra la réalisation
+d'une torsion régulière et sinusoïdale.
 
-Les deux quadrants de muscles sont innervés par la corde neuronale dorsale, et de
-manière similaire, les quadrants ventraux sont innervés par la corde neuronale
-ventrale. Chaque paire de quadrants (dorsale et ventrale) est controlée par le même
-jeu de neurones, ainsi le ver ne peut réaliser des torsions que dans un plan à
-deux dimensions. A noter que seul la tête du ver (composée des quatres premières
-lignes de muscles) est innervée de manière à pouvoir réaliser des mouvements en trois
-dimensions. Le ver se déplace ainsi sur ses flancs gauche ou droit, en réalisant
-une succession de contraction et de décontraction des muscles dorsaux et ventraux
-générant un mouvement sinusoïdale.
+Les deux quadrants de muscles sont innervés par la corde neuronale dorsale, et
+de manière similaire, les quadrants ventraux sont innervés par la corde
+neuronale ventrale. Chaque paire de quadrants (dorsale et ventrale) est
+controlée par le même jeu de neurones, ainsi le ver ne peut réaliser des
+torsions que dans un plan à deux dimensions. A noter que seul la tête du ver
+(composée des quatres premières lignes de muscles) est innervée de manière à
+pouvoir réaliser des mouvements en trois dimensions. Le ver se déplace ainsi
+sur ses flancs gauche ou droit, en réalisant une succession de contraction et
+de décontraction des muscles dorsaux et ventraux générant un mouvement
+sinusoïdale.
 
 % subsection Anatomie du \caeleg{} (end)
 
@@ -156,17 +151,17 @@ de haut niveaux (poursuite/fuite de gradient, réponse au touché), alors que la
 très grande majorité des neurones de la \textit{corde ventrale} ne se charge que
 de la contraction et décontraction des muscles. Le rôle unitaire des neurones
 % mieux connu que quoi ? de ceux de l'anneau nerveux ?
-composant cette corde est mieux connu.
+composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 
 % subsubsection Présentation d'ensemble (end)
 
 \subsubsection{Circuit de la corde ventrale} % (fold)
 \label{ssub:Circuit de la corde ventrale}
 
-Comme dis précédement, chaque paire de muscle présent dans la partie dorsale
+Comme dis précédemment, chaque paire de muscle présent dans la partie dorsale
 (et de manière équivalente dans la partie ventrale) est innervée par le même
-% je comprend pas ce que tu veux dire par "combiné" ici ?
-jeu de neurone, on les considérera comme combiné dans la suite de ce document.
+jeu de neurone. C'est pourquoi nous ne les distinguerons pas dans la
+suite de ce doc
 
 Il existe 6 jeux de neurone différents dans la \textit{corde ventrale} pour la
 gestion de la locomotion \cite{Boyle2009}, DA (9), DB (7), DD (6), VA (12), VB
@@ -183,7 +178,7 @@ pour gérer le déplacement arrière \cite{AltunZ.F.andHall2011,Boyle2009,White1
 % Je suis pas sûre d'avoir compris ta phrase, en tout cas "axone" est un mot masculin...
 On peut noter que les zones de jonction neuromusculaire \footnote{Zone de
 contact entre un neurone et un muscle permettant le transfert d'information 
-pour contrôler le muscle} ne se chevauchent pas, alors que les axones
+pour contrôler le muscle} ne se chevauchent pas, alors que les processus
 des neurones se prolongent vers l'arrière pour les neurones de type B (et
 inversement vers l'avant pour les types A) et se chevauchent entre eux. Cet
 allongement joue le rôle de récépteur de torsion pour le ver lui permettant
@@ -249,7 +244,11 @@ fois le circuit neural de la corde ventrale du ver (ce modèle permet simplement
 de faire avancer le ver), le corps du ver (force, élasticité) et les forces
 en jeux dans l'environement.
 
-Je vais détailler ici le modèle final tel qu'il est décrit dans la thêse de J. H. Boyle.
+Je vais détailler ici le modèle final tel qu'il est décrit dans la thêse de J.
+H. Boyle, en ne concervant que la partie dédié au ver. J'omet donc volontairement
+la modelisation de l'environnement. De même que les raisons et calcul des choix
+de modélisation se trouve dans la thêse de Jordan H. Boyle \cite{Boyle2009}, il
+ne seront pas présenté ici.
 
 % section Modèle du ver (end)
 
