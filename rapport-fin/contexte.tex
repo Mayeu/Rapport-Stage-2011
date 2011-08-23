@@ -1,17 +1,17 @@
 \chapter{Contexte} % (fold)
 \label{cha:Contexte}
 
-\section{L'existant} % (fold)
-\label{sec:L'existant}
+%\section{L'existant} % (fold)
+%\label{sec:L'existant}
 
-Peu d'études ont été menées sur la dynamique du circuit neural de \celeg{},
-principalement car il est actuellement impossible d'enregistrer la dynamique de
-comportement des neurones chez un ver libre de ses mouvements.  Mais il existe
-des études qui permettent d'inférer sur le rôle des différents neurones moteurs
-lors du déplacement du ver \cite{Yanik2006,Chronis2007,Leifer2011}.  Des études
-statistiques sur les différents motifs de déplacement \cite{Gray2005} du ver,
-ainsi que des études portant sur l'éléctrophysiologie de certaines cellules
-neurales \cite{Mellem2008a,Lockery2009} ont été menées.
+%Peu d'études ont été menées sur la dynamique du circuit neural de \celeg{},
+%principalement car il est actuellement impossible d'enregistrer la dynamique de
+%comportement des neurones chez un ver libre de ses mouvements.  Mais il existe
+%des études qui permettent d'inférer sur le rôle des différents neurones moteurs
+%lors du déplacement du ver \cite{Yanik2006,Chronis2007,Leifer2011}.  Des études
+%statistiques sur les différents motifs de déplacement \cite{Gray2005} du ver,
+%ainsi que des études portant sur l'éléctrophysiologie de certaines cellules
+%neurales \cite{Mellem2008a,Lockery2009} ont été menées.
 
 % section L'existant (end)
 
@@ -32,7 +32,7 @@ ses cellules.
       \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
    \end{center}
    \caption{Anatomie générale de \caeleg{}. A) coupe longitudinale du ver,
-   vue depuis le flan gauche. B) coupe transversale du ver. Source
+   vue depuis le flan gauche.B) coupe transversale du ver. Source
    \cite{Boyle2009}}
    \label{fig:celegans_anatomy}
 \end{figure}
@@ -115,13 +115,12 @@ Plus d'informations peuvent être trouvées dans la thêse de J. H. Boyle \cite{
 \subsection{Présentation du circuit neural de locomotion} % (fold)
 \label{sub:Présentation du circuit neural de locomotion}
 
-Le circuit neural de \celeg{} a été étudié en profondeur. En effet, on
-connait non seulement la position de tous ses neurones, mais aussi la grande
-majorité de ses connections neurales (comme vu précédent celles si sont
-invariables d'un ver à l'autre).  Ainsi il est possible d'avoir une carte
-précise des liens entre chaque neurone
-\cite{Durbin1987,Chen2006,Boyle2009,Varshney2011}.  Plusieurs de ces données
-peuvent être trouvées à l'adresse
+Le circuit neural de \celeg{} a été étudié en profondeur. En effet, on connait
+non seulement la position de tous ses neurones, mais aussi la grande majorité
+de ses connections neurales (comme vu précédent celles si sont invariables d'un
+ver à l'autre).  Ainsi il est possible d'avoir une carte précise des liens
+entre chaque neurone \cite{Durbin1987,Chen2006,Boyle2009,Varshney2011}.
+Plusieurs de ces données peuvent être trouvées à l'adresse
 \url{http://www.wormatlas.org/neuronalwiring.html}, le site \textit{Worm Atlas}
 étant une base de donnée structurelle et comportementale de \celeg{}.
 
@@ -185,12 +184,12 @@ pour l'instant.
    \begin{center}
       \psfig{width=15cm,figure=pic/alternance_dv.eps}
    \end{center}
-   \caption{Schéma local du cricuit neural de \celeg{}. On peut voir
+   \caption{Schéma local du circuit neural de \celeg{}. On peut voir
    que lorsque le muscle ventral gauche est excité, le muscle dorsal gauche est
    inhibé; et inversement sur la partie droite du schéma. Les flèches remplies
    représentent des synpapses excitatrices (+), alors que les barres représentent des
    synapses inhibitrices (-). En vert : les muscles. En violet : les neurones (avec corps cellulaires et prolongements).
-DD, VA, VB, VC, VD, DA, DB, AS : neurones. Source \textit{Worm Atlas},
+   DD, VA, VB, VC, VD, DA, DB, AS : neurones. Source \textit{Worm Atlas},
    \url{http://www.wormatlas.org/hermaphrodite/nervous/Neuroframeset.html}}
    \label{fig:alternance_dv}
 \end{figure}
@@ -252,7 +251,7 @@ calcul des choix de modélisation se trouve dans la thèse de Jordan H. Boyle
 \cite{Boyle2009}, ils ne seront pas présenté ici.\\
 
 \subsection{Corps de \celeg{}} % (fold)
-\label{sub:Corps de \celeg{}}
+\label{sub:Corps de celeg}
 
 \begin{figure}[ht]
    \begin{center}
@@ -295,12 +294,13 @@ B et D.
       \psfig{width=5cm,figure=pic/celegans_segment.eps}
    \end{center}
    \caption{Représentation schématique d'une des 12 unitée neurale qui compose
-   le ver simulé. Chaque neurone (cellules rondes et cellules rectangulaires) contrôle 4
-   muscles (cellules hexagonales).  Les synapses excitatrices sont legendées à
-   l'aide d'un triangle alors que les synapses inhibitrices le sont à l'aide d'un rond.
-On observe également les processus neuronaux continuant vers l'arrière du ver. 
-DM: muscle dorsal; DD: neurone dorsal de type D; DB: neurone dorsal de type B; VD: neurone ventral de type D; VB: neurone ventral de type B; VM : muscle ventral.
-   Source \cite{Boyle2009}}
+   le ver simulé. Chaque neurone (cellules rondes et cellules rectangulaires)
+   contrôle 4 muscles (cellules hexagonales).  Les synapses excitatrices sont
+   legendées à l'aide d'un triangle alors que les synapses inhibitrices le sont
+   à l'aide d'un rond.  On observe également les processus neuronaux continuant
+   vers l'arrière du ver.  DM: muscle dorsal; DD: neurone dorsal de type D; DB:
+   neurone dorsal de type B; VD: neurone ventral de type D; VB: neurone ventral
+   de type B; VM : muscle ventral.  Source \cite{Boyle2009}}
    \label{fig:celegans_segment}
 \end{figure}
 
@@ -315,6 +315,8 @@ cross-inhibition représentée entre les neurones DB en VD, ainsi que VB et DD.
 
 \section{Contexte informatique} % (fold)
 \label{sec:Contexte informatique}
+
+
 
 % section Contexte informatique (end)
 
