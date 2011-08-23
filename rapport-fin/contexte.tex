@@ -31,8 +31,8 @@ ses cellules.
    \begin{center}
       \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
    \end{center}
-   \caption{Anatomie générale de \caeleg{}. A) représentation globale du ver,
-   vue selon le flan gauche. B) coupe transversale du ver. Source
+   \caption{Anatomie générale de \caeleg{}. A) coupe longitudinale du ver,
+   vue depuis le flan gauche. B) coupe transversale du ver. Source
    \cite{Boyle2009}}
    \label{fig:celegans_anatomy}
 \end{figure}
@@ -185,11 +185,12 @@ pour l'instant.
    \begin{center}
       \psfig{width=15cm,figure=pic/alternance_dv.eps}
    \end{center}
-   \caption{Représentation d'une partie du circuit neural du ver. On peut voir
+   \caption{Schéma local du cricuit neural de \celeg{}. On peut voir
    que lorsque le muscle ventral gauche est excité, le muscle dorsal gauche est
-   inhibé; et inversement sur la partie droite du schéma. Les flèche remplie
-   représente des synpapse excitatrice, alors que les barre représente des
-   synapse inhibitrice. Source \textit{Worm Atlas},
+   inhibé; et inversement sur la partie droite du schéma. Les flèches remplies
+   représentent des synpapses excitatrices (+), alors que les barres représentent des
+   synapses inhibitrices (-). En vert : les muscles. En violet : les neurones (avec corps cellulaires et prolongements).
+DD, VA, VB, VC, VD, DA, DB, AS : neurones. Source \textit{Worm Atlas},
    \url{http://www.wormatlas.org/hermaphrodite/nervous/Neuroframeset.html}}
    \label{fig:alternance_dv}
 \end{figure}
@@ -250,33 +251,33 @@ volontairement la modelisation de l'environnement. De même que les raisons et
 calcul des choix de modélisation se trouve dans la thèse de Jordan H. Boyle
 \cite{Boyle2009}, ils ne seront pas présenté ici.\\
 
-\subsection{Corps du ver} % (fold)
-\label{sub:Corps du ver}
+\subsection{Corps de \celeg{}} % (fold)
+\label{sub:Corps de \celeg{}}
 
 \begin{figure}[ht]
    \begin{center}
       \psfig{width=15cm,figure=pic/celegans_representation.eps}
    \end{center}
-   \caption{Le ver tel qu'il est représenté en simulation. Il est représenté
-   par 49 segments rigide (noir), connecté latéralement par la représentation
-   de la cutile (rouge), et par par les segments diagonaux (bleu). Source
+   \caption{\celeg{} tel que représenté en simulation. Il est représenté
+   par 49 segments rigides (en noir), connectés latéralement par la représentation
+   de la cuticule (en rouge), et par les segments diagonaux (en bleu). Source
    \cite{Boyle2009}}
    \label{fig:celegans_representation}
 \end{figure}
 
-Le corps du vers est représenté par 49 segments rigide connecté entre eux
-latéralement et en diagonale. Les segments latéraux représente la cuticule du
-ver et en reprennent les propriétés élastiques. Les segments diagonaux on pour
+Le corps du ver est représenté par 49 segments rigides connectés entre eux
+latéralement et en diagonale. Les segments latéraux représentent la cuticule du
+ver et en reprennent les propriétés élastiques. Les segments diagonaux ont pour
 rôle de maintenir les segments rigides, et servent d'approximation pour la
 représentation de la pression interne du ver (voir
 fig~\ref{fig:celegans_representation}
 page~\pageref{fig:celegans_representation}).
 
-Les muscles du vers sont placé au niveaux des segments latéraux, chaque segments
-équivalent à un muscle. Contrairement à la cuticule qui est représenté par un
-resort passif (avec amortissement), les resort qui représente les muscles
-change leurs raideurs, taille au repos et amortissement en fonction du niveau
-d'activité des muscles. Ce model de représentation des muscles permet de gérer
+Les muscles du ver sont placés au niveau des segments latéraux, chaque segments
+étant équivalent à un muscle. Contrairement à la cuticule qui est représentée par un
+ressort passif (avec amortissement), les ressorts qui représentent les muscles
+changent leur raideur, leur taille au repos et leur amortissement en fonction du niveau
+d'activité des muscles. Ce modèle de représentation des muscles permet de gérer
 simplement les relations entre longueur et tension ainsi que vitesse et tension
 \cite{Boyle2009}.
 
@@ -285,7 +286,7 @@ simplement les relations entre longueur et tension ainsi que vitesse et tension
 \subsection{Circuit neural} % (fold)
 \label{sub:Circuit neural}
 
-Au lieu de concidérer exactement le nombre de neurones du vers, on réalise une
+Au lieu de considérer exactement le nombre de neurone du ver, on réalise une
 approximation avec 12 neurones ventraux et 12 neurones dorsaux de chacun des types
 B et D.
 
@@ -293,19 +294,20 @@ B et D.
    \begin{center}
       \psfig{width=5cm,figure=pic/celegans_segment.eps}
    \end{center}
-   \caption{Représentation schématique d'une des 12 unitées neural qui compose
-   le ver simulé. Chaque neurones (cellules rondes et carrées) controle 4
-   muscles (cellules hexagonales).  On voit aussi les processus neuronaux se
-   continuant vers l'arrière du ver. Les synapse excitatrice sont legendé à
-   l'aide d'un triangle alors que les inhibitrice le sont à l'aide d'un cercle.
+   \caption{Représentation schématique d'une des 12 unitée neurale qui compose
+   le ver simulé. Chaque neurone (cellules rondes et cellules rectangulaires) contrôle 4
+   muscles (cellules hexagonales).  Les synapses excitatrices sont legendées à
+   l'aide d'un triangle alors que les synapses inhibitrices le sont à l'aide d'un rond.
+On observe également les processus neuronaux continuant vers l'arrière du ver. 
+DM: muscle dorsal; DD: neurone dorsal de type D; DB: neurone dorsal de type B; VD: neurone ventral de type D; VB: neurone ventral de type B; VM : muscle ventral.
    Source \cite{Boyle2009}}
    \label{fig:celegans_segment}
 \end{figure}
 
-On peut ainsi segmenter le ver en 12 unité neural contenant chacunes un neurones DD, VD,
-DB, VB, quatre muscles dorsaux et quatre muscle ventraux (voir fig~-\ref{fig:celegans_segment},
+On peut ainsi segmenter le ver en 12 unitées neurales contenant chacune un neurone DD, VD,
+DB, VB, quatre muscles dorsaux et quatre muscles ventraux (voir fig~-\ref{fig:celegans_segment},
 page~\pageref{fig:celegans_segment}). Sur la figure \ref{fig:celegans_segment} on peut voir la
-cross-inhibition représenté entre les neurones DB en VD, ainsi que VB et DD.
+cross-inhibition représentée entre les neurones DB en VD, ainsi que VB et DD.
 
 % subsection Circuit neural (end)
 
