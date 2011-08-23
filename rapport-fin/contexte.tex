@@ -133,12 +133,6 @@ considéré comme étant générateur du mouvement arrière.
 \subsubsection{Présentation d'ensemble} % (fold)
 \label{ssub:Présentation d'ensemble}
 
-% TODO ajouter une image du circuit neural générale
-% c'est tes légendes d'image ça ? commencer une légende par "ici, une image de..." c'est très moche je pense... une vrai légende sa serait "Photo/Dessin/Schéma du circuit neural général ..."
-\begin{center}
-   ici, une image du circuit neural général, représentant l'anneau neural et la corde ventrale
-\end{center}
-
 On peut rapidement dicerner deux parties principales dans le circuit neural de
 \celeg{}, un ganglion au niveau de la tête du ver, appelé \textit{anneau
 nerveux}, et la \textit{corde ventrale}.
@@ -150,7 +144,6 @@ présumé de \textit{l'anneau nerveux} est celui de la gestion des comportements
 de haut niveaux (poursuite/fuite de gradient, réponse au touché), alors que la
 très grande majorité des neurones de la \textit{corde ventrale} ne se charge que
 de la contraction et décontraction des muscles. Le rôle unitaire des neurones
-% mieux connu que quoi ? de ceux de l'anneau nerveux ?
 composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 
 % subsubsection Présentation d'ensemble (end)
@@ -188,19 +181,27 @@ White et al. \cite{White1986}, mais n'a jamais été vérifiée expérimentaleme
 pour l'instant.
 
 
-% TODO mettre une image de "l'aternance de DD/VD"
-\begin{center}
-   Ici, une image de "l'alternance" de VD/DD
-\end{center}
+\begin{figure}[ht]
+   \begin{center}
+      \psfig{width=15cm,figure=pic/alternance_dv.eps}
+   \end{center}
+   \caption{Représentation d'une partie du circuit neural du ver. On peut voir
+   que lorsque le muscle ventral gauche est excité, le muscle dorsal gauche est
+   inhibé; et inversement sur la partie droite du schéma. Source \textit{Worm
+   Atlas},
+   \url{http://www.wormatlas.org/hermaphrodite/nervous/Neuroframeset.html}}
+   \label{fig:alternance_dv}
+\end{figure}
+
 A contrario des neurones de type A et B qui n'ont pas de lien entre eux, les
-neurones de type D (DD, VD) sont tous excités par les neurones de type A et B, 
-% je suis pas sûre de ma correction ici
-et permettent d'inhiber les muscles. Les neurones DD sont excités par les neurones VA/B,
-et les neurones VD par les neurones DA/B. Grâce à cela, lorsque les muscles d'un côté se 
-contracteront, l'autre côté sera relaxé; ceci générant alors une
-sinusoïde. La torsion étant elle controlée par les récépteurs de torsion qui
-préviennent lorsqu'il faut alterner les rôles. Ce phénomène sera appelé
-\textit{cross-inhibition} dans la suite.\\
+neurones de type D (DD, VD) sont tous excités par les neurones de type A et B,
+et permettent d'inhiber les muscles. Les neurones DD sont excités par les
+neurones VA/B, et les neurones VD par les neurones DA/B. Grâce à cela, lorsque
+les muscles d'un côté se contracteront, l'autre côté sera relaxé (voir
+fig~\ref{fig:alternance_dv}, page~\pageref{fig:alternance_dv}; ceci générant
+alors une sinusoïde. La torsion étant elle controlée par les récépteurs de
+torsion qui préviennent lorsqu'il faut alterner les rôles. Ce phénomène sera
+appelé \textit{cross-inhibition} dans la suite.\\
 
 
 En plus de ces neurones moteurs, on trouve des interneurones qui ont pour
@@ -217,13 +218,12 @@ simulation.
 
 Les interneurones PVC et AVD quand à eux, sont responsables de la réponse au
 touché du ver. En plus de cette fonction, ils peuvent légèrement compenser le
-rôle de AVA/AVB s'ils sont absents ou dysfonctionnants. 
-% c'est quoi le soma ? es que sa serai pas plutôt le noyau ou le corps cellulaire dont tu veux parler ?
-Le soma du neurone PVC se
-trouve près de la queue, alors que celui d'AVD se trouve dans la tête du ver.
+rôle de AVA/AVB s'ils sont absents ou dysfonctionnants.  Le corps cellulaire du
+neurone PVC se trouve près de la queue, alors que celui d'AVD se trouve dans la
+tête du ver.
 
-Les interneurones AVB et PVC sont reliés aux neurones de type B, et
-AVA et AVD sont reliés aux neurones de type A.
+Les interneurones AVB et PVC sont reliés aux neurones de type B, et AVA et AVD
+sont reliés aux neurones de type A.
 
 % subsubsection Circuit de la corde ventrale (end)
 
@@ -237,18 +237,48 @@ AVA et AVD sont reliés aux neurones de type A.
 Le modèle choisis pour les simulations est celui détaillé dans la thêse de
 Jordan H. Boyle \cite{Boyle2009}. Il a été proposé plusieurs modèles avant
 celui-ci, mais beaucoup différenciaient le mouvement dans l'eau du mouvement
-dans l'agar. J. H. Boyle démontre lui qu'il est
-possible de simuler les deux comportements avec un seul modèle, uniquement
-en se servant des retours réalisés par l'environement. Il modélise ainsi à la
-fois le circuit neural de la corde ventrale du ver (ce modèle permet simplement
-de faire avancer le ver), le corps du ver (force, élasticité) et les forces
-en jeux dans l'environement.
+dans l'agar. J. H. Boyle démontre lui qu'il est possible de simuler les deux
+comportements avec un seul modèle, uniquement en se servant des retours
+réalisés par l'environement. Il modélise ainsi à la fois le circuit neural de
+la corde ventrale du ver (ce modèle permet simplement de faire avancer le ver),
+le corps du ver (force, élasticité) et les forces en jeux dans l'environement.
 
-Je vais détailler ici le modèle final tel qu'il est décrit dans la thêse de J.
-H. Boyle, en ne concervant que la partie dédié au ver. J'omet donc volontairement
-la modelisation de l'environnement. De même que les raisons et calcul des choix
-de modélisation se trouve dans la thêse de Jordan H. Boyle \cite{Boyle2009}, il
-ne seront pas présenté ici.
+Je vais détailler ici le modèle final tel qu'il est décrit dans la thèse de J.
+H. Boyle, en ne concervant que la partie dédié au ver. J'omet donc
+volontairement la modelisation de l'environnement. De même que les raisons et
+calcul des choix de modélisation se trouve dans la thèse de Jordan H. Boyle
+\cite{Boyle2009}, ils ne seront pas présenté ici.\\
+
+\subsection{Corps du ver} % (fold)
+\label{sub:Corps du ver}
+
+\begin{figure}[ht]
+   \begin{center}
+      \psfig{width=15cm,figure=pic/celegans_representation.eps}
+   \end{center}
+   \caption{Le ver tel qu'il est représenté en simulation. Il est représenté
+   par 49 segments rigide (noir), connecté latéralement par la représentation
+   de la cutile (rouge), et par par les segments diagonaux (bleu). Source
+   \cite{Boyle2009}}
+   \label{fig:celegans_representation}
+\end{figure}
+
+Le corps du vers est représenté par 49 segments rigide connecté entre eux
+latéralement et en diagonale. Les segments latéraux représente la cuticule du
+ver et en reprennent les propriétés élastiques. Les segments diagonaux on pour
+rôle de maintenir les segments rigides, et servent d'approximation pour la
+représentation de la pression interne du ver (voir
+fig~\ref{fig:celegans_representation}
+page~\pageref{fig:celegans_representation}).
+
+Les muscles du vers sont placé au niveaux des segments latéraux, chaque segments
+équivalent à un muscle. Contrairement à la cuticule qui est représenté par un
+resort passif (avec amortissement), les resort qui représente les muscles
+change leurs raideurs, taille au repos et amortissement en fonction du niveau
+d'activité des muscles. Ce model de représentation des muscles permet de gérer
+simplement les relations entre longueur et tension ainsi que vitesse et tension.
+
+% subsection Corps du ver (end)
 
 % section Modèle du ver (end)
 
