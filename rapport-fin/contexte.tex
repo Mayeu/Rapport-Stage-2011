@@ -31,7 +31,7 @@ ses cellules.
    \begin{center}
       \psfig{width=15cm,figure=pic/celegans_anatomy.eps}
    \end{center}
-   \caption{Anatomie générale de \caeleg{}. A) coupe longitudinale du ver,
+   \caption[Anatomie générale de \caeleg{}]{Anatomie générale de \caeleg{}. A) coupe longitudinale du ver,
    vue depuis le flan gauche.B) coupe transversale du ver. Source
    \cite{Boyle2009}}
    \label{fig:celegans_anatomy}
@@ -100,9 +100,16 @@ brusque. Ce mouvement est souvent utilisé pour passer d'un mouvement en marche
 arrière à un mouvement en marche avant, ou lorsque le ver recherche de la
 nouriture.\\
 
-\begin{center}
-   Ici une image du mouvement du ver
-\end{center}
+\begin{figure}[ht]
+   \begin{center}
+      \psfig{width=15cm,figure=pic/celegans_mouvement.eps}
+   \end{center}
+   \caption[Séquence d'image du mouvement de \celeg{}]{Séquence d'images tirées de deux films illustrant le mouvement de
+   \celeg{}. A) Mouvement dans l'eau du ver. B) Mouvement de rampe du ver. Le
+   temps indiqué sur chaque image est le temps en seconde. Source
+   \cite{Boyle2009}}
+   \label{fig:celegans_mouvement}
+\end{figure}
 
 % TODO donner la compo du liquide généralement utilisé en réf
 Le ver est également capable de nager dans un environnement liquide. La fréquence
@@ -167,7 +174,6 @@ Il est admis que les neurones de type B sont dédiés au déplacement avant du v
 et que ce circuit est répété dans l'autre sens par les neurones de type A
 pour gérer le déplacement arrière \cite{AltunZ.F.andHall2011,Boyle2009,White1986}.
 
-% Je suis pas sûre d'avoir compris ta phrase, en tout cas "axone" est un mot masculin...
 On peut noter que les zones de jonction neuromusculaire \footnote{Zone de
 contact entre un neurone et un muscle permettant le transfert d'information 
 pour contrôler le muscle} ne se chevauchent pas, alors que les processus
@@ -184,7 +190,7 @@ pour l'instant.
    \begin{center}
       \psfig{width=15cm,figure=pic/alternance_dv.eps}
    \end{center}
-   \caption{Schéma local du circuit neural de \celeg{}. On peut voir
+   \caption[Schéma local du circuit neural de \celeg{}]{Schéma local du circuit neural de \celeg{}. On peut voir
    que lorsque le muscle ventral gauche est excité, le muscle dorsal gauche est
    inhibé; et inversement sur la partie droite du schéma. Les flèches remplies
    représentent des synpapses excitatrices (+), alors que les barres représentent des
@@ -257,7 +263,7 @@ calcul des choix de modélisation se trouve dans la thèse de Jordan H. Boyle
    \begin{center}
       \psfig{width=15cm,figure=pic/celegans_representation.eps}
    \end{center}
-   \caption{\celeg{} tel que représenté en simulation. Il est représenté
+   \caption[Représentation de \celeg{} en simulation]{\celeg{} tel que représenté en simulation. Il est représenté
    par 49 segments rigides (en noir), connectés latéralement par la représentation
    de la cuticule (en rouge), et par les segments diagonaux (en bleu). Source
    \cite{Boyle2009}}
@@ -293,7 +299,7 @@ B et D.
    \begin{center}
       \psfig{width=5cm,figure=pic/celegans_segment.eps}
    \end{center}
-   \caption{Représentation schématique d'une des 12 unitée neurale qui compose
+   \caption[Représentation d'une unité neural de \celeg{}]{Représentation schématique d'une des 12 unitée neurale qui compose
    le ver simulé. Chaque neurone (cellules rondes et cellules rectangulaires)
    contrôle 4 muscles (cellules hexagonales).  Les synapses excitatrices sont
    legendées à l'aide d'un triangle alors que les synapses inhibitrices le sont
@@ -316,7 +322,45 @@ cross-inhibition représentée entre les neurones DB en VD, ainsi que VB et DD.
 \section{Contexte informatique} % (fold)
 \label{sec:Contexte informatique}
 
+\subsection{Implementation de référence} % (fold)
+\label{sub:Implementation de référence}
 
+L'implementation du model réalisé par Jordan H. Boyle serviras de référence
+pour le comportement simulé du ver. Cette implémentation est réalisée en C++ et
+utilise la librairie SUNDIALS \footnote{\textbf{SU}ite of \textbf{N}onlinear and
+\textbf{DI}fferential/\textbf{AL}gebraic equation \textbf{S}olvers,
+\url{https://computation.llnl.gov/casc/sundials/main.html}} pour la résolution
+des équations mécaniques du système. A noter que des différences entre la thèse
+et l'implementation on étais trouvée, j'en parlerais dans une partie dédiée.
+
+Cette version du simulateur implémente tous le système sans utilisé de librairie
+annexe (ormis SUNDIALS pour la résolution des équations). L'implementation initié
+par Thomas Voegtlin se base elle sur un simulateur physique et neural éxistant.
+
+% subsection Implementation de référence (end)
+
+\subsection{Implementation de Thomas Voegtlin} % (fold)
+\label{sub:Implementation de Thomas Voegtlin}
+
+C'est sur cette implémentation que j'ai travailé. Cette implementation réalisée
+en python, utilise la librairie Brian\cite{Goodman2008} pour calculer les états
+des neurones du ver, ainsi que le logiciel SOFA pour simuler la physique et
+l'environnement du ver.
+
+L'avantage principal de cette implémentation est de simplifier la simulation
+étant donné que Brian et SOFA se charge de réaliser la plupart des calculs, et
+qu'il ne reste alors qu'à lier les deux. La communication entre la partie
+python et SOFA est réalisé par une bibliothéque créée pour l'occasion, CLONES.
+
+CLONES utilise un socket pour communiquer avec SOFA, et permet de modifier les
+propriété d'objet au sein de SOFA. Dans le cas de la simulation de \celeg{}
+cela permet ainsi de modifier les propriété des muscles, SOFA se chargeant
+ensuite de calculer le nouvel état du ver et renvoie les informations au script
+python ce qui permet de mettre à jour l'état des récépteurs de torsions du ver.
+Le nouvel état des neurones et ensuite calculé, puis celui des muscles, qui
+sont repassé à SOFA, etc.
+
+% subsection Implementation de Thomas Voegtlin (end)
 
 % section Contexte informatique (end)
 
