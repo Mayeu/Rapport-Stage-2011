@@ -1,0 +1,37 @@
+\chapter{Prédiction des séquences neuronales} % (fold)
+\label{cha:Prédire des séquences neuronales}
+
+Comme vu précédemment, il n'y a pas de donné biologique associé à la
+\textit{pirouette} du ver, ormis sur son utilité et son rôle dans la recherche
+de nourriture chez \celeg{}\cite{Gray2005}. L'une des hypothèse serais que le
+circuit de la marche avant et celui de la marche arrière serait actif
+simultanément pour réaliser une \textit{pirouette} en effet le cablage du
+circuit neural permettrais la modulation de l'activité des motoneurones pour
+réaliser une \textit{pirouette}. Malheureusement le cablage seul du circuit ne
+permet pas de prédire le fonctionnement, il faudrais des données biologique tel
+que des données d'imagerie calcique\footnote{Technique d'observation des
+signaux nerveux en reliant le changement de concentration d'ion $Ca^{2+}$ avec
+l'activité des neurones.}, ou la possible présence et rôle de neuromodulateur
+chez \celeg{}.
+
+Etant donné qu'il est actuellement impossible d'accéder à ce type de donné, une
+alternative serais d'utiliser des algorithmes d'apprentissage pour essayer de
+prédire des séquences neural inconue, à partir d'un entrainement sur des séquences
+connue.
+
+\subsection{Filtre de Kalman} % (fold)
+\label{sub:Filtre de Kalman}
+
+Le filter de Kalman est un algorithme d'estimation récursif. Pour mesurer
+l'état courant, il se sert de l'état précédent. Ce type de filtre peu être
+utiliser pour réaliser du filtrage, du lissage, ou de la prédiction. L'usage
+qui nous interesse ici est bien sur la prédiction, mais avec un entrainement
+pour les matrices d'observation et de transition utilisées par le script.
+
+En effet, ces matrices doivent être calculées en fonction de l'usage choisis,
+dans notre cas, il est plus simple de réaliser un apprentissage pour obtenir de
+bonnes matrices
+
+% subsection Filtre de Kalman (end)
+
+% chapter Prédire les séquences neuronales (end)

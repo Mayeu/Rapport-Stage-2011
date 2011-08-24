@@ -1,0 +1,51 @@
+\chapter{Modification du modèle} % (fold)
+\label{cha:Modification du modèle}
+
+\section{Correction} % (fold)
+\label{sec:Correction}
+
+Durant ma phase de recherche documentaire et mes différents essaies avec
+SOFA et la simulation, certaine différence sont apparue entre la thèse
+et l'implémentation de référence, ainsi j'apporte les corrections suivantes
+à la thèse de Jordan H. Boyle \cite{Boyle2009} :
+\begin{itemize}
+   \item l'équation 8.8 devrais être :
+      $$
+      f^k_{L,m} = \left\{ 
+         \begin{array}{rcl}
+            \kappa_L(L_{0L,m} - L_{L,m}^k) - \beta_{L}v_{L,m}^k & : & L_{L,m}^k < L_{0L,m}\\
+            \kappa_L((L_{0L,m} - L_{L,m}^k) + 16(L_{0L,m} - L_{L,m}^k)^4) - \beta_{L}v_{L,m}^k & : & otherwise
+         \end{array}
+         \right.
+      $$
+   \item l'équation 8.9 devrais être :
+      $$
+      f_{D,m}^k = \kappa_D(L_{0D,m} - L_{D,m}^k) - \beta_{D}v_{D,m}^k
+      $$
+   \item l'équation 8.10 devrais être :
+      $$
+      f_{M,m}^k = \kappa_{M,m}^k(L_{0M,m}^k - L_{L,m}^k) - \beta_{M,m}^{k}v_{L,m}^k
+      $$
+   \item la définition de $\beta_{0M}$ dans la table 8.1 devrais être $\beta_L \times 100$
+\end{itemize}
+
+% section Correction (end)
+
+\section{Différence d'implémentation} % (fold)
+\label{sec:Différence d'implémentation}
+
+- problème de différence entre la référence est python
+- méthode de calcul de SOFA
+
+% section Différence d'implémentation (end)
+
+\section{Ajout de comportement} % (fold)
+\label{sec:Ajout de comportement}
+
+- backward (simple retournement du circuit)
+  - gestion du passage forward/backward
+- omega turn
+
+% section Ajout de comportement (end)
+
+% chapter Modification du modèle (end)
