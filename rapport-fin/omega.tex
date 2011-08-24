@@ -2,36 +2,134 @@
 \label{cha:Prédire des séquences neuronales}
 
 Comme vu précédemment, il n'y a pas de donné biologique associé à la
-\textit{pirouette} du ver, ormis sur son utilité et son rôle dans la recherche
-de nourriture chez \celeg{}\cite{Gray2005}. L'une des hypothèse serais que le
-circuit de la marche avant et celui de la marche arrière serait actif
-simultanément pour réaliser une \textit{pirouette} en effet le cablage du
-circuit neural permettrais la modulation de l'activité des motoneurones pour
-réaliser une \textit{pirouette}. Malheureusement le cablage seul du circuit ne
-permet pas de prédire le fonctionnement, il faudrais des données biologique tel
-que des données d'imagerie calcique\footnote{Technique d'observation des
+\textit{pirouette} du ver, hormis sur son utilité et son rôle dans la recherche
+de nourriture chez \celeg{}\cite{Gray2005}. L'une des hypothèses serait que le
+circuit de la marche avant et celui de la marche arrière seraient actifs
+simultanément pour réaliser une \textit{pirouette}. En effet le câblage du
+circuit neural permettrait la modulation de l'activité des motoneurones pour
+réaliser une \textit{pirouette}. Malheureusement le câblage seul du circuit ne
+permet pas de prédire le fonctionnement, il faudrait des données biologiques
+telles que des données d'imagerie calcique\footnote{Technique d'observation des
 signaux nerveux en reliant le changement de concentration d'ion $Ca^{2+}$ avec
-l'activité des neurones.}, ou la possible présence et rôle de neuromodulateur
-chez \celeg{}.
+l'activité des neurones.}, ou la possible présence et rôles de
+neuromodulateurs\footnote{Les neuromodulateurs sont des molécules qui ne
+propagent pas d'information, mais influencent le transfert et/ou la recapture
+de certain neurotransmetteurs. Ils peuvent donc radicalement modifier la
+manière dont l'information transite.} chez \celeg{}.
 
-Etant donné qu'il est actuellement impossible d'accéder à ce type de donné, une
-alternative serais d'utiliser des algorithmes d'apprentissage pour essayer de
-prédire des séquences neural inconue, à partir d'un entrainement sur des séquences
-connue.
+Étant donné qu'il est actuellement impossible d'accéder à ce type de donné, une
+alternative serait d'utiliser des algorithmes d'apprentissage pour essayer de
+prédire des séquences neurales inconnues, à partir d'un entrainement sur des séquences
+connues.
 
-\subsection{Filtre de Kalman} % (fold)
-\label{sub:Filtre de Kalman}
+\section{Filtre de Kalman} % (fold)
+\label{sec:Filtre de Kalman}
 
-Le filter de Kalman est un algorithme d'estimation récursif. Pour mesurer
-l'état courant, il se sert de l'état précédent. Ce type de filtre peu être
-utiliser pour réaliser du filtrage, du lissage, ou de la prédiction. L'usage
-qui nous interesse ici est bien sur la prédiction, mais avec un entrainement
+Le filtre de Kalman est un algorithme d'estimation récursif. Pour mesurer
+l'état courant, il se sert de l'état précédent. Ce type de filtre peut être
+utilisé pour réaliser du filtrage, du lissage, ou de la prédiction. L'usage
+qui nous intéresse ici est bien sur la prédiction, mais avec un entrainement
 pour les matrices d'observation et de transition utilisées par le script.
 
-En effet, ces matrices doivent être calculées en fonction de l'usage choisis,
+En effet, ces matrices doivent être calculées en fonction de l'usage choisi,
 dans notre cas, il est plus simple de réaliser un apprentissage pour obtenir de
-bonnes matrices
+bonnes matrices. Rajesh P. N. Rao à devellopé un algorithme d'apprentissage
+pour calculer les matrices d'observation et de transition dans le but de modéliser
+le cortex visuel\cite{Rao1999}.
 
-% subsection Filtre de Kalman (end)
+\begin{figure}[ht]
+   \begin{center}
+      \psfig{width=15cm,figure=pic/kalman_filter.eps}
+   \end{center}
+   \caption[Schema du filtre de kalman]{Schema du filtre de kalman utilisé par
+   Rajesh P. N. Rao. Source \cite{Rao1999}}
+   \label{fig:filtre_kalman}
+\end{figure}
+
+\subsection{Équation du filtre} % (fold)
+\label{sub:Équation du filtre}
+
+La figure~\ref{fig:filtre_kalman} page~\pageref{fig:filtre_kalman}, représente
+le filtre de kalman utilisé par Rajesh P. N. Rao. Le filtre réalise ses
+prédictions en calculant
+\[ I_{td} = U\bar{r} \]
+avec $U$ la matrices d'observation, $\bar{r}$ l'état interne du filtre, et
+$I_{td}$ la prédiction. Il corrige ensuite sont estimation de $\bar{r}$ à
+l'aide de la difference entre l'entré suivante et l'état estimé précédent. La
+matrice $V$ de prédiction est la matrice de transition, est permet de faire
+passer l'état interne de $t$ à $t+1$.
+
+Dans son algorithme, le calcul de l'\textit{Inverse Covariance} $\Sigma^{-1}$ et
+de la \textit{Normalization} $N$ sont remplacé par des scalaire bien choisis
+pour réduire le temps nécessaire à la fois à l'apprentissage et au prédictions.
+
+% subsection Équation du filtre (end)
+
+\subsection{Apprentissage de $U$ et $V$} % (fold)
+\label{sub:Apprentissage de U et V}
+
+Les matrices $U$ et $V$ sont initialisé aléatoirement en les contraignants
+à être au moins orthonormal, et l'état interne $r$ est initialisé au vecteur
+nul. L'apprentissage est définis par :
+
+\begin{equation}
+   \label{eqn:learning_U}
+   \hat{U}(t) = \bar{U}(t) + \overbrace{\alpha[I(t) - \bar{U}(t)\hat{r}(t)]\hat{r}(t)^T}^\text{erreur d'apprentissage}
+\end{equation}
+\begin{equation}
+   \label{eqn:learning_V}
+   \hat{V}(t-1) = \bar{V}(t-1) + \underbrace{\beta[\hat{r}(t) - r'(t)]\hat{r}(t-1)^T}_\text{erreur d'apprentissage}
+\end{equation}
+
+avec $\bar{U}(t) = \hat{U}(t-1)$, $\bar{V}(t-1) = \hat{V}(t-2)$, $\alpha$ et $\beta$
+les coefficients d'apprentissages et $r'(t)$ définie ci dessous :
+
+\begin{equation}
+   \label{eqn:def_r_hat}
+   \hat{r}(t) = r'(t) + \frac{N_0}{\sigma^2}\bar{U}(t)^T(I(t)-\bar{U}(t)r'(t))
+\end{equation}
+\begin{equation}
+   \label{eqn:def_r_prime}
+   r'(t) =  \bar{V}(t-1)\hat{r}(t-1) + \bar{m}(t-1)
+\end{equation}
+
+avec $\frac{N_0}{\sigma^2}$ la normalization qui seras remplacé par un scalaire lors
+de l'apprentissage.\\
+
+
+La boucle d'apprentissage est réalisé autant de fois que nécessaire pour que
+l'erreur d'apprentissage devienne non significatives.
+
+% subsection Apprentissage de U et V (end)
+
+% section Filtre de Kalman (end)
+
+\section{Test du filtre} % (fold)
+\label{sec:Test du filtre}
+
+\subsection{Séquence simple} % (fold)
+\label{sub:Sequence simple}
+
+Cette exemple est tiré de l'article de Rajesh P. N. Rao. Il permet
+de vérifier si le filtre prédit correctement une séquence avec une ambiguïté.
+
+% subsection Sequence simple (end)
+
+\subsection{Test spatio- temporelle} % (fold)
+\label{sub:Test spatio-temporelle}
+
+% subsection Séquence simple avec surprise (end)
+
+\subsection{Ver incomplet} % (fold)
+\label{sub:Ver incomplet}
+
+% subsection Ver incomplet (end)
+
+\subsection{Ver complet} % (fold)
+\label{sub:Ver complet}
+
+% subsection Ver complet (end)
+
+% section Test du filtre (end)
 
 % chapter Prédire les séquences neuronales (end)
