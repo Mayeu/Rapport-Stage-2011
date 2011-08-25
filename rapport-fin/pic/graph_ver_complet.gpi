@@ -1,0 +1,19 @@
+set title "Muscles size and prediction"
+set ylabel "Muscles"
+set terminal postscript enhanced color "Helvetica" 12
+set xrange [0:990]
+set yrange [0:98]
+set multiplot;                          # get into multiplot mode
+set size 1,0.3;
+set title "Input Muscles size";
+set origin 0.0,0.65;
+set cbrange [0:0.035]
+plot 'pic/input_graph_tail_muscles_size_all_12.dat' index 0:0 with image;
+set title "Predicted size";
+set origin 0.0,0.32;
+plot 'pic/predicting_graph_tail_muscles_size_all_12.dat' index 0:0 with image;
+set title "Error";
+set origin 0.0,0.0;
+set cbrange [0:0.2]
+plot 'pic/error_graph_tail_muscles_size_all_12.dat' index 0:0 with image;
+unset multiplot ;
