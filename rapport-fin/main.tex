@@ -26,13 +26,13 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{setspace}
-%\usepackage[dvips]{pstricks}
-%\usepackage{pstricks-add}
+\usepackage[dvips]{pstricks}
+\usepackage{pstricks-add}
 \usepackage{color}
-%\usepackage{xcolor}
+\usepackage{xcolor}
 \usepackage{epsfig}
-%\usepackage{pst-grad} % For gradients
-%\usepackage{pst-plot} % For axes
+\usepackage{pst-grad} % For gradients
+\usepackage{pst-plot} % For axes
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -173,10 +173,12 @@
 \bibliographystyle{plain} % biblio style
 \bibliography{bibli} % generate biblio
 
-%\newpage
-%\setcounter{page}{1}
-%\pagenumbering{Roman}
-%\appendix
-%\include{annexes}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\appendix
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\include{appendix}
 
 \end{document}
