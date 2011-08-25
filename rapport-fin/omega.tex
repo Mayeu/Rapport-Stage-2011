@@ -29,9 +29,9 @@ Le filtre de Kalman est un algorithme d'estimation récursif. Pour mesurer
 l'état courant, il se sert ainsi de l'état précédent. Ce type de filtre peut
 être utilisé pour réaliser du filtrage, du lissage, ou de la prédiction.
 L'usage qui nous intéresse ici est un usage prédictif du filtre. Étant donné
-que les données nécessaire à la déduction des séquences neuronales du ver ne
-sont pas disponible pour le mouvement de \textit{pirouette}, nous souhaitons
-utiliser un filtre de Kalman pour prédire des séquences neurales inconnue et
+que les données nécessaires à la déduction des séquences neuronales du ver ne
+sont pas disponibles pour le mouvement de \textit{pirouette}, nous souhaitons
+utiliser un filtre de Kalman pour prédire des séquences neurales inconnues et
 comprendre quels neurones pourraient être en activité lors de la
 \textit{pirouette} du ver.
 
@@ -39,10 +39,10 @@ Un filtre de Kalman nécessite 2 matrices pour réaliser la prédiction, une
 matrice dite générative, et une matrice de transition\cite{Rao1999}. Calculer
 ces deux matrices est dépendant du problème que l'on souhaite résoudre. Dans
 notre cas il est plus simple de générer ses matrices à partir d'algorithme
-d'apprentissage. Rajesh P. N. Rao à devellopé un algorithme d'apprentissage
-pour calculer les matrices générative et de transition dans le but de modéliser
-le cortex visuel\cite{Rao1999}. C'est cet algorithme d'apprentissage que nous
-allons utiliser pour réaliser notre filtre de Kalman.
+d'apprentissage. Rajesh P. N. Rao a developpé un algorithme d'apprentissage
+pour calculer la matrice générative et la matrice de transition dans le but de
+modéliser le cortex visuel\cite{Rao1999}. C'est cet algorithme d'apprentissage
+que nous allons utiliser pour réaliser notre filtre de Kalman.
 
 \begin{figure}[ht]
    \begin{center}
@@ -55,11 +55,11 @@ allons utiliser pour réaliser notre filtre de Kalman.
 
 Dans son article\cite{Rao1999} Rajesh P. N. Rao montre que l'implémentation du
 filtre de Kalman permet de prendre en compte une partie des états précédents
-pour prédire l'état suivant en cas d'ambiguïté; ainsi qu'il est suffisament
-robuste pour "resynchroniser" ses prédictions en cas de présentation d'élèment
+pour prédire l'état suivant en cas d'ambiguïté; ainsi qu'il est suffisamment
+robuste pour "resynchroniser" ses prédictions en cas de présentation d'élément
 inattendu.
 
-Nous verrons dans la suite deux tests qui montre ces deux capacité du filtre.
+Nous verrons dans la suite deux tests qui montrent ces deux capacités du filtre.
 
 \subsection{Équation du filtre} % (fold)
 \label{sub:Équation du filtre}
@@ -72,11 +72,11 @@ article \cite{Rao1999}. Le filtre réalise ses prédictions en calculant
 
 avec $U$ la matrice générative, $\bar{r}$ vecteur représentant l'état interne
 du filtre, et $I_{td}$ la prédiction. Le vecteur d'état interne $\bar{r}$ de
-\textit{k-element} caractérisant l'entrée donnée au filtre. La taille de ce
+\textit{k-éléments} caractérisant l'entrée donnée au filtre. La taille de ce
 vecteur joue sur la qualité de la prédiction réalisé par le filtre.
 
 Le filtre corrige ensuite sont estimation de $\bar{r}$ à l'aide de la
-difference entre l'entré suivante, $I$ et l'état estimé précédent. Le vecteur
+différence entre l'entré suivante, $I$ et l'état estimé précédent. Le vecteur
 $r$ est ensuite passé dans sont état suivant à l'aide de la matrice $V$ de
 transition, est permet de faire passer l'état interne de $\bar{r}(t)$ à
 $\bar{r}(t+1)$.\\
@@ -85,17 +85,17 @@ Dans son algorithme, les calculs de l'\textit{Inverse Covariance} $\Sigma^{-1}$
 et de la \textit{Normalization} $N$ sont remplacés par des scalaires bien
 choisis (voir annexes~\ref{cha:Valeur des variables pour l'apprentissage}
 page~\pageref{cha:Valeur des variables pour l'apprentissage} pour les valeurs
-choisis).  pour réduire le temps de calcul nécessaire à la fois à
-l'apprentissage et à la prédictions.
+choisies) pour réduire le temps de calcul nécessaire à la fois à
+l'apprentissage et à la prédiction.
 
 % subsection Équation du filtre (end)
 
-\subsection{Apprentissage de $U$ et $V$} % (fold)
+\subsection{Apprentissage d'$U$ et $V$} % (fold)
 \label{sub:Apprentissage de U et V}
 
 Les matrices $U$ et $V$ sont initialisées aléatoirement en les contraignants
 à être au moins orthonormal, et l'état interne $r$ est initialisé au vecteur
-nul. L'apprentissage est définis par :
+nul. L'apprentissage est défini par :
 
 \begin{equation}
    \label{eqn:learning_U}
@@ -107,7 +107,7 @@ nul. L'apprentissage est définis par :
 \end{equation}
 
 avec $\bar{U}(t) = \hat{U}(t-1)$, $\bar{V}(t-1) = \hat{V}(t-2)$, $\alpha$ et
-$\beta$ les coefficients d'apprentissages et $r'(t)$ définie ci dessous :
+$\beta$ les coefficients d'apprentissages et $r'(t)$ définis ci-dessous :
 
 \begin{equation}
    \label{eqn:def_r_prime}
@@ -118,7 +118,7 @@ $\beta$ les coefficients d'apprentissages et $r'(t)$ définie ci dessous :
    \hat{r}(t) = r'(t) + \frac{N_0}{\sigma^2}\bar{U}(t)^T(I(t)-\bar{U}(t)r'(t))
 \end{equation}
 
-avec $\frac{N_0}{\sigma^2}$ la normalization qui seras remplacée par un scalaire lors
+avec $\frac{N_0}{\sigma^2}$ la normalisation qui sera remplacée par un scalaire lors
 de l'apprentissage.
 
 La boucle d'apprentissage est réalisée autant de fois que nécessaire pour que
@@ -143,22 +143,22 @@ fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}).
       \resizebox{150mm}{!}{\includegraphics{pic/graph_sequence_3_5.eps}}
    \end{center}
    \caption[Prédiction de séquence simple]{Séquence simple avec une ambiguïté
-   toutes les 2 étapes. Le filtre arrive à déterminer où il en est dans dans la
-   séquence, pour répondre correctement l'étape suivante. Le premier graph est
-   la séquence fournis à prédire, le deuxième est la prédiction du filtre, le
-   troisième est l'erreur normalisée entre l'entrée attendu et la prédiction.
-   Source personnel}
+   toutes les 2 étapes. Le filtre arrive à déterminer où il en est dans la
+   séquence, pour répondre correctement l'étape suivante. Le premier graphe est
+   la séquence fournie à prédire, le deuxième est la prédiction du filtre, le
+   troisième est l'erreur normalisée entre l'entrée attendue et la prédiction.
+   Source personnelle}
    \label{fig:sequence_simple}
 \end{figure}
 
 La séquence représente un pixel blanc sur fond noir ayant 3 états possibles.
 Position basse, intermédiaire et haute. Lorsqu'il est au milieu, deux choix sont
-possible, soit aller en haut, soit aller en bas. On vois que le filtre arrive
-toujours à choisir la bonne position. Ceci est du à la matrice de transition
+possibles, soit aller en haut, soit aller en bas. On voit que le filtre arrive
+toujours à choisir la bonne position. Ceci est dû à la matrice de transition
 $V$ qui va déterminer deux valeurs différentes à l'état interne $r$ pour définir
 cette position selon l'état précédent\cite{Rao1999}.
 
-Le filtre à été ici entrainé en présentant une cinquantaine de fois la séquence
+Le filtre a été ici entrainé en présentant une cinquantaine de fois la séquence :
 bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de 5 éléments.
 
 % subsection Sequence simple (end)
@@ -166,28 +166,28 @@ bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de 5 éléments.
 \subsection{Test simple de robustesse} % (fold)
 \label{sub:Test simple de robustesse}
 
-Ici le filtre à été entrainé de la même manière que pour la
+Ici le filtre a été entrainé de la même manière que pour la
 figure~\ref{fig:sequence_simple}, et possède un aussi un état interne $r$ de
-dimension 5 mais la séquence qu'on lui présente ne correspond pas à son
+taille 5; mais la séquence qu'on lui présente ne correspond pas à son
 entrainement (fig~\ref{fig:sequence_simple_erreur}
 page~\pageref{fig:sequence_simple_erreur}).
 
-On voit ainsi qu'à l'étape 8 le filtre attendais une position basse, alors que
+On voit ainsi qu'à l'étape 8 le filtre attendait une position basse, alors que
 nous lui présentont une position intermédiaire. L'étape 9 est donc entièrement
 fausse puisque le filtre prédit la succession basse. Mais le filtre corrige
-rapidement ses prédiction en seulement 1 étape supplémentaire.
+rapidement ses prédictions en seulement 1 étape supplémentaire.
 
 \begin{figure}[ht]
    \begin{center}
       \resizebox{150mm}{!}{\includegraphics{pic/graph_sequence_3_error_5.eps}}
    \end{center}
    \caption[Prédiction de séquence simple, avec erreur]{Séquence similaire à la
-   figure~\ref{fig:sequence_simple}, mais avec une position inattendu.
+   figure~\ref{fig:sequence_simple}, mais avec une position inattendue.
    L'entrainement est le même que pour la figure~\ref{fig:sequence_simple}, et
-   le filtre se remet à prédire assez rapidement correctement. Le premier graph
-   est la séquence fournis à prédire, le deuxième est la prédiction du filtre,
-   le troisième est l'erreur normalisée entre l'entrée attendu et la
-   prédiction. Source personnel}
+   le filtre se remet à prédire assez rapidement correctement. Le premier graphe
+   est la séquence fournie à prédire, le deuxième est la prédiction du filtre,
+   le troisième est l'erreur normalisée entre l'entrée attendue et la
+   prédiction. Source personnelle}
    \label{fig:sequence_simple_erreur}
 \end{figure}
 
@@ -199,43 +199,44 @@ rapidement ses prédiction en seulement 1 étape supplémentaire.
 \label{sec:Prédiction sur le ver complet}
 
 Le filtre de Kalman va être utilisé pour prédire la taille des muscles lors
-des mouvements du ver. En effet, l'activité neuronal du ver peut être lié
-directement à sont activité musculaire. En premier lieu il va falloir
+des mouvements du ver. En effet, l'activité neuronale du ver peut être liée
+directement à son activité musculaire. En premier lieu il va falloir
 s'assurer que le filtre arrive à prédire correctement les mouvements du ver en
-apprentissage non supervisé (filtre de Kalman par defaut), et ensuite on tenteras
-de le contraindre à nous donner l'état neuronal lié à l'état des muscles.
+apprentissage non supervisé (fonctionnement par défaut du filtre de Kalman), et
+ensuite on tentera de le contraindre à nous donner l'état neuronal lié à
+l'état des muscles.
 
 \subsection{Mouvement normal avant du ver} % (fold)
 \label{sub:Mouvement normal avant du ver}
 
 Une première étape consiste donc à vérifier si le filtre arrive à correctement
 prédire l'état des muscles du ver lors d'un mouvement simple. Le mouvement
-choisis en l'occurence est la marche avant obtenue par simulation avec le
+choisi en l'occurrence est la marche avant obtenue par simulation avec le
 modèle du ver.
 
 \begin{figure}[ht]
    \begin{center}
       \resizebox{150mm}{!}{\includegraphics{pic/graph_ver_complet.eps}}
    \end{center}
-   \caption[Prédiction de de la taille des muscles lors du mouvement simulé
+   \caption[Prédiction de la taille des muscles lors du mouvement simulé
    avant du ver]{Prédiction de la taille des muscles lors du mouvement simulé
-   avant du ver. Le premier graph est la séquence fournis à prédire, le
+   avant du ver. Le premier graphe est la séquence fournie à prédire, le
    deuxième est la prédiction du filtre, le troisième est l'erreur normalisée
-   entre l'entré attendu et la prédiction. Source pesonnel}
+   entre l'entrée attendue et la prédiction. Source personnelle}
    \label{fig:sequence_ver_complet}
 \end{figure}
 
 Les données d'entrainement pour l'apprentissage correspondent à l'évolution de
 la longueur des 98 muscles du ver simulé pour une durée de 30 secondes de
 simulation. Ce jeu d'entrainement est présenté entre 3000 et 5000 lors de la
-phase d'apprentissage. L'état interne $r$ est ici un vecteur de 12 élèments.
-Cette taille de vecteurs à été choisis car correspondante au nombre d'unité
-neuronale du ver.
+phase d'apprentissage. L'état interne $r$ est ici un vecteur de 12 éléments.
+Cette taille de vecteurs a été choisis car elle correspond au nombre d'unités
+neuronales du ver.
 
-Le même jeu de donné que celui d'entrainement est ensuite fournis pour la phase
+Le même jeu de donnée que celui d'entrainement est ensuite fourni pour la phase
 de prédiction. Sur la figure~\ref{fig:sequence_ver_complet} on peut voir que l'erreur
-est grossièrement comprise entre $1\%$ et $7\%$ Avec quelques rares endroit ou l'erreur
-éxcède $15\%$. Ce que nous considérons comme correct.
+est grossièrement comprise entre $1\%$ et $7\%$ avec quelques rares endroits où l'erreur
+excède $15\%$. Ce que nous considérons comme correct.
 
 % subsection Mouvement normal avant du ver (end)
 
