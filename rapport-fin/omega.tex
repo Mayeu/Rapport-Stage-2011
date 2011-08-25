@@ -159,7 +159,7 @@ $V$ qui va déterminer deux valeurs différentes à l'état interne $r$ pour dé
 cette position selon l'état précédent\cite{Rao1999}.
 
 Le filtre à été ici entrainé en présentant une cinquantaine de fois la séquence
-bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de dimension 5.
+bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de 5 éléments.
 
 % subsection Sequence simple (end)
 
@@ -198,12 +198,12 @@ rapidement ses prédiction en seulement 1 étape supplémentaire.
 \section{Prédiction sur le ver complet} % (fold)
 \label{sec:Prédiction sur le ver complet}
 
-Le filtre de Kalman va être utiliser pour prédire la taille des muscles lors
+Le filtre de Kalman va être utilisé pour prédire la taille des muscles lors
 des mouvements du ver. En effet, l'activité neuronal du ver peut être lié
-directement à sont activité musculaire.  En premier lieu il va falloir
-s'assurer que le filtre arrive à prédire correctement les mouvements du ver, et
-ensuite on tenteras de le contraindre à nous donner l'état neuronal lié à ses
-muscles.
+directement à sont activité musculaire. En premier lieu il va falloir
+s'assurer que le filtre arrive à prédire correctement les mouvements du ver en
+apprentissage non supervisé (filtre de Kalman par defaut), et ensuite on tenteras
+de le contraindre à nous donner l'état neuronal lié à l'état des muscles.
 
 \subsection{Mouvement normal avant du ver} % (fold)
 \label{sub:Mouvement normal avant du ver}
@@ -226,9 +226,16 @@ modèle du ver.
 \end{figure}
 
 Les données d'entrainement pour l'apprentissage correspondent à l'évolution de
-la longueurs des 98 muscles du ver simulé pour une durée de 30 secondes de
-simulation. L'état interne $r$ est ici un vecteur de dimensions 12. Cette dimensions
-à été choisis car correspondante au nombre d'unité neuronale du ver.
+la longueur des 98 muscles du ver simulé pour une durée de 30 secondes de
+simulation. Ce jeu d'entrainement est présenté entre 3000 et 5000 lors de la
+phase d'apprentissage. L'état interne $r$ est ici un vecteur de 12 élèments.
+Cette taille de vecteurs à été choisis car correspondante au nombre d'unité
+neuronale du ver.
+
+Le même jeu de donné que celui d'entrainement est ensuite fournis pour la phase
+de prédiction. Sur la figure~\ref{fig:sequence_ver_complet} on peut voir que l'erreur
+est grossièrement comprise entre $1\%$ et $7\%$ Avec quelques rares endroit ou l'erreur
+éxcède $15\%$. Ce que nous considérons comme correct.
 
 % subsection Mouvement normal avant du ver (end)
 
