@@ -3,6 +3,7 @@ set ylabel "Muscles"
 set terminal postscript enhanced color "Helvetica" 12
 set xrange [0:990]
 set yrange [0:98]
+set ytics 15
 set multiplot;                          # get into multiplot mode
 set size 1,0.3;
 set title "Input Muscles size";
