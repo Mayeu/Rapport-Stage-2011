@@ -1,16 +1,16 @@
 \chapter{Prédiction des séquences neuronales} % (fold)
 \label{cha:Prédire des séquences neuronales}
 
-Comme vu précédemment, il n'y a pas de donné biologique associé à la
+Comme vu précédemment, il n'y a pas de donnés biologiques associées à la
 \textit{pirouette} du ver, hormis sur son utilité et son rôle dans la recherche
 de nourriture chez \celeg{}\cite{Gray2005}. L'une des hypothèses serait que le
 circuit de la marche avant et celui de la marche arrière seraient actifs
 simultanément pour réaliser une \textit{pirouette}. En effet le câblage du
 circuit neural permettrait la modulation de l'activité des motoneurones pour
 réaliser une \textit{pirouette}. Malheureusement le câblage seul du circuit ne
-permet pas de prédire le fonctionnement, il faudrait des données biologiques
-telles que des données d'imagerie calcique\footnote{Technique d'observation des
-signaux nerveux en reliant le changement de concentration d'ion $Ca^{2+}$ avec
+permet pas d'en prédire le fonctionnement, il faudrait des données telles que
+des données d'imagerie calcique\footnote{Technique d'observation des signaux
+nerveux en reliant le changement de concentration d'ion $Ca^{2+}$ avec
 l'activité des neurones.}, ou la possible présence et rôles de
 neuromodulateurs\footnote{Les neuromodulateurs sont des molécules qui ne
 propagent pas d'information, mais influencent le transfert et/ou la recapture
@@ -19,17 +19,17 @@ manière dont l'information transite.} chez \celeg{}.
 
 Étant donné qu'il est actuellement impossible d'accéder à ce type de donné, une
 alternative serait d'utiliser des algorithmes d'apprentissage pour essayer de
-prédire des séquences neurales inconnues, à partir d'un entrainement sur des séquences
-connues.
+prédire des séquences neurales inconnues, à partir d'un entrainement sur des
+séquences connues.
 
 \section{Filtre de Kalman} % (fold)
 \label{sec:Filtre de Kalman}
 
 Le filtre de Kalman est un algorithme d'estimation récursif. Pour mesurer
-l'état courant, il se sert de l'état précédent. Ce type de filtre peut être
+l'état courant, il se sert ainsi de l'état précédent. Ce type de filtre peut être
 utilisé pour réaliser du filtrage, du lissage, ou de la prédiction. L'usage
 qui nous intéresse ici est bien sur la prédiction, mais avec un entrainement
-pour les matrices d'observation et de transition utilisées par le script.
+pour les matrices d'observation et de transition utilisées par l'algorithme.
 
 En effet, ces matrices doivent être calculées en fonction de l'usage choisi,
 dans notre cas, il est plus simple de réaliser un apprentissage pour obtenir de
@@ -53,22 +53,23 @@ La figure~\ref{fig:filtre_kalman} page~\pageref{fig:filtre_kalman}, représente
 le filtre de kalman utilisé par Rajesh P. N. Rao. Le filtre réalise ses
 prédictions en calculant
 \[ I_{td} = U\bar{r} \]
-avec $U$ la matrices d'observation, $\bar{r}$ l'état interne du filtre, et
+avec $U$ la matrice d'observation, $\bar{r}$ l'état interne du filtre, et
 $I_{td}$ la prédiction. Il corrige ensuite sont estimation de $\bar{r}$ à
-l'aide de la difference entre l'entré suivante et l'état estimé précédent. La
+l'aide de la difference entre l'entré suivante, $I$ et l'état estimé précédent. La
 matrice $V$ de prédiction est la matrice de transition, est permet de faire
-passer l'état interne de $t$ à $t+1$.
+passer l'état interne de $\bar{r}(t)$ à $\bar{r}(t+1)$.
 
-Dans son algorithme, le calcul de l'\textit{Inverse Covariance} $\Sigma^{-1}$ et
-de la \textit{Normalization} $N$ sont remplacé par des scalaire bien choisis
-pour réduire le temps nécessaire à la fois à l'apprentissage et au prédictions.
+Dans son algorithme, les calculs de l'\textit{Inverse Covariance} $\Sigma^{-1}$ et
+de la \textit{Normalization} $N$ sont remplacés par des scalaires bien choisis
+pour réduire le temps de calcul nécessaire à la fois à l'apprentissage et à la
+prédictions.
 
 % subsection Équation du filtre (end)
 
 \subsection{Apprentissage de $U$ et $V$} % (fold)
 \label{sub:Apprentissage de U et V}
 
-Les matrices $U$ et $V$ sont initialisé aléatoirement en les contraignants
+Les matrices $U$ et $V$ sont initialisées aléatoirement en les contraignants
 à être au moins orthonormal, et l'état interne $r$ est initialisé au vecteur
 nul. L'apprentissage est définis par :
 
@@ -93,12 +94,11 @@ les coefficients d'apprentissages et $r'(t)$ définie ci dessous :
    r'(t) =  \bar{V}(t-1)\hat{r}(t-1) + \bar{m}(t-1)
 \end{equation}
 
-avec $\frac{N_0}{\sigma^2}$ la normalization qui seras remplacé par un scalaire lors
-de l'apprentissage.\\
+avec $\frac{N_0}{\sigma^2}$ la normalization qui seras remplacée par un scalaire lors
+de l'apprentissage.
 
-
-La boucle d'apprentissage est réalisé autant de fois que nécessaire pour que
-l'erreur d'apprentissage devienne non significatives.
+La boucle d'apprentissage est réalisée autant de fois que nécessaire pour que
+les erreurs d'apprentissages deviennent non significatives.
 
 % subsection Apprentissage de U et V (end)
 
@@ -110,26 +110,104 @@ l'erreur d'apprentissage devienne non significatives.
 \subsection{Séquence simple} % (fold)
 \label{sub:Sequence simple}
 
-Cette exemple est tiré de l'article de Rajesh P. N. Rao. Il permet
-de vérifier si le filtre prédit correctement une séquence avec une ambiguïté.
+Cet exemple est tiré de l'article de Rajesh P. N. Rao. Il permet de vérifier si
+le filtre prédit correctement une séquence avec une ambiguïté (voir
+fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}.
+
+\begin{figure}[ht]
+   \begin{center}
+      \resizebox{150mm}{!}{\includegraphics{pic/graph_sequence_3_5.eps}}
+   \end{center}
+   \caption[Prédiction de séquence simple]{Séquence simple avec une ambiguïté
+   toutes les 2 étapes. Le filtre arrive à déterminer où il en est dans dans la
+   séquence, pour répondre correctement l'étape suivante. Le premier graph est
+   la séquence fournis à prédire, le deuxième est la prédiction du filtre, le
+   troisième est l'erreur normalisée entre l'entrée attendu et la prédiction.}
+   \label{fig:sequence_simple}
+\end{figure}
+
+La séquence représente un pixel blanc sur fond noir ayant 3 états possibles.
+Position basse, intermédiaire et haute. Lorsqu'il est au milieu, deux choix sont
+possible, soit aller en haut, soit aller en bas. On vois que le filtre arrive
+toujours à choisir la bonne position. Ceci est du à la matrice de transition
+$V$ qui va déterminer deux valeurs différentes à l'état interne $r$ pour définir
+cette position selon l'état précédent\cite{Rao1999}.
+
+Le filtre à été ici entrainé en présentant une cinquantaine de fois la séquence
+bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de dimension 5.
 
 % subsection Sequence simple (end)
 
-\subsection{Test spatio- temporelle} % (fold)
-\label{sub:Test spatio-temporelle}
+\subsection{Test simple de robustesse} % (fold)
+\label{sub:Test simple de robustesse}
+
+Ici le filtre à été entrainé de la même manière que pour la
+figure~\ref{fig:sequence_simple}, et possède un aussi un état interne $r$ de
+dimension 5 mais la séquence qu'on lui présente ne correspond pas à son
+entrainement (fig~\ref{fig:sequence_simple_erreur}
+page~\pageref{fig:sequence_simple_erreur}).
+
+On voit ainsi qu'à l'étape 8 le filtre attendais une position basse, alors que
+nous lui présentont une position intermédiaire. L'étape 9 est donc entièrement
+fausse puisque le filtre prédit la succession basse. Mais le filtre corrige
+rapidement ses prédiction en seulement 1 étape supplémentaire.
+
+\begin{figure}[ht]
+   \begin{center}
+      \resizebox{150mm}{!}{\includegraphics{pic/graph_sequence_3_error_5.eps}}
+   \end{center}
+   \caption[Prédiction de séquence simple, avec erreur]{Séquence similaire à la
+   figure~\ref{fig:sequence_simple}, mais avec une position inattendu.
+   L'entrainement est le même que pour la figure~\ref{fig:sequence_simple}, et
+   le filtre se remet à prédire assez rapidement correctement. Le premier graph
+   est la séquence fournis à prédire, le deuxième est la prédiction du filtre,
+   le troisième est l'erreur normalisée entre l'entrée attendu et la
+   prédiction.}
+   \label{fig:sequence_simple_erreur}
+\end{figure}
 
 % subsection Séquence simple avec surprise (end)
 
-\subsection{Ver incomplet} % (fold)
-\label{sub:Ver incomplet}
-
-% subsection Ver incomplet (end)
-
-\subsection{Ver complet} % (fold)
-\label{sub:Ver complet}
-
-% subsection Ver complet (end)
-
 % section Test du filtre (end)
+
+\section{Prédiction sur le ver complet} % (fold)
+\label{sec:Prédiction sur le ver complet}
+
+Le filtre de Kalman va être utiliser pour prédire la taille des muscles lors
+des mouvements du ver. En effet, l'activité neuronal du ver peut être lié
+directement à sont activité musculaire.  En premier lieu il va falloir
+s'assurer que le filtre arrive à prédire correctement les mouvements du ver, et
+ensuite on tenteras de le contraindre à nous donner l'état neuronal lié à ses
+muscles.
+
+\subsection{Mouvement normal avant du ver} % (fold)
+\label{sub:Mouvement normal avant du ver}
+
+Une première étape consiste donc à vérifier si le filtre arrive à correctement
+prédire l'état des muscles du ver lors d'un mouvement simple. Le mouvement
+choisis en l'occurence est la marche avant obtenue par simulation avec le
+modèle du ver.
+
+\begin{figure}[ht]
+   \begin{center}
+      \resizebox{150mm}{!}{\includegraphics{pic/graph_ver_complet.eps}}
+   \end{center}
+   \caption[Prédiction de de la taille des muscles lors du mouvement simulé
+   avant du ver]{Prédiction de la taille des muscles lors du mouvement simulé
+   avant du ver. Le premier graph est la séquence fournis à prédire, le
+   deuxième est la prédiction du filtre, le troisième est l'erreur normalisée
+   entre l'entrée attendu et la prédiction.}
+   \label{fig:sequence_ver_complet}
+\end{figure}
+
+
+% subsection Mouvement normal avant du ver (end)
+
+\subsection{Mouvement complexe} % (fold)
+\label{sub:Mouvement complexe}
+
+% subsection Mouvement complexe (end)
+
+% section Ver complet (end)
 
 % chapter Prédire les séquences neuronales (end)
