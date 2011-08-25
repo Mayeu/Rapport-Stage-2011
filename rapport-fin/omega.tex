@@ -26,16 +26,23 @@ séquences connues.
 \label{sec:Filtre de Kalman}
 
 Le filtre de Kalman est un algorithme d'estimation récursif. Pour mesurer
-l'état courant, il se sert ainsi de l'état précédent. Ce type de filtre peut être
-utilisé pour réaliser du filtrage, du lissage, ou de la prédiction. L'usage
-qui nous intéresse ici est bien sur la prédiction, mais avec un entrainement
-pour les matrices d'observation et de transition utilisées par l'algorithme.
+l'état courant, il se sert ainsi de l'état précédent. Ce type de filtre peut
+être utilisé pour réaliser du filtrage, du lissage, ou de la prédiction.
+L'usage qui nous intéresse ici est un usage prédictif du filtre. Étant donné
+que les données nécessaire à la déduction des séquences neuronales du ver ne
+sont pas disponible pour le mouvement de \textit{pirouette}, nous souhaitons
+utiliser un filtre de Kalman pour prédire des séquences neurales inconnue et
+comprendre quels neurones pourraient être en activité lors de la
+\textit{pirouette} du ver.
 
-En effet, ces matrices doivent être calculées en fonction de l'usage choisi,
-dans notre cas, il est plus simple de réaliser un apprentissage pour obtenir de
-bonnes matrices. Rajesh P. N. Rao à devellopé un algorithme d'apprentissage
-pour calculer les matrices d'observation et de transition dans le but de modéliser
-le cortex visuel\cite{Rao1999}.
+Un filtre de Kalman nécessite 2 matrices pour réaliser la prédiction, une
+matrice dite générative, et une matrice de transition\cite{Rao1999}. Calculer
+ces deux matrices est dépendant du problème que l'on souhaite résoudre. Dans
+notre cas il est plus simple de générer ses matrices à partir d'algorithme
+d'apprentissage. Rajesh P. N. Rao à devellopé un algorithme d'apprentissage
+pour calculer les matrices générative et de transition dans le but de modéliser
+le cortex visuel\cite{Rao1999}. C'est cet algorithme d'apprentissage que nous
+allons utiliser pour réaliser notre filtre de Kalman.
 
 \begin{figure}[ht]
    \begin{center}
@@ -46,23 +53,40 @@ le cortex visuel\cite{Rao1999}.
    \label{fig:filtre_kalman}
 \end{figure}
 
+Dans son article\cite{Rao1999} Rajesh P. N. Rao montre que l'implémentation du
+filtre de Kalman permet de prendre en compte une partie des états précédents
+pour prédire l'état suivant en cas d'ambiguïté; ainsi qu'il est suffisament
+robuste pour "resynchroniser" ses prédictions en cas de présentation d'élèment
+inattendu.
+
+Nous verrons dans la suite deux tests qui montre ces deux capacité du filtre.
+
 \subsection{Équation du filtre} % (fold)
 \label{sub:Équation du filtre}
 
 La figure~\ref{fig:filtre_kalman} page~\pageref{fig:filtre_kalman}, représente
-le filtre de kalman utilisé par Rajesh P. N. Rao. Le filtre réalise ses
-prédictions en calculant
-\[ I_{td} = U\bar{r} \]
-avec $U$ la matrice d'observation, $\bar{r}$ l'état interne du filtre, et
-$I_{td}$ la prédiction. Il corrige ensuite sont estimation de $\bar{r}$ à
-l'aide de la difference entre l'entré suivante, $I$ et l'état estimé précédent. La
-matrice $V$ de prédiction est la matrice de transition, est permet de faire
-passer l'état interne de $\bar{r}(t)$ à $\bar{r}(t+1)$.
+le filtre de kalman utilisé par Rajesh P. N. Rao et décrit en détail dans son
+article \cite{Rao1999}. Le filtre réalise ses prédictions en calculant
 
-Dans son algorithme, les calculs de l'\textit{Inverse Covariance} $\Sigma^{-1}$ et
-de la \textit{Normalization} $N$ sont remplacés par des scalaires bien choisis
-pour réduire le temps de calcul nécessaire à la fois à l'apprentissage et à la
-prédictions.
+\[ I_{td} = U\bar{r} \]
+
+avec $U$ la matrice générative, $\bar{r}$ vecteur représentant l'état interne
+du filtre, et $I_{td}$ la prédiction. Le vecteur d'état interne $\bar{r}$ de
+\textit{k-element} caractérisant l'entrée donnée au filtre. La taille de ce
+vecteur joue sur la qualité de la prédiction réalisé par le filtre.
+
+Le filtre corrige ensuite sont estimation de $\bar{r}$ à l'aide de la
+difference entre l'entré suivante, $I$ et l'état estimé précédent. Le vecteur
+$r$ est ensuite passé dans sont état suivant à l'aide de la matrice $V$ de
+transition, est permet de faire passer l'état interne de $\bar{r}(t)$ à
+$\bar{r}(t+1)$.\\
+
+Dans son algorithme, les calculs de l'\textit{Inverse Covariance} $\Sigma^{-1}$
+et de la \textit{Normalization} $N$ sont remplacés par des scalaires bien
+choisis (voir annexes~\ref{cha:Valeur des variables pour l'apprentissage}
+page~\pageref{cha:Valeur des variables pour l'apprentissage} pour les valeurs
+choisis).  pour réduire le temps de calcul nécessaire à la fois à
+l'apprentissage et à la prédictions.
 
 % subsection Équation du filtre (end)
 
@@ -82,16 +106,16 @@ nul. L'apprentissage est définis par :
    \hat{V}(t-1) = \bar{V}(t-1) + \underbrace{\beta[\hat{r}(t) - r'(t)]\hat{r}(t-1)^T}_\text{erreur d'apprentissage}
 \end{equation}
 
-avec $\bar{U}(t) = \hat{U}(t-1)$, $\bar{V}(t-1) = \hat{V}(t-2)$, $\alpha$ et $\beta$
-les coefficients d'apprentissages et $r'(t)$ définie ci dessous :
+avec $\bar{U}(t) = \hat{U}(t-1)$, $\bar{V}(t-1) = \hat{V}(t-2)$, $\alpha$ et
+$\beta$ les coefficients d'apprentissages et $r'(t)$ définie ci dessous :
 
-\begin{equation}
-   \label{eqn:def_r_hat}
-   \hat{r}(t) = r'(t) + \frac{N_0}{\sigma^2}\bar{U}(t)^T(I(t)-\bar{U}(t)r'(t))
-\end{equation}
 \begin{equation}
    \label{eqn:def_r_prime}
    r'(t) =  \bar{V}(t-1)\hat{r}(t-1) + \bar{m}(t-1)
+\end{equation}
+\begin{equation}
+   \label{eqn:def_r_hat}
+   \hat{r}(t) = r'(t) + \frac{N_0}{\sigma^2}\bar{U}(t)^T(I(t)-\bar{U}(t)r'(t))
 \end{equation}
 
 avec $\frac{N_0}{\sigma^2}$ la normalization qui seras remplacée par un scalaire lors
@@ -112,7 +136,7 @@ les erreurs d'apprentissages deviennent non significatives.
 
 Cet exemple est tiré de l'article de Rajesh P. N. Rao. Il permet de vérifier si
 le filtre prédit correctement une séquence avec une ambiguïté (voir
-fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}.
+fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}).
 
 \begin{figure}[ht]
    \begin{center}
@@ -122,7 +146,8 @@ fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}.
    toutes les 2 étapes. Le filtre arrive à déterminer où il en est dans dans la
    séquence, pour répondre correctement l'étape suivante. Le premier graph est
    la séquence fournis à prédire, le deuxième est la prédiction du filtre, le
-   troisième est l'erreur normalisée entre l'entrée attendu et la prédiction.}
+   troisième est l'erreur normalisée entre l'entrée attendu et la prédiction.
+   Source personnel}
    \label{fig:sequence_simple}
 \end{figure}
 
@@ -162,7 +187,7 @@ rapidement ses prédiction en seulement 1 étape supplémentaire.
    le filtre se remet à prédire assez rapidement correctement. Le premier graph
    est la séquence fournis à prédire, le deuxième est la prédiction du filtre,
    le troisième est l'erreur normalisée entre l'entrée attendu et la
-   prédiction.}
+   prédiction. Source personnel}
    \label{fig:sequence_simple_erreur}
 \end{figure}
 
@@ -196,10 +221,14 @@ modèle du ver.
    avant du ver]{Prédiction de la taille des muscles lors du mouvement simulé
    avant du ver. Le premier graph est la séquence fournis à prédire, le
    deuxième est la prédiction du filtre, le troisième est l'erreur normalisée
-   entre l'entrée attendu et la prédiction.}
+   entre l'entré attendu et la prédiction. Source pesonnel}
    \label{fig:sequence_ver_complet}
 \end{figure}
 
+Les données d'entrainement pour l'apprentissage correspondent à l'évolution de
+la longueurs des 98 muscles du ver simulé pour une durée de 30 secondes de
+simulation. L'état interne $r$ est ici un vecteur de dimensions 12. Cette dimensions
+à été choisis car correspondante au nombre d'unité neuronale du ver.
 
 % subsection Mouvement normal avant du ver (end)
 
