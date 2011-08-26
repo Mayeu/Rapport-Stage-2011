@@ -34,6 +34,30 @@ et l'implémentation de référence, ainsi j'apporte les corrections suivantes
 \section{Différence d'implémentation} % (fold)
 \label{sec:Différence d'implémentation}
 
+Le but de Clones est d'offrir une interface générique pour
+la simulation entre Brian et SOFA, pour éviter d'avoir à modéliser
+le système neurale (Brian) et physique (SOFA) dans toute simulation.
+
+Ceci apporte bien sur des avantages en termes de facilité d'implémentation,
+et de temps, mais aussi différents problèmes.
+
+\subsection{Changement d'échelle} % (fold)
+\label{sbu:Changement d'échelle}
+
+SOFA est avant tout dédié à la simulation médicale, et donc à la simulation
+à une échelle de taille différente de celle du \celeg{}. Ainsi, dans le code
+python représentant le ver, un changement d'échelle était nécessaire pour
+faire fonctionner la simulation.
+
+Après recherche au sein du code source de SOFA, il s'avèra que les forces trop
+faible sont automatiquement considéré comme insignifiante, de même pour que pour la taille
+des ressorts constituant les muscles. Nous avons donc modifier les codes et proposé
+ces modifications, et la prise en compte d'autres échelles pour les simulations.
+
+% section Changement d'échelle (end)
+
+
+
 - problème de différence entre la référence est python
 - méthode de calcul de SOFA
 

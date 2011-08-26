@@ -49,7 +49,9 @@ que nous allons utiliser pour réaliser notre filtre de Kalman.
       \psfig{width=15cm,figure=pic/kalman_filter.eps}
    \end{center}
    \caption[Schema du filtre de kalman]{Schema du filtre de kalman utilisé par
-   Rajesh P. N. Rao. Source \cite{Rao1999}}
+   Rajesh P. N. Rao. Source Rao, R. P. (1999). \textit{An optimal estimation
+   approach to visual perception and learning}. Vision research, 39(11),
+   1963-89. \cite{Rao1999}}
    \label{fig:filtre_kalman}
 \end{figure}
 
@@ -76,10 +78,9 @@ du filtre, et $I_{td}$ la prédiction. Le vecteur d'état interne $\bar{r}$ de
 vecteur joue sur la qualité de la prédiction réalisé par le filtre.
 
 Le filtre corrige ensuite sont estimation de $\bar{r}$ à l'aide de la
-différence entre l'entré suivante, $I$ et l'état estimé précédent. Le vecteur
-$r$ est ensuite passé dans sont état suivant à l'aide de la matrice $V$ de
-transition, est permet de faire passer l'état interne de $\bar{r}(t)$ à
-$\bar{r}(t+1)$.\\
+différence entre l'entré suivante $I$, et l'état estimé précédent. Puis le
+vecteur $r$ est passé dans son état suivant à l'aide de la matrice $V$ de
+transition pour estimer l'état attendu suivant.\\
 
 Dans son algorithme, les calculs de l'\textit{Inverse Covariance} $\Sigma^{-1}$
 et de la \textit{Normalization} $N$ sont remplacés par des scalaires bien
@@ -94,7 +95,7 @@ l'apprentissage et à la prédiction.
 \label{sub:Apprentissage de U et V}
 
 Les matrices $U$ et $V$ sont initialisées aléatoirement en les contraignants
-à être au moins orthonormal, et l'état interne $r$ est initialisé au vecteur
+à être au moins orthonormal, l'état interne $r$ lui, est initialisé au vecteur
 nul. L'apprentissage est défini par :
 
 \begin{equation}
