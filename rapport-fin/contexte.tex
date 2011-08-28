@@ -62,10 +62,11 @@ Les deux quadrants de muscles sont innervés par la corde neuronale dorsale, et
 de manière similaire, les quadrants ventraux sont innervés par la corde
 neuronale ventrale. Chaque paire de quadrants (dorsale et ventrale) est
 contrôlée par le même jeu de neurones, ainsi le ver ne peut réaliser des
+% TODO Changer le "A noter"
 torsions que dans un plan à deux dimensions. À noter que seule la tête du ver
 (composée des quatre premières lignes de muscles) est innervée de manière à
 pouvoir réaliser des mouvements en trois dimensions. Le ver se déplace ainsi
-sur ses flancs gauche ou droit, en réalisant une succession de contraction et
+sur son flanc gauche ou droit, en réalisant une succession de contraction et
 de décontraction des muscles dorsaux et ventraux générant un mouvement
 sinusoïdal.
 
@@ -88,6 +89,7 @@ flancs droit ou gauche. L'étude du mouvement se fait généralement dans des
 boites de petri contenant du gel d'agar qui lui permet de reposer
 sans s'enfoncer. Le ver rampe ainsi à la surface du gel en suivant une
 sinusoïde avec une longueur d'onde d'environ 2/3 de la longueur du corps et 
+% TODO dégager le bien sûr
 une fréquence de 0,5~Hz en moyenne\cite{Boyle2009}. Ce mouvement lui permet
 soit de se déplacer vers l'avant, soit vers l'arrière. \celeg{} a bien sûr
 la possibilité de moduler ce mouvement pour adapter sa vitesse.
@@ -146,9 +148,9 @@ Les muscles de la tête (quatre premiers quadrants de muscles) ne sont innervés
 par \textit{l'anneau nerveux}, le reste des muscles en revanche est innervé
 par \textit{l'anneau nerveux}, et par la \textit{corde ventrale}.  Le rôle
 présumé de \textit{l'anneau nerveux} est celui de la gestion des comportements
-de haut niveau (poursuite et fuite de gradient, réponse au touché), alors que la
+de haut niveau (poursuite et fuite de gradient, réponse au toucher), alors que la
 très grande majorité des neurones de la \textit{corde ventrale} ne se charge que
-de la contraction et décontraction des muscles. Le rôle unitaire des neurones
+de la contraction et décontraction des muscles. Le rôle individuel des neurones
 composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 
 % subsubsection Présentation d'ensemble (end)
@@ -156,6 +158,7 @@ composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 \subsubsection{Circuit de la corde ventrale} % (fold)
 \label{ssub:Circuit de la corde ventrale}
 
+% TODO Comme dit précédemment = pas top
 Comme dit précédemment, chaque paire de muscles présents dans la partie dorsale
 (et de manière équivalente dans la partie ventrale) est innervée par le même
 jeu de neurone. C'est pourquoi nous ne les distinguerons pas dans la
@@ -165,7 +168,7 @@ Il existe 6 jeux de neurone différents dans la \textit{corde ventrale} pour la
 gestion de la locomotion \cite{Boyle2009}, DA (9), DB (7), DD (6), VA (12), VB
 (11), VD (13), où le chiffre entre parenthèses désigne le nombre de neurones de
 chaque type, et où V désigne Ventral, et D dorsal.  Les neurones de type A et B
-(DA, DB, VA, VB) sont des neurones excitants, alors que les neurones de type D
+(DA, DB, VA, VB) sont des neurones excitateurs, alors que les neurones de type D
 (DD, VD) sont des neurones inhibiteurs.\\
 
 
@@ -175,11 +178,12 @@ pour gérer le déplacement arrière \cite{AltunZ.F.andHall2011,Boyle2009,White1
 
 On peut noter que les zones de jonction neuromusculaire \footnote{Zone de
 contact entre un neurone et un muscle permettant le transfert d'information 
+% Ajouter une footnote
 pour contrôler le muscle} ne se chevauchent pas, alors que les processus
 des neurones se prolongent vers l'arrière pour les neurones de type B (et
 inversement vers l'avant pour les types A) et se chevauchent entre eux. Cet
 allongement joue le rôle de récepteur de torsion pour le ver lui permettant
-ainsi de synchroniser le mouvement de ses muscles \cite{Boyle2009}. A noter que
+ainsi de synchroniser le mouvement de ses muscles \cite{Boyle2009}. À noter que
 cette fonction a été proposée par R. L. Russel et L. Byerly, le tout cité par
 White et al. \cite{White1986}, mais n'a jamais été vérifiée expérimentalement
 pour l'instant.
@@ -212,10 +216,11 @@ appelé \textit{cross-inhibition} dans la suite.\\
 
 En plus de ces neurones moteurs, on trouve des interneurones qui ont pour
 charge de transmettre l'information entre différents neurones. Je ne
-présenterais pas tous ces interneurones, mais seulement 2 paires, AVB/AVA et
+présenterai pas tous ces interneurones, mais seulement 2 paires, AVB/AVA et
 PVC/AVD, qui sont pertinent dans le contexte de ce stage. Ces interneurones
 permettent la génération de réaction de plus haut niveau
 \cite{Boyle2009,White1986}.  Ainsi la paire AVB/AVA se charge de la marche
+% AVB gérant... AVA la marche... phrase sans verbe, à changer
 avant et de la marche arrière, ainsi que du passage de l'un à l'autre. AVB gérant
 la marche avant, et AVA la marche arrière. On pense aussi que l'interaction
 entre ces deux interneurones permet la génération d'une \textit{pirouette},
@@ -324,13 +329,14 @@ cross-inhibition représentée entre les neurones DB en VD, ainsi que VB et DD.
 \subsection{Implémentation de référence} % (fold)
 \label{sub:implémentation de référence}
 
-L'implémentation du modèle réalisé par Jordan H. Boyle serviras de référence
+L'implémentation du modèle réalisé par Jordan H. Boyle servira de référence
 pour le comportement simulé du ver. Cette implémentation est réalisée en C++ et
 utilise la bibliothèque SUNDIALS \footnote{\textbf{SU}ite of \textbf{N}onlinear and
 \textbf{DI}fferential/\textbf{AL}gebraic equation \textbf{S}olvers,
 \url{https://computation.llnl.gov/casc/sundials/main.html}} pour la résolution
 des équations mécaniques du système. A noter que des différences entre la thèse
-et l'implémentation on était trouvée, j'en parlerais dans une partie dédiée.
+% TODO réf à l'annexe de correction
+et l'implémentation ont été trouvée, j'en parlerais dans une partie dédiée.
 
 Cette version du simulateur implémente tout le système sans utiliser de bibliothèques
 annexes (hormis SUNDIALS pour la résolution des équations). L'implémentation initiée
