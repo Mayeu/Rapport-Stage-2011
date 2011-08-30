@@ -8,7 +8,7 @@
 %%%%%%                                            %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[11pt,a4paper]{report}
+\documentclass[11pt,a4paper,twoside]{report}
 \special{papersize=210mm,297mm} % safe protection against ghostscript multiple version
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,7 +17,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
-\usepackage[paper=a4paper,margin=1in]{geometry} % pour des marges plus petites
+\usepackage[paper=a4paper,twoside=true,outer=2.5cm,inner=3.5cm,bottom=3cm,top=3cm]{geometry} % marge en mode double page
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Package optionnel
@@ -69,6 +69,7 @@
 %% Configuration des chapitres
 \makeatletter
 \def\@makechapterhead#1{%
+\cleardoublepage
 \vspace*{50\p@}%
 {\parindent \z@ \raggedright \normalfont
 \interlinepenalty\@M
@@ -119,9 +120,9 @@
 \fancyfoot[LE,RO]{\textit{Année Universitaire 2010-2011}}
 
 \input{title}
-\newpage
-\thispagestyle{empty}
-\mbox{}
+%\newpage
+%\thispagestyle{empty}
+%\mbox{}
 
 \thispagestyle{empty}
 
@@ -148,17 +149,19 @@
 \fancyfoot[LE,RO]{\thepage}
 }
 
+\cleardoublepage
 \tableofcontents
 
 %\newpage
 %\thispagestyle{empty}
 %\mbox{}
 
+\cleardoublepage
 \listoffigures
 
-\newpage
-\thispagestyle{empty}
-\mbox{}
+%\newpage
+%\thispagestyle{empty}
+%\mbox{}
 
 \input{inria}
 \input{project}
@@ -167,19 +170,19 @@
 \input{omega}
 %\input{timeline}
 
-\clearpage % ensure to jump to the next page
+%\clearpage % ensure to jump to the next page
 \addcontentsline{toc}{chapter}{Bibliographie} % Add the title in the TOC
 %\nocite{Goodman2008,Allard2007} % cite not cited paper
 \nocite{*}
 \bibliographystyle{plain} % biblio style
 \bibliography{bibli} % generate biblio
 
-\newpage
-\thispagestyle{empty}
-\mbox{}
+%\newpage
+%\thispagestyle{empty}
+%\mbox{}
 \appendix
-\pagenumbering{Roman}
-\setcounter{page}{1}
+%\pagenumbering{Roman}
+%\setcounter{page}{1}
 \include{appendix}
 
 \end{document}
