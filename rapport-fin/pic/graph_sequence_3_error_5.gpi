@@ -6,10 +6,10 @@ set yrange [-0.5:2.5]
 unset ytics
 set multiplot;                          # get into multiplot mode
 set size 1,0.3;  
-set title "Entré du filtre, dim(r) = (5,1)";
+set title "Entree du filtre, dim(r) = (5,1)";
 set origin 0.0,0.65; plot 'pic/input_graph_sequence_3_error_5.dat' with image;
-set title "Prédiction du filtre de Kalman";
+set title "Prediction du filtre de Kalman";
 set origin 0.0,0.30; plot 'pic/predicting_graph_sequence_3_error_5.dat' with image;
-set title "Erreur de prédiction";
+set title "Erreur de prediction";
 set origin 0.0,0.0; plot 'pic/error_graph_sequence_3_error_5.dat' with image;
 unset multiplot;
