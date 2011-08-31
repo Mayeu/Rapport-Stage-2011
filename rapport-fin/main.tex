@@ -69,7 +69,6 @@
 %% Configuration des chapitres
 \makeatletter
 \def\@makechapterhead#1{%
-\cleardoublepage
 \vspace*{50\p@}%
 {\parindent \z@ \raggedright \normalfont
 \interlinepenalty\@M
@@ -133,7 +132,7 @@
 \renewcommand{\footrulewidth}{0.5pt}
 \renewcommand{\headrulewidth}{0.5pt}
 \fancyhead{} % clear all header fields
-\fancyhead[RE,LO]{Rapport intermédiaire de stage}
+\fancyhead[RE,LO]{Rapport de stage de fin d'études}
 \fancyhead[RO,LE]{\rightmark}
 \fancyfoot{} % clear all footer fields
 \fancyfoot[LO,RE]{Matthieu Maury}
@@ -163,11 +162,17 @@
 %\thispagestyle{empty}
 %\mbox{}
 
+\cleardoublepage
 \input{inria}
+\cleardoublepage
 \input{project}
+\cleardoublepage
 \input{contexte}
+\cleardoublepage
 \input{modification}
+\cleardoublepage
 \input{omega}
+\cleardoublepage
 \input{conclusion}
 %\input{timeline}
 
