@@ -28,25 +28,31 @@ séquences connues.
 Étant donné que la taille des muscles et directement lié à l'activité neuronale
 de \celeg{} nous souhaitons utiliser algorithme de type réseau de neurone pour
 déduire l'activité neuronale lors de mouvement pour lesquels on ne possède pas
-ce type d'information. (1) En premier lieu l'algorithme sera testé sur un
-apprentissage non supervisé de la variation de la taille des muscles du ver.
-Il devra arriver à prédire avec une marge d'erreur acceptable la taille lors
-du mouvement du ver. Puis, une fois ceci fait, (2) nous passerons l'algorithme
-en mode supervisé pour le contraindre à générer les séquences neuronales connues
-lors de mouvement connu. Le but étant que la qualité de sa prédiction de
-taille ne change pas, mais que dans le même temps son état interne sois
-contraint à correspondre à l'activité neuronale du ver simulé. (3) Enfin on
-générera les séquences neuronales lors de mouvement non connu à l'aide du filtre; et on
-validera celle-ci en fournissant au simulateur la séquence neuronale générée et
-en visualisant si le modèle se comporte correctement.
+ce type d'information. De plus le modèle du ver utilisé permet à partir d'une
+succession de taille de muscle, de calculer le mouvement et la configuration
+physique du ver. Il n'est donc pas nécessaire de chercher à prédire d'autre
+élément du mouvement.
+
+(1) En premier lieu l'algorithme sera testé sur un apprentissage non supervisé
+de la variation de la taille des muscles du ver.  Il devra arriver à prédire
+avec une marge d'erreur acceptable la taille lors du mouvement du ver. Puis,
+une fois ceci fait, (2) nous passerons l'algorithme en mode supervisé pour le
+contraindre à générer les séquences neuronales connues lors de mouvement connu.
+Le but étant que la qualité de sa prédiction de taille ne change pas, mais que
+dans le même temps son état interne soit contraint à correspondre à l'activité
+neuronale du ver simulé. (3) Enfin on générera les séquences neuronales lors de
+mouvement non connu à l'aide du filtre; et on validera celle-ci en fournissant
+au simulateur la séquence neuronale générée et en visualisant si le modèle se
+comporte correctement.
 
 L'algorithme choisi pour cet apprentissage est le filtre de Kalman qui est non
 supervisé par défaut, mais dont on peut contraindre la représentation interne
-du filtre pour le rendre supervisé.
+pour le rendre supervisé. C'est un algorithme linéaire qui est donc idéal pour
+modéliser des systèmes de resort.
 
 Pour l'étape (1) nous utiliserons le mouvement généré par le simulateur pour
 entrainer et tester l'algorithme; de même pour l'étape (2). L'étape 3
-demanderas l'extraction du mouvement du ver depuis des vidéos de déplacement à
+demandera l'extraction du mouvement du ver depuis des vidéos de déplacement à
 fin de s'assurer que le mouvement du ver est un mouvement réel.
 
 % section But et étape (end)
@@ -54,14 +60,16 @@ fin de s'assurer que le mouvement du ver est un mouvement réel.
 \section{Filtre de Kalman} % (fold)
 \label{sec:Filtre de Kalman}
 
-Le filtre de Kalman est un algorithme d'estimation récursif. Pour mesurer
-l'état courant, il se sert ainsi de l'état précédent. Ce type de filtre peut
-être utilisé pour réaliser du filtrage, du lissage, ou de la prédiction.
-L'usage qui nous intéresse ici est un usage prédictif du filtre. Étant donné
-que les données nécessaires à la déduction des séquences neuronales du ver ne
-sont pas disponibles pour le mouvement de \textit{pirouette}, nous souhaitons
-utiliser un filtre de Kalman pour prédire des séquences neurales inconnues et
-comprendre quels neurones pourraient être en activité lors de la
+Le filtre de Kalman est un algorithme d'estimation récursif. Le filtre cherche
+à estimer un état interne en fonction des entrée qu'on lui fournis. Cet état
+interne peut être de dimension réduite par rapport aux dimensions d'entrée.
+Pour mesurer l'état courant, il se sert ainsi de l'état précédent. Ce type de
+filtre peut être utilisé pour réaliser du filtrage, du lissage, ou de la
+prédiction.  L'usage qui nous intéresse ici est un usage prédictif du filtre.
+Étant donné que les données nécessaires à la déduction des séquences neuronales
+du ver ne sont pas disponibles pour le mouvement de \textit{pirouette}, nous
+souhaitons utiliser un filtre de Kalman pour prédire des séquences neurales
+inconnues et comprendre quels neurones pourraient être en activité lors de la
 \textit{pirouette} du ver.
 
 Un filtre de Kalman nécessite 2 matrices pour réaliser la prédiction, une
@@ -197,7 +205,7 @@ bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de 5 éléments.
 \label{sub:Test simple de robustesse}
 
 Ici le filtre a été entrainé de la même manière que pour la
-figure~\ref{fig:sequence_simple}, et possède un aussi un état interne $r$ de
+figure~\ref{fig:sequence_simple}, et possède aussi un état interne $r$ de
 taille 5; mais la séquence qu'on lui présente ne correspond pas à son
 entrainement (fig~\ref{fig:sequence_simple_erreur}
 page~\pageref{fig:sequence_simple_erreur}).
@@ -258,7 +266,7 @@ Les données d'entrainement pour l'apprentissage correspondent à l'évolution d
 la longueur des 98 muscles du ver simulé pour une durée de 30 secondes de
 simulation. Ce jeu d'entrainement est présenté entre 3000 et 5000 lors de la
 phase d'apprentissage. L'état interne $r$ est ici un vecteur de 12 éléments.
-Cette taille de vecteurs a été choisis car elle correspond au nombre d'unités
+Cette taille de vecteurs a été choisi car elle correspond au nombre d'unités
 neuronales du ver.
 
 Le même jeu de donnée que celui d'entrainement est ensuite fourni pour la phase
