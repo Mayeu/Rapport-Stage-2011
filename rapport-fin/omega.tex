@@ -1,7 +1,7 @@
 \chapter{Prédiction des séquences neuronales} % (fold)
 \label{cha:Prédire des séquences neuronales}
 
-Comme vu précédemment, il n'y a pas de donnés biologiques associées à la
+Comme vu précédemment, il n'y a pas de données biologiques associées à la
 \textit{pirouette} du ver, hormis sur son utilité et son rôle dans la recherche
 de nourriture chez \celeg{}\cite{Gray2005}. L'une des hypothèses serait que le
 circuit de la marche avant et celui de la marche arrière seraient actifs
@@ -22,6 +22,35 @@ alternative serait d'utiliser des algorithmes d'apprentissage pour essayer de
 prédire des séquences neurales inconnues, à partir d'un entrainement sur des
 séquences connues.
 
+\section{But et étape} % (fold)
+\label{sec:But et étape}
+
+Étant donné que la taille des muscles et directement lié à l'activité neuronale
+de \celeg{} nous souhaitons utiliser algorithme de type réseau de neurone pour
+déduire l'activité neuronale lors de mouvement pour lesquels on ne possède pas
+ce type d'information. (1) En premier lieu l'algorithme sera testé sur un
+apprentissage non supervisé de la variation de la taille des muscles du ver.
+Il devra arriver à prédire avec une marge d'erreur acceptable la taille lors
+du mouvement du ver. Puis, une fois ceci fait, (2) nous passerons l'algorithme
+en mode supervisé pour le contraindre à générer les séquences neuronales connues
+lors de mouvement connu. Le but étant que la qualité de sa prédiction de
+taille ne change pas, mais que dans le même temps son état interne sois
+contraint à correspondre à l'activité neuronale du ver simulé. (3) Enfin on
+générera les séquences neuronales lors de mouvement non connu à l'aide du filtre; et on
+validera celle-ci en fournissant au simulateur la séquence neuronale générée et
+en visualisant si le modèle se comporte correctement.
+
+L'algorithme choisi pour cet apprentissage est le filtre de Kalman qui est non
+supervisé par défaut, mais dont on peut contraindre la représentation interne
+du filtre pour le rendre supervisé.
+
+Pour l'étape (1) nous utiliserons le mouvement généré par le simulateur pour
+entrainer et tester l'algorithme; de même pour l'étape (2). L'étape 3
+demanderas l'extraction du mouvement du ver depuis des vidéos de déplacement à
+fin de s'assurer que le mouvement du ver est un mouvement réel.
+
+% section But et étape (end)
+
 \section{Filtre de Kalman} % (fold)
 \label{sec:Filtre de Kalman}
 
@@ -39,7 +68,7 @@ Un filtre de Kalman nécessite 2 matrices pour réaliser la prédiction, une
 matrice dite générative, et une matrice de transition\cite{Rao1999}. Calculer
 ces deux matrices est dépendant du problème que l'on souhaite résoudre. Dans
 notre cas il est plus simple de générer ses matrices à partir d'algorithme
-d'apprentissage. Rajesh P. N. Rao a developpé un algorithme d'apprentissage
+d'apprentissage. Rajesh P. N. Rao a développé un algorithme d'apprentissage
 pour calculer la matrice générative et la matrice de transition dans le but de
 modéliser le cortex visuel\cite{Rao1999}. C'est cet algorithme d'apprentissage
 que nous allons utiliser pour réaliser notre filtre de Kalman.
@@ -199,13 +228,11 @@ rapidement ses prédictions en seulement 1 étape supplémentaire.
 \section{Prédiction sur le ver complet} % (fold)
 \label{sec:Prédiction sur le ver complet}
 
-Le filtre de Kalman va être utilisé pour prédire la taille des muscles lors
-des mouvements du ver. En effet, l'activité neuronale du ver peut être liée
-directement à son activité musculaire. En premier lieu il va falloir
-s'assurer que le filtre arrive à prédire correctement les mouvements du ver en
-apprentissage non supervisé (fonctionnement par défaut du filtre de Kalman), et
-ensuite on tentera de le contraindre à nous donner l'état neuronal lié à
-l'état des muscles.
+Le filtre de Kalman va être utilisé pour prédire la taille des muscles lors des
+mouvements du ver. En premier lieu il va falloir s'assurer que le filtre arrive
+à prédire correctement les mouvements du ver en apprentissage non supervisé
+(fonctionnement par défaut du filtre de Kalman), et nous tenterons plus tard de
+le contraindre à nous donner l'état neuronal lié à l'état des muscles.
 
 \subsection{Mouvement normal avant du ver} % (fold)
 \label{sub:Mouvement normal avant du ver}
