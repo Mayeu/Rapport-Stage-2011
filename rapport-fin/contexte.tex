@@ -62,13 +62,12 @@ Les deux quadrants de muscles sont innervés par la corde neuronale dorsale, et
 de manière similaire, les quadrants ventraux sont innervés par la corde
 neuronale ventrale. Chaque paire de quadrants (dorsale et ventrale) est
 contrôlée par le même jeu de neurones, ainsi le ver ne peut réaliser des
-% TODO Changer le "A noter"
-torsions que dans un plan à deux dimensions. À noter que seule la tête du ver
-(composée des quatre premières lignes de muscles) est innervée de manière à
-pouvoir réaliser des mouvements en trois dimensions. Le ver se déplace ainsi
-sur son flanc gauche ou droit, en réalisant une succession de contraction et
-de décontraction des muscles dorsaux et ventraux générant un mouvement
-sinusoïdal.
+torsions que dans un plan à deux dimensions. Contrairement au reste du corp, la
+tête du ver, qui est composée des quatre premières lignes de muscles, est
+innervée de manière à pouvoir réaliser des mouvements en trois dimensions. Le
+ver se déplace sur son flanc gauche ou droit, en réalisant une succession de
+contraction et de décontraction des muscles dorsaux et ventraux générant un
+mouvement sinusoïdal.
 
 % subsection Anatomie du \caeleg{} (end)
 
@@ -89,10 +88,10 @@ flancs droit ou gauche. L'étude du mouvement se fait généralement dans des
 boites de petri contenant du gel d'agar qui lui permet de reposer
 sans s'enfoncer. Le ver rampe ainsi à la surface du gel en suivant une
 sinusoïde avec une longueur d'onde d'environ 2/3 de la longueur du corps et 
-% TODO dégager le bien sûr
 une fréquence de 0,5~Hz en moyenne\cite{Boyle2009}. Ce mouvement lui permet
-soit de se déplacer vers l'avant, soit vers l'arrière. \celeg{} a bien sûr
-la possibilité de moduler ce mouvement pour adapter sa vitesse.
+soit de se déplacer vers l'avant, soit vers l'arrière. \celeg{} a aussi la
+possibilité de moduler ce mouvement pour adapter sa vitesse selon ses besoins
+(déplacement lent de recherche, déplacement rapide de fuite, etc.).
 
 Il est capable de tourner de manière lente pour suivre ou fuir des gradients
 d'odeur et de température, mais il présente également un mouvement nommé
@@ -158,11 +157,9 @@ composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 \subsubsection{Circuit de la corde ventrale} % (fold)
 \label{ssub:Circuit de la corde ventrale}
 
-% TODO Comme dit précédemment = pas top
-Comme dit précédemment, chaque paire de muscles présents dans la partie dorsale
-(et de manière équivalente dans la partie ventrale) est innervée par le même
-jeu de neurone. C'est pourquoi nous ne les distinguerons pas dans la
-suite de ce doc
+Étant donné que chaque paire de muscles présents dans la partie dorsale (et de
+manière équivalente dans la partie ventrale) est innervée par le même jeu de
+neurone. C'est pourquoi nous ne les distinguerons pas dans la suite de ce doc
 
 Il existe 6 jeux de neurone différents dans la \textit{corde ventrale} pour la
 gestion de la locomotion \cite{Boyle2009}, DA (9), DB (7), DD (6), VA (12), VB
@@ -334,8 +331,8 @@ utilise la bibliothèque SUNDIALS \footnote{\textbf{SU}ite of \textbf{N}onlinear
 \textbf{DI}fferential/\textbf{AL}gebraic equation \textbf{S}olvers,
 \url{https://computation.llnl.gov/casc/sundials/main.html}} pour la résolution
 des équations mécaniques du système. A noter que des différences entre la thèse
-% TODO réf à l'annexe de correction
-et l'implémentation ont été trouvée (voir annexe~\ref{cha:Correction du modèle} page~\pageref{cha:Correction du modèle}).
+et l'implémentation ont été trouvée (voir annexe~\ref{cha:Correction du modèle}
+page~\pageref{cha:Correction du modèle}).
 
 Cette version du simulateur implémente tout le système sans utiliser de bibliothèques
 annexes (hormis SUNDIALS pour la résolution des équations). L'implémentation initiée
