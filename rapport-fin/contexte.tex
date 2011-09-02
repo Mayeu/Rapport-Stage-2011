@@ -376,31 +376,28 @@ et de temps, mais aussi différents problèmes.
 \subsubsection{Changement d'échelle} % (fold)
 \label{subs:Changement d'échelle}
 
-SOFA est avant tout dédié à la simulation médicale, et donc à la simulation
-à une échelle de taille différente de celle du \celeg{}. Ainsi, dans le code
-python représentant le ver, un changement d'échelle était nécessaire pour
-faire fonctionner la simulation.
+SOFA est avant tout dédié à la simulation médicale, et donc à la simulation à
+une échelle de taille différente de celle du \celeg{}. Ainsi, dans le code
+python représentant le ver, un changement d'échelle était nécessaire pour faire
+fonctionner la simulation.
 
 Après recherche au sein du code source de SOFA, il s'avèra que les forces trop
-faible sont automatiquement considéré comme insignifiante, de même pour que pour la taille
-des ressorts constituant les muscles. Nous avons donc modifier les codes et proposé
-ces modifications, et la prise en compte d'autres échelles pour les simulations.
+faible sont automatiquement considéré comme insignifiante, de même pour que
+pour la taille des ressorts constituant les muscles. Nous avons donc modifier
+les codes et proposé ces modifications, et la prise en compte d'autres échelles
+pour les simulations.\\
+
+
+Malgré ces modifications dans la gestion des ressorts, un changement d'échelle
+étai toujours nécessaire même si il était plus faible qu'avant modification.
+Ce problème seras finalement dû au méthode de calcul utilisée par SOFA qui ne
+nous permette pas de simuler le ver de la même manière que l'implémentation de
+réfèrence. SOFA étant très modulaire, il est envisageable d'implémenter la même
+méthode de calcul en sont sein, mais pas dans la durée de ce stage
 
 % subsubsection Changement d'échelle (end)
 
-- problème de différence entre la référence est python
-- méthode de calcul de SOFA
-
 % subsection Différence d'implémentation (end)
-
-\subsection{Ajout de comportement} % (fold)
-\label{sub:Ajout de comportement}
-
-- backward (simple retournement du circuit)
-  - gestion du passage forward/backward
-- omega turn
-
-% subsection Ajout de comportement (end)
 
 % section Contexte informatique (end)
 
