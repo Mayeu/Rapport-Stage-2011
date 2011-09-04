@@ -1,5 +1,5 @@
 .DS_Store
-*.swp
+*.sw*
 *.d
 *.dvi
 *.log
@@ -15,3 +15,4 @@
 *.pdf
 *.lof*
 *.xcf
+graph*.eps
