@@ -41,7 +41,7 @@ Il est composé de dendrites qui reçoivent l'information, et d'un axone qui tra
 l'information.
 
 Un neurone peut être représenté par une fonction de seuil prenant en entrée la somme
-des entrées du neurone, ainsi qu'une fonction de seuil. Lorsque le seuil est atteint,
+des entrées du neuronel. Lorsque le seuil est atteint,
 le neurone envoie une information.
 
 
@@ -136,7 +136,7 @@ nourriture.\\
 
 % TODO donner la compo du liquide généralement utilisé en réf
 Le ver est également capable de nager dans un environnement liquide. La fréquence
-de son mouvement passe alors à 2 Hz. Différentes études ont montré que le ver
+de son mouvement passe alors à 2 Hz. Différentes études ont montrées que le ver
 adapte ainsi son mouvement en fonction des contraintes de son environnement.
 Plus d'informations peuvent être trouvées dans la thèse de J. H. Boyle \cite{Boyle2009}
 
@@ -147,7 +147,7 @@ Plus d'informations peuvent être trouvées dans la thèse de J. H. Boyle \cite{
 
 Le circuit neural de \celeg{} a été étudié en profondeur. En effet, on connait
 non seulement la position de tous ses neurones, mais aussi la grande majorité
-de ses connexions neurales (comme vu précédent celles si sont invariables d'un
+de ses connexions neurales (comme vu précédent celles-ci sont invariables d'un
 ver à l'autre).  Ainsi il est possible d'avoir une carte précise des liens
 entre chaque neurone \cite{Durbin1987,Chen2006,Boyle2009,Varshney2011}.
 Plusieurs de ces données peuvent être trouvées à l'adresse
@@ -182,7 +182,7 @@ composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 
 Étant donné que chaque paire de muscles présents dans la partie dorsale (et de
 manière équivalente dans la partie ventrale) est innervée par le même jeu de
-neurone. C'est pourquoi nous ne les distinguerons pas dans la suite de ce doc
+neurone. C'est pourquoi nous ne les distinguerons pas dans la suite de ce doc.
 
 Il existe 6 jeux de neurone différents dans la \textit{corde ventrale} pour la
 gestion de la locomotion \cite{Boyle2009}, DA (9), DB (7), DD (6), VA (12), VB
@@ -237,10 +237,10 @@ appelé \textit{cross-inhibition} dans la suite.\\
 En plus de ces neurones moteurs, on trouve des interneurones qui ont pour
 charge de transmettre l'information entre différents neurones. Je ne
 présenterai pas tous ces interneurones, mais seulement 2 paires, AVB/AVA et
-PVC/AVD, qui sont pertinent dans le contexte de ce stage. Ces interneurones
+PVC/AVD, qui sont pertinentes dans le contexte de ce stage. Ces interneurones
 permettent la génération de réaction de plus haut niveau
-\cite{Boyle2009,White1986}.  Ainsi la paire d'interneurone AVB/AVA se charge de
-la marche avant pour AVB, et réciproquement de la marche arrière pour AVA. Ces
+\cite{Boyle2009,White1986}.  Dans la paire d'interneurone AVB/AVA, AVB se charge de 
+la marche avant, et réciproquement AVA de la marche arrière. Ces
 interneurones sont certainement utilisés et actifs lors du passage de l'un à
 l'autre de ces mouvements. On pense aussi que l'interaction entre ces deux
 interneurones permet la génération d'une \textit{pirouette}, mais rien n'a
@@ -248,11 +248,11 @@ encore été prouvé que ce soit en terme expérimental, ou de simulation.
 
 Les interneurones PVC et AVD quant à eux, sont responsables de la réponse au
 touché du ver. En plus de cette fonction, ils peuvent légèrement compenser le
-rôle de AVA/AVB s'ils sont absents ou dysfonctionnels. Le corps cellulaire du
+rôle de AVB/AVA s'ils sont absents ou dysfonctionnels. Le corps cellulaire du
 neurone PVC se trouve près de la queue, alors que celui d'AVD se trouve dans la
 tête du ver.
 
-Les interneurones AVB et PVC sont reliés aux neurones de type B, et AVA et AVD
+Les interneurones AVB et PVC sont reliés aux neurones de type B. Réciproquement, AVA et AVD
 sont reliés aux neurones de type A.
 
 % subsubsection Circuit de la corde ventrale (end)
@@ -354,7 +354,7 @@ utilise la bibliothèque SUNDIALS \footnote{\textbf{SU}ite of \textbf{N}onlinear
 \textbf{DI}fferential/\textbf{AL}gebraic equation \textbf{S}olvers,
 \url{https://computation.llnl.gov/casc/sundials/main.html}} pour la résolution
 des équations mécaniques du système. A noter que des différences entre la thèse
-et l'implémentation ont été trouvée (voir annexe~\ref{cha:Correction du modèle}
+et l'implémentation ont été trouvées (voir annexe~\ref{cha:Correction du modèle}
 page~\pageref{cha:Correction du modèle}).
 
 Cette version du simulateur implémente tout le système sans utiliser de bibliothèques
@@ -372,7 +372,7 @@ des neurones du ver, ainsi que le logiciel SOFA pour simuler la physique et
 l'environnement du ver.
 
 L'avantage principal de cette implémentation est de simplifier la simulation
-étant donné que Brian et SOFA se charge de réaliser la plupart des calculs, et
+étant donné que Brian et SOFA se chargent de réaliser la plupart des calculs, et
 qu'il ne reste alors qu'à lier les deux. La communication entre la partie
 python et SOFA est réalisée par une bibliothèque créée pour l'occasion, CLONES.
 
@@ -381,7 +381,7 @@ propriétés d'objet au sein de SOFA. Dans le cas de la simulation de \celeg{}
 cela permet ainsi de modifier les propriétés des muscles, SOFA se chargeant
 ensuite de calculer le nouvel état du ver et renvoie les informations au script
 python ce qui permet de mettre à jour l'état des récepteurs de torsions du ver.
-Le nouvel état des neurones et ensuite calculé, puis celui des muscles, qui
+Le nouvel état des neurones est ensuite calculé, puis celui des muscles, qui
 sont repassés à SOFA, etc.
 
 % subsection implémentation de Thomas Voegtlin (end)
@@ -389,7 +389,7 @@ sont repassés à SOFA, etc.
 \subsection{Différence d'implémentation} % (fold)
 \label{sub:Différence d'implémentation}
 
-Le but de Clones est d'offrir une interface générique pour
+Le but de CLONES est d'offrir une interface générique pour
 la simulation entre Brian et SOFA, pour éviter d'avoir à modéliser
 le système neural (Brian) et physique (SOFA) dans toute simulation.
 
@@ -405,18 +405,18 @@ python représentant le ver, un changement d'échelle était nécessaire pour fa
 fonctionner la simulation.
 
 Après recherche au sein du code source de SOFA, il s'avéra que les forces trop
-faible sont automatiquement considérées comme insignifiante, de même pour que
-pour la taille des ressorts constituants les muscles. Nous avons donc modifié
+faibles sont automatiquement considérées comme insignifiantes, de même que pour
+ la taille des ressorts constituants les muscles. Nous avons donc modifié
 les codes et proposé ces modifications, et la prise en compte d'autres échelles
 pour les simulations.\\
 
 
 Malgré ces modifications dans la gestion des ressorts, un changement d'échelle
-était toujours nécessaire même s'il était plus faible qu'avant modification.
-Ce problème sera finalement dû aux méthodes de calcul utilisées par SOFA qui ne
+était toujours nécessaire.
+Ce problème est finalement dû aux méthodes de calcul utilisées par SOFA qui ne
 nous permettent pas de simuler le ver de la même manière que l'implémentation de
 référence. SOFA étant très modulaire, il est envisageable d'implémenter la même
-méthode de calcul en son sein, mais pas dans la durée de ce stage
+méthode de calcul en son sein, mais pas dans la durée de ce stage.
 
 % subsubsection Changement d'échelle (end)
 

@@ -1,9 +1,9 @@
 \chapter{Prédiction des séquences neuronales} % (fold)
 \label{cha:Prédire des séquences neuronales}
 
-Hormis la marche avant est arrière, les autres comportements du ver sont moins
-bien connus au niveau neuronal. Très peu de données biologiques sur l'activité
-neuronale.
+Hormis la marche avant et arrière, les autres comportements du ver sont moins
+bien connus au niveau neuronal. En effet, très peu de données biologiques sur l'activité
+neuronale sont disponibles pour ces autres comportements.
 
 Ainsi, hormis des données sur l'utilité et le rôle de la \textit{pirouette}
 dans la recherche de nourriture chez \celeg{}\cite{Gray2005}, aucune
@@ -15,7 +15,7 @@ réaliser une \textit{pirouette}. Malheureusement le câblage seul du circuit ne
 permet pas d'en prédire le fonctionnement, il faudrait des données telles que
 des données d'imagerie calcique\footnote{Technique d'observation des signaux
 nerveux en reliant le changement de concentration d'ion $Ca^{2+}$ avec
-l'activité des neurones.}, ou la possible présence et rôles de
+l'activité des neurones.}, ou sur la présence et les rôles possibles de
 neuromodulateurs\footnote{Les neuromodulateurs sont des molécules qui ne
 propagent pas d'information, mais influencent le transfert et/ou la recapture
 de certain neurotransmetteurs. Ils peuvent donc radicalement modifier la
@@ -29,9 +29,9 @@ séquences connues.
 \section{But et étape} % (fold)
 \label{sec:But et étape}
 
-Étant donné que la taille des muscles et directement lié à l'activité neuronale
-de \celeg{} nous souhaitons utiliser algorithme de type réseau de neurone pour
-déduire l'activité neuronale lors de mouvement pour lesquels on ne possède pas
+Étant donné que la taille des muscles est directement lié à l'activité neuronale
+de \celeg{}, nous souhaitons utiliser un algorithme de type réseau de neurone pour
+déduire l'activité neuronale lors des mouvements pour lesquels on ne possède pas
 ce type d'information. De plus le modèle du ver utilisé permet à partir d'une
 succession de taille de muscle de calculer le mouvement et la configuration
 physique du ver. Il n'est donc pas nécessaire de chercher à prédire d'autre
@@ -44,8 +44,8 @@ une fois ceci fait, (2) nous passerons l'algorithme en mode supervisé pour le
 contraindre à générer les séquences neuronales connues lors de mouvement connu.
 Le but étant que la qualité de sa prédiction de taille ne change pas, mais que
 dans le même temps son état interne soit contraint à correspondre à l'activité
-neuronale du ver simulé. (3) Enfin on générera les séquences neuronales lors de
-mouvement non connu à l'aide du filtre; et on validera celle-ci en fournissant
+neuronale du ver simulé. (3) Enfin, nous générerons les séquences neuronales lors de
+mouvement non connu à l'aide du filtre, et nous validerons celles-ci en fournissant
 au simulateur la séquence neuronale générée et en visualisant si le modèle se
 comporte correctement.
 
@@ -55,9 +55,9 @@ pour le rendre supervisé. C'est un algorithme linéaire qui est donc idéal pou
 modéliser des systèmes de ressort.
 
 Pour l'étape (1) nous utiliserons le mouvement généré par le simulateur pour
-entrainer et tester l'algorithme; de même pour l'étape (2). L'étape 3
-demandera l'extraction du mouvement du ver depuis des vidéos de déplacement à
-fin de s'assurer que le mouvement du ver est un mouvement réel.
+entrainer et tester l'algorithme; de même pour l'étape (2). L'étape (3)
+demandera l'extraction du mouvement du ver depuis des vidéos de déplacement 
+afin de s'assurer que le mouvement du ver est un mouvement réel.
 
 % section But et étape (end)
 
@@ -72,14 +72,14 @@ filtre peut être utilisé pour réaliser du filtrage, du lissage, ou de la
 prédiction.  L'usage qui nous intéresse ici est un usage prédictif du filtre.
 Étant donné que les données nécessaires à la déduction des séquences neuronales
 du ver ne sont pas disponibles pour le mouvement de \textit{pirouette}, nous
-souhaitons utiliser un filtre de Kalman pour prédire des séquences neurales
+souhaitons utiliser ce filtre pour prédire des séquences neurales
 inconnues et comprendre quels neurones pourraient être en activité lors de la
 \textit{pirouette} du ver.
 
-Un filtre de Kalman nécessite 2 matrices pour réaliser la prédiction, une
+Un filtre de Kalman nécessite deux matrices pour réaliser la prédiction, une
 matrice dite générative, et une matrice de transition\cite{Rao1999}. Calculer
 ces deux matrices est dépendant du problème que l'on souhaite résoudre. Dans
-notre cas il est plus simple de générer ses matrices à partir d'algorithme
+notre cas il est plus simple de générer ces matrices à partir d'algorithme
 d'apprentissage. Rajesh P. N. Rao a développé un algorithme d'apprentissage
 pour calculer la matrice générative et la matrice de transition dans le but de
 modéliser le cortex visuel\cite{Rao1999}. C'est cet algorithme d'apprentissage
@@ -102,7 +102,7 @@ pour prédire l'état suivant en cas d'ambiguïté; ainsi qu'il est suffisamment
 robuste pour "resynchroniser" ses prédictions en cas de présentation d'élément
 inattendu.
 
-Nous verrons dans la suite deux tests qui montrent ces deux capacités du filtre.
+Nous verrons dans la suite deux tests qui montrent ces deux propriétés du filtre.
 
 \subsection{Équation du filtre} % (fold)
 \label{sub:Équation du filtre}
@@ -119,7 +119,7 @@ du filtre, et $I_{td}$ la prédiction. Le vecteur d'état interne $\bar{r}$ de
 vecteur joue sur la qualité de la prédiction réalisée par le filtre.
 
 Le filtre corrige ensuite son estimation de $\bar{r}$ à l'aide de la
-différence entre l'entrée suivante $I$, et l'état estimé précédent. Puis le
+différence entre l'entrée suivante $I$ et l'état estimé précédent. Puis le
 vecteur $r$ est passé dans son état suivant à l'aide de la matrice $V$ de
 transition pour estimer l'état attendu suivant.\\
 
@@ -137,7 +137,7 @@ l'apprentissage et à la prédiction.
 \label{sub:Apprentissage de U et V}
 
 Les matrices $U$ et $V$ sont initialisées aléatoirement en les contraignants
-à être au moins orthonormal, l'état interne $r$ lui, est initialisé au vecteur
+à être au moins orthonormales, l'état interne $r$ lui, est initialisé au vecteur
 nul. L'apprentissage est défini par :
 
 \begin{equation}
@@ -178,7 +178,7 @@ les erreurs d'apprentissages deviennent non significatives.
 \label{sub:Sequence simple}
 
 Cet exemple est tiré de l'article de Rajesh P. N. Rao. Il permet de vérifier si
-le filtre prédit correctement une séquence avec une ambiguïté (voir
+le filtre prédit correctement une séquence avec ambiguïté (voir
 fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}).
 
 \begin{figure}[ht]
@@ -187,8 +187,8 @@ fig.~\ref{fig:sequence_simple} page~\pageref{fig:sequence_simple}).
    \end{center}
    \caption[Prédiction de séquence simple]{Séquence simple avec une ambiguïté
    toutes les 2 étapes. Le filtre arrive à déterminer où il en est dans la
-   séquence, pour répondre correctement l'étape suivante. Le premier graphe est
-   la séquence fournie à prédire, le deuxième est la prédiction du filtre, le
+   séquence, pour répondre correctement à l'étape suivante. Le premier graphique est
+   la séquence fournie à prédire, le deuxième est la prédiction du filtre, et le
    troisième est l'erreur normalisée entre l'entrée attendue et la prédiction.
    Source personnelle}
    \label{fig:sequence_simple}
@@ -202,7 +202,7 @@ $V$ qui va déterminer deux valeurs différentes à l'état interne $r$ pour dé
 cette position selon l'état précédent\cite{Rao1999}.
 
 Le filtre a été ici entrainé en présentant une cinquantaine de fois la séquence :
-bas, milieu, haut, milieu et l'état interne $r$ est un vecteur de 5 éléments.
+bas, milieu, haut, milieu et avec un état interne $r$ de 5 éléments.
 
 % subsection Sequence simple (end)
 
@@ -215,7 +215,7 @@ taille 5; mais la séquence qu'on lui présente ne correspond pas à son
 entrainement (fig~\ref{fig:sequence_simple_erreur}
 page~\pageref{fig:sequence_simple_erreur}).
 
-On voit ainsi qu'à l'étape 8 le filtre attendait une position basse, alors que
+On voit ainsi qu'à l'étape 8 le filtre attend une position basse, alors que
 nous lui présentons une position intermédiaire. L'étape 9 est donc entièrement
 fausse puisque le filtre prédit la succession basse. Mais le filtre corrige
 rapidement ses prédictions en seulement 1 étape supplémentaire.
@@ -227,8 +227,8 @@ rapidement ses prédictions en seulement 1 étape supplémentaire.
    \caption[Prédiction de séquence simple, avec erreur]{Séquence similaire à la
    figure~\ref{fig:sequence_simple}, mais avec une position inattendue.
    L'entrainement est le même que pour la figure~\ref{fig:sequence_simple}, et
-   le filtre se remet à prédire assez rapidement correctement. Le premier graphe
-   est la séquence fournie à prédire, le deuxième est la prédiction du filtre,
+   le filtre se remet à prédire correctement assez rapidement. Le premier graphique
+   est la séquence fournie à prédire, le deuxième est la prédiction du filtre, et
    le troisième est l'erreur normalisée entre l'entrée attendue et la
    prédiction. Source personnelle}
    \label{fig:sequence_simple_erreur}
@@ -242,16 +242,16 @@ rapidement ses prédictions en seulement 1 étape supplémentaire.
 \label{sec:Prédiction sur le ver complet}
 
 Le filtre de Kalman va être utilisé pour prédire la taille des muscles lors des
-mouvements du ver. En premier lieu il va falloir s'assurer que le filtre arrive
+mouvements du ver. En premier lieu, il va falloir s'assurer que le filtre arrive
 à prédire correctement les mouvements du ver en apprentissage non supervisé
-(fonctionnement par défaut du filtre de Kalman), et nous tenterons plus tard de
+(fonctionnement par défaut du filtre de Kalman). Ensuite, nous tenterons de
 le contraindre à nous donner l'état neuronal lié à l'état des muscles.
 
 \subsection{Mouvement normal avant du ver} % (fold)
 \label{sub:Mouvement normal avant du ver}
 
-Une première étape consiste donc à vérifier si le filtre arrive à correctement
-prédire l'état des muscles du ver lors d'un mouvement simple. Le mouvement
+Une première étape consiste donc à vérifier si le filtre arrive à prédire 
+correctement l'état des muscles du ver lors d'un mouvement simple. Le mouvement
 choisi en l'occurrence est la marche avant obtenue par simulation avec le
 modèle du ver.
 
@@ -261,23 +261,23 @@ modèle du ver.
    \end{center}
    \caption[Prédiction de la taille des muscles lors du mouvement simulé
    avant du ver]{Prédiction de la taille des muscles lors du mouvement simulé
-   avant du ver. Le premier graphe est la séquence fournie à prédire, le
-   deuxième est la prédiction du filtre, le troisième est l'erreur normalisée
+   avant du ver. Le premier graphique est la séquence fournie à prédire, le
+   deuxième est la prédiction du filtre, et le troisième est l'erreur normalisée
    entre l'entrée attendue et la prédiction. Source personnelle}
    \label{fig:sequence_ver_complet}
 \end{figure}
 
 Les données d'entrainement pour l'apprentissage correspondent à l'évolution de
 la longueur des 98 muscles du ver simulé pour une durée de 30 secondes de
-simulation. Ce jeu d'entrainement est présenté entre 3000 et 5000 lors de la
+simulation. Ce jeu d'entrainement est présenté entre 3000 et 5000 fois lors de la
 phase d'apprentissage. L'état interne $r$ est ici un vecteur de 12 éléments.
-Cette taille de vecteurs a été choisi car elle correspond au nombre d'unités
+Cette taille de vecteur a été choisi car elle correspond au nombre d'unités
 neuronales du ver.
 
 Le même jeu de donnée que celui d'entrainement est ensuite fourni pour la phase
 de prédiction. Sur la figure~\ref{fig:sequence_ver_complet} on peut voir que l'erreur
 est grossièrement comprise entre $1\%$ et $7\%$ avec quelques rares endroits où l'erreur
-excède $15\%$. Ce que nous considérons comme correct à ce stade de la recherche.
+excède $15\%$. Nous considérons cela comme correct à ce stade de la recherche.
 
 % subsection Mouvement normal avant du ver (end)
 
@@ -290,21 +290,21 @@ excède $15\%$. Ce que nous considérons comme correct à ce stade de la recherc
    \end{center}
    \caption[Prédiction de la taille des muscles lors d'un mouvement complexe
    simulé]{Prédiction de la taille des muscles lors d'un mouvement complexe
-   simulé du ver. Le premier graphe est la séquence fournie à prédire, le
-   deuxième est la prédiction du filtre, le troisième est l'erreur normalisée
+   simulé du ver. Le premier graphique est la séquence fournie à prédire, le
+   deuxième est la prédiction du filtre, et le troisième est l'erreur normalisée
    entre l'entrée attendue et la prédiction. Le mouvement réalisé ici est une
    succession aléatoire des différents mouvements disponibles dans le simulateur
-   (marche avant, relaxation musculaire, torsion dorsale, torsion ventrale. On
-   voit que la prédiction suit assez mal les changements rapides, certaine
-   "structure" de l'entrée visible sur le graphe sont perdues lors de la
+   (marche avant, relaxation musculaire, torsion dorsale, torsion ventrale). On
+   voit que la prédiction suit assez mal les changements rapides, certaines
+   "structures" de l'entrée visibles sur le graphique sont perdues lors de la
    prédiction. Source personnelle}
    \label{fig:sequence_mouvement_complexe}
 \end{figure}
 
-Ensuite nous cherchons à valider que le filtre prédit correctement la taille
+Ensuite nous cherchons à vérifier que le filtre prédit correctement la taille
 des muscles lors de mouvement composé de plusieurs motifs. Le script du ver est
 ici modifié pour forcer le réseau de neurones à réaliser une série de mouvement
-aléatoirement choisi, et de durée aléatoire. Un premier essaie est présenté
+aléatoirement choisi, et de durée aléatoire. Un premier essai est présenté
 sur la figure \ref{fig:sequence_mouvement_complexe} page
 \pageref{fig:sequence_mouvement_complexe}.  Dans cet essai le ver choisi
 aléatoirement entre les 4 mouvements disponibles dans le simulateur (marche
@@ -329,12 +329,12 @@ si un lissage de l'entrée est présent.
       \resizebox{150mm}{!}{\includegraphics{pic/graph_ran_2pattern.eps}}
    \end{center}
    \caption[Prédiction de la taille des muscles lors d'un mouvement avec 2
-   motif]{Prédiction de la taille des muscles lors d'un mouvement simulé du ver
-   avec 2 motif (marche avant et relaxation musculaire). Le premier graphe est
-   la séquence fournie à prédire, le deuxième est la prédiction du filtre, le
+   motifs]{Prédiction de la taille des muscles lors d'un mouvement simulé du ver
+   avec 2 motifs (marche avant et relaxation musculaire). Le premier graphique est
+   la séquence fournie à prédire, le deuxième est la prédiction du filtre, et le
    troisième est l'erreur normalisée entre l'entrée attendue et la prédiction.
    Le mouvement est un enchainement de durée aléatoire entre les 2 motifs
-   précité. Source personnelle}
+   pré-cités. Source personnelle}
    \label{fig:sequence_mouvement_complexe_2pattern}
 \end{figure}
 
@@ -343,12 +343,12 @@ si un lissage de l'entrée est présent.
 \subsection{Taille de r optimal} % (fold)
 \label{sub:Taille de r optimal}
 
-Une question intéressante serait de savoir si il avec un $r$ de 12 éléments il n'y à
+Une question intéressante serait de savoir sil avec un $r$ de 12 éléments il n'y aurait
 pas de perte d'information, et s'il s'agit de la taille minimale de $r$ sans perte
 d'information.
 
 Pour cela nous avons réalisé plusieurs fois les expériences précédentes pour obtenir
-un maximum de résultat, et nous avons comparé les erreurs e prédiction selon la
+un maximum de résultat, et nous avons comparé les erreurs de prédiction selon la
 taille de $r$.
 
 %\subsubsection{Mouvement simple} % (fold)
@@ -361,8 +361,8 @@ taille de $r$.
    \caption[Comparaison de l'erreur pour différents $r$ lors du mouvement avant]{
    Comparaison de l'erreur pour différentes tailles de $r$ lors du mouvement avant
    du ver. La moyenne de l'erreur est réalisée pour 16 itérations de la simulation
-   pour chaque valeur de $r$. On voit qu'avec un $r > 8$ on obtient une erreur à
-   peu de chose près similaire, donc au-delà de 8 éléments pour  il n'y à pas
+   pour chaque valeur de $r$. On voit qu'à partir de $r > 8$ on obtient des erreures similaires entre elles, 
+donc au-delà de 8 éléments pour $r$ il n'y a pas
    d'apport d'information supplémentaire. Source personnelle}
    \label{fig:comparaison_r_mouvement_simple}
 \end{figure}
@@ -373,8 +373,8 @@ Avec un mouvement simple (en l'occurrence un déplacement avant sur la figure
 supérieur à 8 éléments, l'erreur est très peu variable, il n'y a donc plus de différence
 en terme d'information pour un $r > 8$. Le mouvement étant très simple est régulier,
 la différence d'erreur entre un $r = 4$ et $r > 8$ n'est pas grande. 
-Plus de résultats seraient nécessaires pour déterminer quelle taille optimale serait
-nécessaire pour $r$. Principalement des études similaires avec des mouvements plus complexes
+D'avantages de résultats seraient nécessaires pour déterminer la taille optimale de $r$. 
+Il faudrait principalement mener des études similaires avec des mouvements plus complexes
 que la simple marche avant du ver.
 
 % subsubsection Mouvement simple (end)
