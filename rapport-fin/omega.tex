@@ -1,14 +1,16 @@
 \chapter{Prédiction des séquences neuronales} % (fold)
 \label{cha:Prédire des séquences neuronales}
 
-Ormis la marche avant est arrière, les autres comportements du ver sont moins bien
-connue au niveau neuronals
-il n'y a pas de données biologiques associées à la
-\textit{pirouette} du ver, hormis sur son utilité et son rôle dans la recherche
-de nourriture chez \celeg{}\cite{Gray2005}. L'une des hypothèses serait que le
-circuit de la marche avant et celui de la marche arrière seraient actifs
-simultanément pour réaliser une \textit{pirouette}. En effet le câblage du
-circuit neural permettrait la modulation de l'activité des motoneurones pour
+Ormis la marche avant est arrière, les autres comportements du ver sont moins
+bien connue au niveau neuronals. Très peu de données biologiques sur l'activité
+neuronale.
+
+Ainsi, ormis des données sur l'utitilté et le rôle de la \textit{pirouette}
+dans la recherche de nourriture chez \celeg{}\cite{Gray2005}, aucune
+information sur l'activité neurale n'est disponible. L'une des hypothèses
+est que le circuit de la marche avant et celui de la marche arrière seraient
+actifs simultanément pour réaliser une \textit{pirouette}. En effet le câblage
+du circuit neural permettrait la modulation de l'activité des motoneurones pour
 réaliser une \textit{pirouette}. Malheureusement le câblage seul du circuit ne
 permet pas d'en prédire le fonctionnement, il faudrait des données telles que
 des données d'imagerie calcique\footnote{Technique d'observation des signaux
@@ -123,9 +125,10 @@ transition pour estimer l'état attendu suivant.\\
 
 Dans son algorithme, les calculs de l'\textit{Inverse Covariance} $\Sigma^{-1}$
 et de la \textit{Normalization} $N$ sont remplacés par des scalaires bien
-choisis (voir annexes~\ref{cha:Valeur des variables pour l'apprentissage}
-page~\pageref{cha:Valeur des variables pour l'apprentissage} pour les valeurs
-choisies) pour réduire le temps de calcul nécessaire à la fois à
+choisis %(voir annexes~\ref{cha:Valeur des variables pour l'apprentissage}
+%page~\pageref{cha:Valeur des variables pour l'apprentissage} pour les valeurs
+%choisies)
+pour réduire le temps de calcul nécessaire à la fois à
 l'apprentissage et à la prédiction.
 
 % subsection Équation du filtre (end)
@@ -274,14 +277,125 @@ neuronales du ver.
 Le même jeu de donnée que celui d'entrainement est ensuite fourni pour la phase
 de prédiction. Sur la figure~\ref{fig:sequence_ver_complet} on peut voir que l'erreur
 est grossièrement comprise entre $1\%$ et $7\%$ avec quelques rares endroits où l'erreur
-excède $15\%$. Ce que nous considérons comme correct.
+excède $15\%$. Ce que nous considérons comme correct à ce stade de la recherche.
 
 % subsection Mouvement normal avant du ver (end)
 
 \subsection{Mouvement complexe} % (fold)
 \label{sub:Mouvement complexe}
 
+\begin{figure}[ht]
+   \begin{center}
+      \resizebox{150mm}{!}{\includegraphics{pic/graph_ran_3_5.eps}}
+   \end{center}
+   \caption[Prédiction de la taille des muscles lors d'un mouvement complexe
+   simulé]{Prédiction de la taille des muscles lors d'un mouvement complexe
+   simulé du ver. Le premier graphe est la séquence fournie à prédire, le
+   deuxième est la prédiction du filtre, le troisième est l'erreur normalisée
+   entre l'entrée attendue et la prédiction. Le mouvement réalisé ici est une
+   succession aléatoire des différents mouvements disponiple dans le simulateur
+   (marche avant, relaxation musculaire, torsion dorsal, torsion ventral. On
+   voit que la prédiction suis assez mal les changement rapide, certaine
+   "structure" de l'entrée visible sur le graphe sont perdues lors de la
+   prédiction. Source personnelle}
+   \label{fig:sequence_mouvement_complexe}
+\end{figure}
+
+Ensuite nous cherchons à valider que le filtre prédit correctement la taille
+des muscles lors de mouvement composé de plusieurs motifs. Le script du ver est
+ici modifié pour forcer le réseau de neurones à réaliser une série de mouvement
+aléatoirement choisis, et de durée aléatoire. Un premier essaie est présenté
+sur la figure \ref{fig:sequence_mouvement_complexe} page
+\pageref{fig:sequence_mouvement_complexe}.  Dans cette essaie le ver choisis
+aléatoirement entre les 4 mouvements disponible dans le simulateur (marche
+avant, relaxation musculaire, torsion ventral et torsion dorsal), chacun des
+mouvement est maintenue durant un temps aléatoirement choisis entre 1,5 et 3
+secondes. Ce mouvement est loin de tous mouvement naturel et on voit que le
+filtre n'arrive pas à suivre l'enchainement de mouvement trop rapide du ver
+simulé. Ceci est visible par le lissage effectué entre l'entrée et la
+prédiction.\\
+
+
+Un deuxième essaie à été réalisé cette fois ci avec un mouvement simulé
+composé de seulement deux motifs, marche avant et relaxation musculaire,
+sur des durée comprise entre 3 et 6 secondes (voir figure \ref{fig:sequence_mouvement_complexe_2pattern},
+page \pageref{fig:sequence_mouvement_complexe_2pattern}). Contrairement à l'essai
+précédent le filtre arrive beaucoup mieux à prévoir la taille des muscles, même
+si un lissage de l'entrée est présent.
+
+\begin{figure}[ht]
+   \begin{center}
+      \resizebox{150mm}{!}{\includegraphics{pic/graph_ran_2pattern.eps}}
+   \end{center}
+   \caption[Prédiction de la taille des muscles lors d'un mouvement avec 2
+   motif]{Prédiction de la taille des muscles lors d'un mouvement simulé du ver
+   avec 2 motif (marche avant et relaxation musculaire). Le premier graphe est
+   la séquence fournie à prédire, le deuxième est la prédiction du filtre, le
+   troisième est l'erreur normalisée entre l'entrée attendue et la prédiction.
+   Le mouvement est un enchainement de durée aléatoire entre les 2 motifs
+   pré-cité. Source personnelle}
+   \label{fig:sequence_mouvement_complexe_2pattern}
+\end{figure}
+
 % subsection Mouvement complexe (end)
+
+\subsection{Taille de r optimal} % (fold)
+\label{sub:Taille de r optimal}
+
+Une question interessante serais de savoir si il avec un $r$ de 12 élément il n'y à
+pas de perte d'information, et s'il s'agit de la taille minimal de $r$ sans perte
+d'information.
+
+Pour cela nous avons réalisé plusieurs fois les expériences précédente pour obtenir
+un maximum de résultat, et nous avons comparer les erreurs e prédiction selon la
+taille de $r$.
+
+\subsubsection{Mouvement simple} % (fold)
+\label{ssub:Mouvement simple}
+
+\begin{figure}[h]
+   \begin{center}
+      \resizebox{140mm}{!}{\includegraphics{pic/graph_mean_error.eps}}
+   \end{center}
+   \caption[Comparaison de l'erreur pour différents $r$ lors du mouvement avant]{
+   Comparaison de l'erreur pour différentes tailles de $r$ lars du mouvement avant
+   du ver. La moyenne de l'erreur est réaliser pour 16 itérations de la simulation
+   pour chaque valeur de $r$. On voit qu'avec un $r > 8$ on obtient une erreur à
+   peu de chose près similaire, donc au delà de 8 éléments pour $r$ il n'y à pas
+   d'apport d'information supplémentaire. Source personnelle}
+   \label{fig:comparaison_r_mouvement_simple}
+\end{figure}
+
+% subsubsection Mouvement simple (end)
+
+\subsubsection{Mouvement complexe} % (fold)
+\label{ssub:Mouvement complexe}
+
+\begin{figure}[h]
+   \begin{center}
+      \resizebox{140mm}{!}{\includegraphics{pic/graph_mean_data_complexe.eps}}
+   \end{center}
+   \caption[Comparaison de l'erreur pour différents $r$ lors d'un mouvement 
+   simulé complexe]{Comparaison de l'erreur pour différentes tailles de $r$ lors
+   d'un mouvement simulé complexe avec 4 motifs (marche avant, relaxation musculaire,
+   torsion ventral, torsion dorsal). Malgrès le peu de résultat par rapport a l'essai
+   précédent, on voit qu'il n'y à pas vraiment de réduction dans l'erreur moyenne. Le
+   mouvement est certainement trop complexe que le filtre réduise son erreur correctement.
+   Source personnelle}
+   \label{fig:comparaison_r_mouvement_complexe}
+\end{figure}
+
+\begin{figure}[h]
+   \begin{center}
+      \resizebox{140mm}{!}{\includegraphics{pic/graph_mean_data_complexe_2.eps}}
+   \end{center}
+   \caption[]{}
+   \label{fig:comparaison_r_mouvement_complexe_2}
+\end{figure}
+
+% subsubsection Mouvement complexe (end)
+
+% subsection Taille de r optimal (end)
 
 % section Ver complet (end)
 
