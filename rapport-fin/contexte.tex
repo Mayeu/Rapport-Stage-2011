@@ -36,11 +36,11 @@ ses cellules.
    \label{fig:neurone}
 \end{figure}
 
-Un neurone est une cellule dont le rôle est de recevoir et transmette de l'information.
+Un neurone est une cellule dont le rôle est de recevoir et transmettre de l'information.
 Il est composé de dendrites qui reçoivent l'information, et d'un axone qui transmet
 l'information.
 
-Un neurone peut être représenter par une fonction de seuil prenant en entrée la somme
+Un neurone peut être représenté par une fonction de seuil prenant en entrée la somme
 des entrées du neurone, ainsi qu'une fonction de seuil. Lorsque le seuil est atteint,
 le neurone envoie une information.
 
@@ -85,7 +85,7 @@ Les deux quadrants de muscles sont innervés par la corde neuronale dorsale, et
 de manière similaire, les quadrants ventraux sont innervés par la corde
 neuronale ventrale. Chaque paire de quadrants (dorsale et ventrale) est
 contrôlée par le même jeu de neurones, ainsi le ver ne peut réaliser des
-torsions que dans un plan à deux dimensions. Contrairement au reste du corp, la
+torsions que dans un plan à deux dimensions. Contrairement au reste du corps, la
 tête du ver, qui est composée des quatre premières lignes de muscles, est
 innervée de manière à pouvoir réaliser des mouvements en trois dimensions. Le
 ver se déplace sur son flanc gauche ou droit, en réalisant une succession de
@@ -241,7 +241,7 @@ PVC/AVD, qui sont pertinent dans le contexte de ce stage. Ces interneurones
 permettent la génération de réaction de plus haut niveau
 \cite{Boyle2009,White1986}.  Ainsi la paire d'interneurone AVB/AVA se charge de
 la marche avant pour AVB, et réciproquement de la marche arrière pour AVA. Ces
-interneurones sont certainement utilisé et actif lors du passage de l'un à
+interneurones sont certainement utilisés et actifs lors du passage de l'un à
 l'autre de ces mouvements. On pense aussi que l'interaction entre ces deux
 interneurones permet la génération d'une \textit{pirouette}, mais rien n'a
 encore été prouvé que ce soit en terme expérimental, ou de simulation.
@@ -391,9 +391,9 @@ sont repassés à SOFA, etc.
 
 Le but de Clones est d'offrir une interface générique pour
 la simulation entre Brian et SOFA, pour éviter d'avoir à modéliser
-le système neurale (Brian) et physique (SOFA) dans toute simulation.
+le système neural (Brian) et physique (SOFA) dans toute simulation.
 
-Ceci apporte bien sur des avantages en termes de facilité d'implémentation,
+Ceci apporte des avantages en termes de facilité d'implémentation,
 et de temps, mais aussi différents problèmes.
 
 \subsubsection{Changement d'échelle} % (fold)
@@ -404,19 +404,19 @@ une échelle de taille différente de celle du \celeg{}. Ainsi, dans le code
 python représentant le ver, un changement d'échelle était nécessaire pour faire
 fonctionner la simulation.
 
-Après recherche au sein du code source de SOFA, il s'avèra que les forces trop
-faible sont automatiquement considéré comme insignifiante, de même pour que
-pour la taille des ressorts constituant les muscles. Nous avons donc modifier
+Après recherche au sein du code source de SOFA, il s'avéra que les forces trop
+faible sont automatiquement considérées comme insignifiante, de même pour que
+pour la taille des ressorts constituants les muscles. Nous avons donc modifié
 les codes et proposé ces modifications, et la prise en compte d'autres échelles
 pour les simulations.\\
 
 
 Malgré ces modifications dans la gestion des ressorts, un changement d'échelle
-étai toujours nécessaire même si il était plus faible qu'avant modification.
-Ce problème seras finalement dû au méthode de calcul utilisée par SOFA qui ne
-nous permette pas de simuler le ver de la même manière que l'implémentation de
-réfèrence. SOFA étant très modulaire, il est envisageable d'implémenter la même
-méthode de calcul en sont sein, mais pas dans la durée de ce stage
+était toujours nécessaire même s'il était plus faible qu'avant modification.
+Ce problème sera finalement dû aux méthodes de calcul utilisées par SOFA qui ne
+nous permettent pas de simuler le ver de la même manière que l'implémentation de
+référence. SOFA étant très modulaire, il est envisageable d'implémenter la même
+méthode de calcul en son sein, mais pas dans la durée de ce stage
 
 % subsubsection Changement d'échelle (end)
 
