@@ -89,7 +89,7 @@ torsions que dans un plan à deux dimensions. Contrairement au reste du corps, l
 tête du ver, qui est composée des quatre premières lignes de muscles, est
 innervée de manière à pouvoir réaliser des mouvements en trois dimensions. Le
 ver se déplace sur son flanc gauche ou droit, en réalisant une succession de
-contraction et de décontraction des muscles dorsaux et ventraux générant un
+contractions et de décontractions des muscles dorsaux et ventraux générant un
 mouvement sinusoïdal.
 
 % subsection Anatomie du \caeleg{} (end)
@@ -111,7 +111,7 @@ flancs droit ou gauche. L'étude du mouvement se fait généralement dans des
 boites de petri contenant du gel d'agar qui lui permet de reposer
 sans s'enfoncer. Le ver rampe ainsi à la surface du gel en suivant une
 sinusoïde avec une longueur d'onde d'environ 2/3 de la longueur du corps et 
-une fréquence de 0,5~Hz en moyenne\cite{Boyle2009}. Ce mouvement lui permet
+une fréquence de 0,5~Hz en moyenne\cite{Boyle2009}. Ce mouvement lui permet,
 soit de se déplacer vers l'avant, soit vers l'arrière. \celeg{} a aussi la
 possibilité de moduler ce mouvement pour adapter sa vitesse selon ses besoins
 (déplacement lent de recherche, déplacement rapide de fuite, etc.).
@@ -182,7 +182,7 @@ composant cette corde est mieux connu que ceux de \textit{l'anneau nerveux}.
 
 Étant donné que chaque paire de muscles présents dans la partie dorsale (et de
 manière équivalente dans la partie ventrale) est innervée par le même jeu de
-neurone. C'est pourquoi nous ne les distinguerons pas dans la suite de ce doc.
+neurone. C'est pourquoi nous ne les distinguerons pas dans la suite de ce document.
 
 Il existe 6 jeux de neurone différents dans la \textit{corde ventrale} pour la
 gestion de la locomotion \cite{Boyle2009}, DA (9), DB (7), DD (6), VA (12), VB
@@ -202,7 +202,7 @@ contact entre un neurone et un muscle permettant le transfert d'information
 pour contrôler le muscle} ne se chevauchent pas, alors que les processus
 des neurones se prolongent vers l'arrière pour les neurones de type B (et
 inversement vers l'avant pour les types A) et se chevauchent entre eux. Cet
-allongement joue le rôle de récepteur de torsion pour le ver lui permettant
+allongement joue le rôle de récepteur de torsion pour le ver, lui permettant
 ainsi de synchroniser le mouvement de ses muscles \cite{Boyle2009}. À noter que
 cette fonction a été proposée par R. L. Russel et L. Byerly, le tout cité par
 White et al. \cite{White1986}, mais n'a jamais été vérifiée expérimentalement
@@ -228,7 +228,7 @@ neurones de type D (DD, VD) sont tous excités par les neurones de type A et B,
 et permettent d'inhiber les muscles. Les neurones DD sont excités par les
 neurones VA/B, et les neurones VD par les neurones DA/B. Grâce à cela, lorsque
 les muscles d'un côté se contracteront, l'autre côté sera relaxé (voir
-fig~\ref{fig:alternance_dv}, page~\pageref{fig:alternance_dv}; ceci générant
+fig~\ref{fig:alternance_dv}, page~\pageref{fig:alternance_dv}) ceci générant
 alors une sinusoïde. La torsion étant elle contrôlée par les récepteurs de
 torsion qui préviennent lorsqu'il faut alterner les rôles. Ce phénomène sera
 appelé \textit{cross-inhibition} dans la suite.\\
@@ -271,7 +271,7 @@ dans l'agar. J. H. Boyle démontre lui qu'il est possible de simuler les deux
 comportements avec un seul modèle, uniquement en se servant des retours
 réalisés par l'environnement. Il modélise ainsi à la fois le circuit neural de
 la corde ventrale du ver (ce modèle permet simplement de faire avancer le ver),
-le corps du ver (force, élasticité) et les forces en jeux dans l'environnement.
+le corps du ver (force, élasticité) et les forces en jeu dans l'environnement.
 
 Je vais détailler ici le modèle final tel qu'il est décrit dans la thèse de J.
 H. Boyle, en ne conservant que la partie dédiée au ver. J'omets donc
@@ -324,7 +324,7 @@ B et D.
    \caption[Représentation d'une unité neural de \celeg{}]{Représentation
    schématique d'une des 12 unités neurales qui compose le ver simulé. Chaque
    neurone (cellules rondes et cellules rectangulaires) contrôle 4 muscles
-   (cellules hexagonales).  Les synapses excitatrices sont légendées à l'aide
+   (cellules losanges).  Les synapses excitatrices sont légendées à l'aide
    d'un triangle alors que les synapses inhibitrices le sont à l'aide d'un
    rond.  On observe également les processus neuronaux continuant vers
    l'arrière du ver.  DM: muscle dorsal; DD: neurone dorsal de type D; DB:
@@ -363,7 +363,7 @@ par Thomas Voegtlin se base elle sur un simulateur physique et neural existant.
 
 % subsection implémentation de référence (end)
 
-\subsection{implémentation de Thomas Voegtlin} % (fold)
+\subsection{Implémentation de Thomas Voegtlin} % (fold)
 \label{sub:implémentation de Thomas Voegtlin}
 
 C'est sur cette implémentation que j'ai travaillé. Cette implémentation réalisée
@@ -371,7 +371,7 @@ en python, utilise la bibliothèque Brian\cite{Goodman2008} pour calculer les é
 des neurones du ver, ainsi que le logiciel SOFA pour simuler la physique et
 l'environnement du ver.
 
-L'avantage principal de cette implémentation est de simplifier la simulation
+L'avantage principal de cette implémentation est de simplifier la simulation,
 étant donné que Brian et SOFA se chargent de réaliser la plupart des calculs, et
 qu'il ne reste alors qu'à lier les deux. La communication entre la partie
 python et SOFA est réalisée par une bibliothèque créée pour l'occasion, CLONES.
@@ -380,7 +380,7 @@ CLONES utilise un socket pour communiquer avec SOFA, et permet de modifier les
 propriétés d'objet au sein de SOFA. Dans le cas de la simulation de \celeg{}
 cela permet ainsi de modifier les propriétés des muscles, SOFA se chargeant
 ensuite de calculer le nouvel état du ver et renvoie les informations au script
-python ce qui permet de mettre à jour l'état des récepteurs de torsions du ver.
+python ce qui permet de mettre à jour l'état des récepteurs de torsion du ver.
 Le nouvel état des neurones est ensuite calculé, puis celui des muscles, qui
 sont repassés à SOFA, etc.
 
@@ -406,7 +406,7 @@ fonctionner la simulation.
 
 Après recherche au sein du code source de SOFA, il s'avéra que les forces trop
 faibles sont automatiquement considérées comme insignifiantes, de même que pour
- la taille des ressorts constituants les muscles. Nous avons donc modifié
+ la taille des ressorts constituant les muscles. Nous avons donc modifié
 les codes et proposé ces modifications, et la prise en compte d'autres échelles
 pour les simulations.\\
 

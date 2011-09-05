@@ -34,8 +34,8 @@ de \celeg{}, nous souhaitons utiliser un algorithme de type réseau de neurone p
 déduire l'activité neuronale lors des mouvements pour lesquels on ne possède pas
 ce type d'information. De plus le modèle du ver utilisé permet à partir d'une
 succession de taille de muscle de calculer le mouvement et la configuration
-physique du ver. Il n'est donc pas nécessaire de chercher à prédire d'autre
-élément du mouvement.
+physique du ver. Il n'est donc pas nécessaire de chercher à prédire d'autres
+éléments du mouvement.
 
 (1) En premier lieu l'algorithme sera testé sur un apprentissage non supervisé
 de la variation de la taille des muscles du ver.  Il devra arriver à prédire
@@ -99,8 +99,8 @@ que nous allons utiliser pour réaliser notre filtre de Kalman.
 Dans son article\cite{Rao1999} Rajesh P. N. Rao montre que l'implémentation du
 filtre de Kalman permet de prendre en compte une partie des états précédents
 pour prédire l'état suivant en cas d'ambiguïté; ainsi qu'il est suffisamment
-robuste pour "resynchroniser" ses prédictions en cas de présentation d'élément
-inattendu.
+robuste pour "resynchroniser" ses prédictions en cas de présentation d'éléments
+inattendus.
 
 Nous verrons dans la suite deux tests qui montrent ces deux propriétés du filtre.
 
@@ -136,7 +136,7 @@ l'apprentissage et à la prédiction.
 \subsection{Apprentissage d'$U$ et $V$} % (fold)
 \label{sub:Apprentissage de U et V}
 
-Les matrices $U$ et $V$ sont initialisées aléatoirement en les contraignants
+Les matrices $U$ et $V$ sont initialisées aléatoirement en les contraignant
 à être au moins orthonormales, l'état interne $r$ lui, est initialisé au vecteur
 nul. L'apprentissage est défini par :
 
@@ -165,7 +165,7 @@ avec $\frac{N_0}{\sigma^2}$ la normalisation qui sera remplacée par un scalaire
 de l'apprentissage.
 
 La boucle d'apprentissage est réalisée autant de fois que nécessaire pour que
-les erreurs d'apprentissages deviennent non significatives.
+les erreurs d'apprentissage deviennent non significatives.
 
 % subsection Apprentissage de U et V (end)
 
@@ -274,7 +274,7 @@ phase d'apprentissage. L'état interne $r$ est ici un vecteur de 12 éléments.
 Cette taille de vecteur a été choisi car elle correspond au nombre d'unités
 neuronales du ver.
 
-Le même jeu de donnée que celui d'entrainement est ensuite fourni pour la phase
+Le même jeu de données que celui d'entrainement est ensuite fourni pour la phase
 de prédiction. Sur la figure~\ref{fig:sequence_ver_complet} on peut voir que l'erreur
 est grossièrement comprise entre $1\%$ et $7\%$ avec quelques rares endroits où l'erreur
 excède $15\%$. Nous considérons cela comme correct à ce stade de la recherche.
@@ -303,14 +303,14 @@ excède $15\%$. Nous considérons cela comme correct à ce stade de la recherche
 
 Ensuite nous cherchons à vérifier que le filtre prédit correctement la taille
 des muscles lors de mouvement composé de plusieurs motifs. Le script du ver est
-ici modifié pour forcer le réseau de neurones à réaliser une série de mouvement
-aléatoirement choisi, et de durée aléatoire. Un premier essai est présenté
+ici modifié pour forcer le réseau de neurones à réaliser une série de mouvements
+aléatoirement choisis, et de durée aléatoire. Un premier essai est présenté
 sur la figure \ref{fig:sequence_mouvement_complexe} page
-\pageref{fig:sequence_mouvement_complexe}.  Dans cet essai le ver choisi
+\pageref{fig:sequence_mouvement_complexe}.  Dans cet essai le ver choisit
 aléatoirement entre les 4 mouvements disponibles dans le simulateur (marche
 avant, relaxation musculaire, torsion ventrale et torsion dorsale), chacun des
 mouvements est maintenu durant un temps aléatoirement choisi entre 1,5 et 3
-secondes. Ce mouvement est loin de tout mouvement naturel et on voit que le
+secondes. Ce mouvement est loin de tout mouvement naturel et on voit alors que le
 filtre n'arrive pas à suivre l'enchainement de mouvement trop rapide du ver
 simulé. Ceci est visible par le lissage effectué entre l'entrée et la
 prédiction.\\
@@ -343,12 +343,12 @@ si un lissage de l'entrée est présent.
 \subsection{Taille de r optimal} % (fold)
 \label{sub:Taille de r optimal}
 
-Une question intéressante serait de savoir sil avec un $r$ de 12 éléments il n'y aurait
+Une question intéressante serait de savoir si avec un $r$ de 12 éléments il n'y aurait
 pas de perte d'information, et s'il s'agit de la taille minimale de $r$ sans perte
 d'information.
 
 Pour cela nous avons réalisé plusieurs fois les expériences précédentes pour obtenir
-un maximum de résultat, et nous avons comparé les erreurs de prédiction selon la
+un maximum de résultats, et nous avons comparé les erreurs de prédiction selon la
 taille de $r$.
 
 %\subsubsection{Mouvement simple} % (fold)
@@ -370,10 +370,10 @@ donc au-delà de 8 éléments pour $r$ il n'y a pas
 Avec un mouvement simple (en l'occurrence un déplacement avant sur la figure
 \ref{fig:comparaison_r_mouvement_simple} page
 \pageref{fig:comparaison_r_mouvement_simple}) on voit que pour des tailles de $r$
-supérieur à 8 éléments, l'erreur est très peu variable, il n'y a donc plus de différence
-en terme d'information pour un $r > 8$. Le mouvement étant très simple est régulier,
+supérieures à 8 éléments, l'erreur est très peu variable, il n'y a donc plus de différence
+en terme d'information pour un $r > 8$. Le mouvement étant très simple et régulier,
 la différence d'erreur entre un $r = 4$ et $r > 8$ n'est pas grande. 
-D'avantages de résultats seraient nécessaires pour déterminer la taille optimale de $r$. 
+D'avantage de résultats seraient nécessaires pour déterminer la taille optimale de $r$. 
 Il faudrait principalement mener des études similaires avec des mouvements plus complexes
 que la simple marche avant du ver.
 
